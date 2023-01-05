@@ -9,6 +9,8 @@
   "author": "Carson Angell",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.0.3"
+    "@slack/bolt": "^3.12.2",
+    "dotenv": "^16.0.3",
+    "twilio": "^3.84.0"
   }
 }
