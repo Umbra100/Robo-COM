@@ -1,0 +1,23 @@
+APIs needed for communication app (NodeJS)
+==========================================
+
+-> Slack Bolt API	https://slack.dev/bolt-js/concepts	
+    - Features:
+	+ Has command capability
+	+ Has chat compability
+    - Node Module:  "@slack/bolt"
+-> SMS API Twilio	https://www.twilio.com/docs/sms/quickstart/node
+    - Features:
+	+ Has secure SMS capability
+    - Node Module:  "twilio"
+
+
+Potential Dependencies
+----------------------
+
+- "dotenv"
+- "@slack/bolt"
+- "twilio"
+
+
+07Z2KbcaqU9P8-vGXIAow75NAAfRJ4EK6IpLb7dy

@@ -1,0 +1,14 @@
+{
+  "name": "robo-com",
+  "version": "1.0.0",
+  "description": "General commuications app for the JHS Robotics team",
+  "main": "app.mjs",
+  "scripts": {
+    "start": "node app.mjs"
+  },
+  "author": "Carson Angell",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
