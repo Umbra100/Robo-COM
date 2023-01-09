@@ -19,5 +19,15 @@ Potential Dependencies
 - "@slack/bolt"
 - "twilio"
 
+Things done
+-----------
 
-07Z2KbcaqU9P8-vGXIAow75NAAfRJ4EK6IpLb7dy
+Created successful connections with slack bot and commands
+Routed command execution path
+Added directory manifest control
+Added system logging to commands and application booting
+
+System Todo
+-----------
+
+- Create batch script to start bot

@@ -4,7 +4,7 @@
   "description": "General commuications app for the JHS Robotics team",
   "main": "app.mjs",
   "scripts": {
-    "start": "node app.mjs"
+    "start": "node sys/app.mjs"
   },
   "author": "Carson Angell",
   "license": "ISC",

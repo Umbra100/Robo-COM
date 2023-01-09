@@ -1,0 +1,27 @@
+$>> [16:14:34:126 Sun 8/1/2023]  LOG FILE INITIALIZED
+
+[19:22:44:441 Sun 8/1/2023]  Application Started
+[19:23:2:489 Sun 8/1/2023]  User carsonjesseangell(U04H4NHJC95) successfully executed commad 'test'
+[19:27:33:301 Sun 8/1/2023]  Application Started
+[19:27:36:945 Sun 8/1/2023]  User carsonjesseangell(U04H4NHJC95) successfully executed commad 'test'
+
+   Result:  Fail
+   ReferenceError: paylod is not defined
+       at command (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:39:33)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Array.<anonymous> (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/bolt/dist/middleware/builtin.js:211:9)
+       at async Array.onlyCommands (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/bolt/dist/middleware/builtin.js:45:5)
+       at async Promise.allSettled (index 0)
+       at async /Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/bolt/dist/App.js:577:48
+       at async Array.<anonymous> (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/bolt/dist/conversation-store.js:67:9)
+       at async Array.<anonymous> (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/bolt/dist/middleware/builtin.js:274:9)
+       at async App.processEvent (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/bolt/dist/App.js:555:13)
+       at async SocketModeClient.<anonymous> (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/bolt/dist/receivers/SocketModeReceiver.js:126:17)
+
+[19:27:56:761 Sun 8/1/2023]  Application Started
+[19:28:0:651 Sun 8/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command 'test'
+
+   Result:  Success
+   Payload Text:  undefined
+
+[19:33:13:375 Sun 8/1/2023]  Application Started

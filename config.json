@@ -1,4 +1,13 @@
 {
-   "slackPort": 6410,
-   "webport": 6411
+   "CONSTANT": {
+      "liveFileLocation": "./sys/data/live.json",
+      "intervals": {
+         "scheduler": 1000,
+         "config": 100
+      }
+   },
+   "logs": {
+      "folderLocation": "./sys/logs",
+      "interval": 604800
+   }
 }
