@@ -1,0 +1,289 @@
+{
+   "register": {
+      "modal": {
+         "trigger_id": null,
+         "view": {
+            "type": "modal",
+            "title": {
+               "type": "plain_text",
+               "text": "User Registration"
+            },
+            "callback_id": "registerData",
+            "blocks": [
+               {
+                  "type": "input",
+                  "block_id": "nameField",
+                  "label": {
+                     "type": "plain_text",
+                     "text": "Name"
+                  },
+                  "element": {
+                     "type": "plain_text_input",
+                     "action_id": "nameInput",
+                     "multiline": false,
+                     "placeholder": {
+                        "type": "plain_text",
+                        "text": "Billy Bob Joe"
+                     },
+                     "focus_on_load": true
+                  },
+                  "optional": false
+               },
+               {
+                  "type": "input",
+                  "block_id": "phoneField",
+                  "label": {
+                     "type": "plain_text",
+                     "text": "Phone Number"
+                  },
+                  "element": {
+                     "type": "plain_text_input",
+                     "action_id": "phonenumberInput",
+                     "multiline": false,
+                     "placeholder": {
+                        "type": "plain_text",
+                        "text": "000-000-0000"
+                     },
+                     "max_length": 12
+                  },
+                  "optional": false
+               },
+               {
+                  "type": "input",
+                  "block_id": "teamField",
+                  "label": {
+                     "type": "plain_text",
+                     "text": "What team are you a part of?"
+                  },
+                  "element": {
+                     "type": "static_select",
+                     "action_id": "teamInput",
+                     "placeholder": {
+                        "type": "plain_text",
+                        "text": "Select"
+                     },
+                     "options": null
+                  }
+               },
+               {
+                  "type": "divider"
+               },
+               {
+                  "type": "section",
+                  "block_id": "notificationField",
+                  "text": {
+                     "type": "mrkdwn",
+                     "text": "Would you like to recieve daily schedule reminders?"
+                  },
+                  "accessory": null
+               }
+            ],
+            "submit": {
+               "type": "plain_text",
+               "text": "Submit"
+            }
+         }
+      },
+      "alternations": [
+         {
+            "action_id": "notificationInput",
+            "options": {
+               "yes": {
+                  "type": "button",
+                  "action_id": "notificationInput",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Yes"
+                  },
+                  "style": "primary",
+                  "confirm": {
+                     "title": {
+                        "type": "plain_text",
+                        "text": "Are you sure?"
+                     },
+                     "text": {
+                        "type": "plain_text",
+                        "text": "You will not be able to recieve important notifications such as announcements through text message."
+                     },
+                     "confirm": {
+                        "type": "plain_text",
+                        "text": "Yes"
+                     },
+                     "deny": {
+                        "type": "plain_text",
+                        "text": "No Go Back!"
+                     }
+                  }
+               },
+               "no": {
+                  "type": "button",
+                  "action_id": "notificationInput",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "No"
+                  },
+                  "style": "danger"
+               }
+            },
+            "defaultOption": "yes"
+         }
+      ]
+   },
+   "notifyCommand": {
+      "modal": {
+         "trigger_id": null,
+         "view": {
+            "type": "modal",
+            "title": {
+               "type": "plain_text",
+               "text": "Notify"
+            },
+            "blocks": [
+               {
+                  "type": "section",
+                  "text": {
+                     "type": "mrkdwn",
+                     "text": "Do you want to notify everyone on the team?"
+                  },
+                  "block_id": "section01",
+                  "accessory": {
+                     "type": "button",
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Yes"
+                     },
+                     "action_id": "recipientButtonInput",
+                     "style": "primary"
+                  }
+               },
+               {
+                  "type": "divider"
+               },
+               {
+                  "type": "input",
+                  "block_id": "messageField",
+                  "label": {
+                     "type": "plain_text",
+                     "text": "Message"
+                  },
+                  "element": {
+                     "type": "plain_text_input",
+                     "action_id": "messageInput",
+                     "placeholder": {
+                        "type": "plain_text",
+                        "text": "Write what you want to send in here."
+                     },
+                     "multiline": true
+                  }
+               }
+            ],
+            "callback_id": "notifyCommandData",
+            "submit": {
+               "type": "plain_text",
+               "text": "Send"
+            }
+         }
+      },
+      "alternations": [
+         {
+            "yes": {
+               "type": "button",
+               "text": {
+                  "type": "plain_text",
+                  "text": "Yes"
+               },
+               "action_id": "recipientButtonInput",
+               "style": "primary"
+            },
+            "no": {
+               "type": "button",
+               "text": {
+                  "type": "plain_text",
+                  "text": "No"
+               },
+               "action_id": "recipientButtonInput",
+               "style": "danger"
+            }
+         },
+         {
+            "recipientChoice": {
+               "type": "input",
+               "block_id": "recipientField",
+               "label": {
+                  "type": "plain_text",
+                  "text": "Recipients"
+               },
+               "element": {
+                  "type": "multi_static_select",
+                  "action_id": "recipientInput",
+                  "placeholder": {
+                     "type": "plain_text",
+                     "text": "Teams and/or Users"
+                  },
+                  "options": null
+               }
+            }
+         }
+      ]
+   },
+   "notifyShortcut": {
+      "modal": {
+         "trigger_id": null,
+         "view": {
+            "type": "modal",
+            "title": {
+               "type": "plain_text",
+               "text": "Notify"
+            },
+            "blocks": [
+               {
+                  "type": "section",
+                  "text": {
+                     "type": "mrkdwn",
+                     "text": "Do you want to notify everyone on the team?"
+                  },
+                  "block_id": "section01",
+                  "accessory": {
+                     "type": "button",
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Yes"
+                     },
+                     "action_id": "recipientButtonInput",
+                     "style": "primary"
+                  }
+               },
+               {
+                  "type": "divider"
+               },
+               {
+                  "type": "input",
+                  "block_id": "messageField",
+                  "label": {
+                     "type": "plain_text",
+                     "text": "Message"
+                  },
+                  "element": {
+                     "type": "plain_text_input",
+                     "action_id": "messageInput",
+                     "placeholder": {
+                        "type": "plain_text",
+                        "text": "Write what you want to send in here."
+                     },
+                     "multiline": true
+                  },
+                  "hint": {
+                     "type": "plain_text",
+                     "text": "Any files attached to this message will not be able to be send."
+                  }
+               }
+            ],
+            "callback_id": "notifyShortcutData",
+            "submit": {
+               "type": "plain_text",
+               "text": "Send"
+            }
+         }
+      }
+   }
+}

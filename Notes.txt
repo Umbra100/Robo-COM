@@ -27,7 +27,29 @@ Routed command execution path
 Added directory manifest control
 Added system logging to commands and application booting
 
+Seperated the different interactions into different routes
+Improved system logging
+Added registration functionality
+Creates Notify functionality (without SMS)
+
 System Todo
 -----------
 
 - Create batch script to start bot
+- Have register command send DM with /help contentst5g
+- Add error check for user not registered under teams
+
+Things to test in deployment
+----------------------------
+
+- Registration for other users
+
+Maybe Add Later:
+----------------
+
+- Admin capability
+- Event management
+- Shortcut mode instead of commands (chooseable)
+
+Temp
+----

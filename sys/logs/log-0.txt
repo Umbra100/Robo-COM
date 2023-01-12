@@ -25,3 +25,1460 @@ $>> [16:14:34:126 Sun 8/1/2023]  LOG FILE INITIALIZED
    Payload Text:  undefined
 
 [19:33:13:375 Sun 8/1/2023]  Application Started
+
+[19:52:10:435 Sun 8/1/2023]  Application Started
+[19:54:44:944 Sun 8/1/2023]  Application Started
+[19:55:4:365 Sun 8/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command 'notify'
+
+   Result:  Success
+   Payload Text:  undefined
+
+[20:1:4:473 Sun 8/1/2023]  Application Started
+[20:3:48:991 Sun 8/1/2023]  Application Started
+[20:9:24:449 Sun 8/1/2023]  Application Started
+[20:9:43:344 Sun 8/1/2023]  Application Started
+[20:10:38:128 Sun 8/1/2023]  Application Started
+[20:11:2:854 Sun 8/1/2023]  Application Started
+[20:11:33:326 Sun 8/1/2023]  Application Started
+[20:19:36:606 Sun 8/1/2023]  Application Started
+[20:42:9:495 Sun 8/1/2023]  Application Started
+[20:42:31:633 Sun 8/1/2023]  Application Started
+[20:45:34:972 Sun 8/1/2023]  Application Started
+[20:56:12:109 Sun 8/1/2023]  Application Started
+[20:56:29:876 Sun 8/1/2023]  User carsonjesseangell(U04H4NHJC95) executed message shortcut 'notify'
+
+   Result:  Success
+   Message TS:  1673230982.443239
+   Message Contents:  'Hello World!'
+
+[20:56:55:849 Sun 8/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command 'notify'
+
+   Result:  Success
+   Payload Text:  undefined
+
+[20:59:59:904 Sun 8/1/2023]  Application Started
+[21:0:49:128 Sun 8/1/2023]  Application Started
+[21:0:58:122 Sun 8/1/2023]  User carsonjesseangell(U04H4NHJC95) executed message shortcut 'notify'
+
+   Result:  Success
+   Message TS:  1673236855.359469
+   Message Contents:  'Hi there'
+
+[23:13:24:666 Sun 8/1/2023]  Application Started
+[23:16:56:510 Sun 8/1/2023]  Application Started
+[23:21:14:416 Sun 8/1/2023]  Application Started
+[23:21:50:496 Sun 8/1/2023]  Application Started
+[23:22:48:86 Sun 8/1/2023]  Application Started
+[7:47:17:719 Mon 9/1/2023]  Application Started
+[7:47:23:837 Mon 9/1/2023]  Application Started
+[9:21:40:130 Mon 9/1/2023]  Application Started
+[9:21:57:909 Mon 9/1/2023]  User undefined executed shortcut.message interation 'test'undefined
+[9:23:29:171 Mon 9/1/2023]  Application Started
+[9:23:34:766 Mon 9/1/2023]  User undefined executed shortcut.normal interation 'test'
+[9:24:9:570 Mon 9/1/2023]  Application Started
+[9:24:14:46 Mon 9/1/2023]  User User carsonjesseangell(U04H4NHJC95) successfully executed command interaction 'test' executed command interation 'test'
+
+      Result:  "SUCCESS"
+
+[9:28:33:368 Mon 9/1/2023]  Application Started
+[9:28:36:528 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interation 'test'
+
+      Result:  "SUCCESS"
+
+[9:28:54:756 Mon 9/1/2023]  Application Started
+[9:28:57:621 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interation 'test'
+
+      Result:  "SUCCESS"
+
+[9:29:25:2 Mon 9/1/2023]  User undefined(U04H4NHJC95) executed shortcut.message interation 'test'
+
+      Result:  "SUCCESS"
+
+[9:29:58:932 Mon 9/1/2023]  Application Started
+[9:30:2:606 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interation 'test'
+
+      Result:  "SUCCESS"
+
+[9:30:13:237 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interation 'test'
+
+      Result:  "SUCCESS"
+
+[9:30:33:466 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.normal interation 'test'
+
+      Result:  "SUCCESS"
+
+[9:31:42:561 Mon 9/1/2023]  Application Started
+[9:31:44:628 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'test'
+
+      Result:  "SUCCESS"
+[9:31:52:263 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'test'
+
+      Result:  "SUCCESS"
+[9:32:50:273 Mon 9/1/2023]  Application Started
+[9:32:53:808 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'test'
+
+      Result:  "SUCCESS"
+
+[9:33:5:877 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'test'
+
+      Result:  "SUCCESS"
+
+[9:34:5:240 Mon 9/1/2023]  Application Started
+[9:34:7:227 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'test'
+      Result:  "SUCCESS"
+
+[9:34:14:309 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'test'
+      Result:  "SUCCESS"
+
+[9:37:9:859 Mon 9/1/2023]  Application Started
+[9:37:17:266 Mon 9/1/2023]  User undefined executed command interaction 'test'
+      Result:  "FAIL"
+   Error: This is a test error!
+       at Object.test (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:4:16)
+       at Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:57)
+
+[9:37:48:649 Mon 9/1/2023]  Application Started
+[9:37:51:622 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'test'
+      Result:  "FAIL"
+   Error: This is a test error!
+       at Object.test (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:4:16)
+       at Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:44:57)
+
+[12:55:42:621 Mon 9/1/2023]  Application Started
+[12:56:29:938 Mon 9/1/2023]  Application Started
+[12:56:47:5 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[12:57:54:155 Mon 9/1/2023]  Application Started
+[12:57:59:178 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[12:59:10:302 Mon 9/1/2023]  Application Started
+[12:59:15:186 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:11:24)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:41:29)
+
+[13:6:15:762 Mon 9/1/2023]  Application Started
+[13:6:20:682 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:11:24)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:41:29)
+
+[13:36:18:75 Mon 9/1/2023]  Application Started
+[13:36:22:239 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:11:24)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:41:29)
+
+[13:37:26:797 Mon 9/1/2023]  Application Started
+[13:37:29:688 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:41:16:697 Mon 9/1/2023]  Application Started
+[13:41:19:909 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:41:37:814 Mon 9/1/2023]  Application Started
+[13:41:43:608 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:52:9:692 Mon 9/1/2023]  Application Started
+[13:52:13:299 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:58:39:720 Mon 9/1/2023]  Application Started
+[13:58:48:546 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:11:24)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[13:59:11:640 Mon 9/1/2023]  Application Started
+[13:59:15:89 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[14:0:11:295 Mon 9/1/2023]  Application Started
+[14:0:17:800 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[14:5:25:81 Mon 9/1/2023]  Application Started
+[14:5:27:979 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[14:9:42:970 Mon 9/1/2023]  Application Started
+[14:9:46:819 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[14:10:11:945 Mon 9/1/2023]  Application Started
+[14:10:14:45 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[14:11:24:600 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[14:12:4:402 Mon 9/1/2023]  Application Started
+[14:12:8:220 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[14:15:40:583 Mon 9/1/2023]  Application Started
+[14:15:57:328 Mon 9/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:11:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[9:45:32:80 Tue 10/1/2023]  Application Started
+[9:45:38:98 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:49:55:454 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:50:8:699 Tue 10/1/2023]  Application Started
+[9:50:20:352 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:51:21:12 Tue 10/1/2023]  Application Started
+[9:51:24:787 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:51:41:97 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:55:8:421 Tue 10/1/2023]  Application Started
+[9:55:19:589 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:1:27:878 Tue 10/1/2023]  Application Started
+[10:1:48:523 Tue 10/1/2023]  Application Started
+[10:1:54:702 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:2:10:219 Tue 10/1/2023]  Application Started
+[10:2:14:784 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:2:24:15 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:4:53:23 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:5:12:75 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:5:25:601 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:6:52:448 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:7:28:915 Tue 10/1/2023]  Application Started
+[10:7:31:976 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:9:48:246 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:31:27:278 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:34:44:42 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:34:58:102 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:36:29:233 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:43:48:179 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:46:41:401 Tue 10/1/2023]  Application Started
+[10:46:49:949 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:47:44:35 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:48:1:78 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:48:6:899 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:48:13:783 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:48:35:873 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:49:37:655 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:49:51:592 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:50:7:678 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:51:0:810 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:51:40:579 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:51:50:934 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:52:33:83 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:53:36:721 Tue 10/1/2023]  Application Started
+[10:53:38:643 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:55:5:356 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:55:58:561 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:56:46:766 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:57:2:854 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:57:10:295 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:57:18:832 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:58:11:554 Tue 10/1/2023]  Application Started
+[10:58:13:452 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:58:38:94 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:58:50:988 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:59:24:236 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[10:59:49:605 Tue 10/1/2023]  Application Started
+[10:59:51:312 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[11:0:45:887 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[11:1:4:210 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[11:59:31:804 Tue 10/1/2023]  Application Started
+[11:59:35:816 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[11:59:50:155 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[18:8:3:326 Tue 10/1/2023]  Application Started
+[18:8:11:476 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[18:8:12:538 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[18:9:54:644 Tue 10/1/2023]  Application Started
+[18:12:11:266 Tue 10/1/2023]  Application Started
+[18:12:40:907 Tue 10/1/2023]  Application Started
+[18:13:15:461 Tue 10/1/2023]  Application Started
+[18:13:33:8 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:14:16:920 Tue 10/1/2023]  Application Started
+[18:14:21:112 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'trigger_id')
+       at Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:23:35)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:46:29)
+
+[18:15:10:656 Tue 10/1/2023]  Application Started
+[18:15:16:698 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+      Result:  "FAIL"
+   ReferenceError: client is not defined
+       at Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:25:22)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:46:29)
+
+[18:15:30:366 Tue 10/1/2023]  Application Started
+[18:15:33:991 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[18:15:44:686 Tue 10/1/2023]  Application Started
+[18:16:2:951 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[18:19:44:3 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[20:57:40:92 Tue 10/1/2023]  Application Started
+[20:57:53:755 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[20:59:17:304 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:0:58:694 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:1:38:140 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:4:48:945 Tue 10/1/2023]  Application Started
+[21:4:54:549 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:7:23:442 Tue 10/1/2023]  Application Started
+[21:7:26:672 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:7:37:272 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:8:13:578 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:16:33:541 Tue 10/1/2023]  Application Started
+[21:16:44:964 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:22:4:13 Tue 10/1/2023]  Application Started
+[21:22:13:529 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:22:52:431 Tue 10/1/2023]  Application Started
+[21:22:54:454 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:24:52:718 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:28:22:30 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:30:25:599 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:31:7:933 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:31:40:668 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:46:22:290 Tue 10/1/2023]  Application Started
+[21:46:25:630 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:53:40:631 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:53:51:562 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:54:41:429 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:13:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:55:10:24 Tue 10/1/2023]  Application Started
+[21:55:12:120 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[21:58:55:151 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:59:8:525 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[21:59:24:314 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[22:0:29:619 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[22:6:59:835 Tue 10/1/2023]  Application Started
+[22:7:3:341 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[22:8:3:775 Tue 10/1/2023]  Application Started
+[22:8:6:660 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[22:33:42:840 Tue 10/1/2023]  Application Started
+[22:33:48:669 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[22:59:15:359 Tue 10/1/2023]  Application Started
+[22:59:19:75 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[22:59:51:590 Tue 10/1/2023]  Application Started
+[22:59:52:629 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:0:14:935 Tue 10/1/2023]  Application Started
+[23:0:16:120 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:14:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:1:20:917 Tue 10/1/2023]  Application Started
+[23:1:22:20 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting '4')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:664:50)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:1:57:66 Tue 10/1/2023]  Application Started
+[23:1:58:416 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting '4')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:665:50)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:2:15:606 Tue 10/1/2023]  Application Started
+[23:2:17:953 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting '4')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:665:50)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:2:28:851 Tue 10/1/2023]  Application Started
+[23:2:29:810 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting '4')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:665:50)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:3:1:144 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:3:1:690 Tue 10/1/2023]  Application Started
+[23:3:18:556 Tue 10/1/2023]  Application Started
+[23:3:19:389 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:3:34:209 Tue 10/1/2023]  Application Started
+[23:3:35:263 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:4:5:575 Tue 10/1/2023]  Application Started
+[23:4:6:275 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:4:24:149 Tue 10/1/2023]  Application Started
+[23:4:25:576 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting 'view')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:664:50)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:5:31:170 Tue 10/1/2023]  Application Started
+[23:5:32:145 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting 'blocks')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:664:50)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:9:3:848 Tue 10/1/2023]  Application Started
+[23:9:4:688 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: Object node path does not exist in object
+       at JSONFile.followNodePath (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:23:21)
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:667:49)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:9:30:356 Tue 10/1/2023]  Application Started
+[23:9:30:910 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: Object node path does not exist in object
+       at JSONFile.followNodePath (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:23:21)
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:668:49)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:20:24:477 Tue 10/1/2023]  Application Started
+[23:20:25:429 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting 'blocks')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:666:54)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:21:31:578 Tue 10/1/2023]  Application Started
+[23:21:32:821 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'blocks')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:665:56)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:22:5:471 Tue 10/1/2023]  Application Started
+[23:22:6:68 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'blocks')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:666:56)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:22:28:98 Tue 10/1/2023]  Application Started
+[23:22:29:139 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'blocks')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:667:56)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:22:58:171 Tue 10/1/2023]  Application Started
+[23:23:0:534 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:23:22:295 Tue 10/1/2023]  Application Started
+[23:23:23:173 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:25:0:222 Tue 10/1/2023]  Application Started
+[23:25:3:164 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:25:34:174 Tue 10/1/2023]  Application Started
+[23:25:34:542 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:26:5:357 Tue 10/1/2023]  Application Started
+[23:26:8:281 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:28:56:367 Tue 10/1/2023]  Application Started
+[23:28:57:254 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:29:53:357 Tue 10/1/2023]  Application Started
+[23:29:53:945 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:30:42:589 Tue 10/1/2023]  Application Started
+[23:30:43:978 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:31:9:140 Tue 10/1/2023]  Application Started
+[23:31:9:973 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:31:39:473 Tue 10/1/2023]  Application Started
+[23:31:39:765 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:31:55:44 Tue 10/1/2023]  Application Started
+[23:31:55:298 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading '4')
+       at UIFile.CompileModal (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/util/directory.mjs:671:57)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:10:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[23:32:17:307 Tue 10/1/2023]  Application Started
+[23:32:17:738 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:32:30:897 Tue 10/1/2023]  Application Started
+[23:32:31:52 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:33:12:820 Tue 10/1/2023]  Application Started
+[23:33:13:319 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[23:33:29:540 Tue 10/1/2023]  Application Started
+[23:33:30:7 Tue 10/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:42:24:612 Wed 11/1/2023]  Application Started
+[8:42:25:827 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:48:6:310 Wed 11/1/2023]  Application Started
+[8:48:7:359 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: console.loog is not a function
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:11:15)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:42:29)
+
+[8:48:15:365 Wed 11/1/2023]  Application Started
+[8:48:16:192 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:51:1:49 Wed 11/1/2023]  Application Started
+[8:51:2:238 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:51:10:890 Wed 11/1/2023]  Application Started
+[8:51:11:752 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:51:25:258 Wed 11/1/2023]  Application Started
+[8:51:25:746 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:51:53:337 Wed 11/1/2023]  Application Started
+[8:51:53:518 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:52:19:933 Wed 11/1/2023]  Application Started
+[8:52:20:464 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:52:39:172 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:53:1:220 Wed 11/1/2023]  Application Started
+[8:53:2:848 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:18:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:42:29)
+
+[8:53:29:171 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'blocks')
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:17:31)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:42:29)
+
+[8:53:39:396 Wed 11/1/2023]  Application Started
+[8:53:40:760 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'blocks')
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:17:31)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:42:29)
+
+[8:53:49:333 Wed 11/1/2023]  Application Started
+[8:53:49:740 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:54:3:242 Wed 11/1/2023]  Application Started
+[8:54:3:561 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:56:42:653 Wed 11/1/2023]  Application Started
+[8:56:42:688 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:56:57:389 Wed 11/1/2023]  Application Started
+[8:56:57:589 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:59:4:718 Wed 11/1/2023]  Application Started
+[8:59:5:208 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:59:28:788 Wed 11/1/2023]  Application Started
+[8:59:29:955 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:9:19:976 Wed 11/1/2023]  Application Started
+[13:9:23:497 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:9:43:940 Wed 11/1/2023]  Application Started
+[13:9:45:342 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:18:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[13:55:27:273 Wed 11/1/2023]  Application Started
+[13:55:31:354 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:56:9:528 Wed 11/1/2023]  Application Started
+[13:56:10:218 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:56:22:792 Wed 11/1/2023]  Application Started
+[13:56:23:838 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:56:37:732 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[13:59:11:555 Wed 11/1/2023]  Application Started
+[13:59:12:99 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[14:0:33:734 Wed 11/1/2023]  Application Started
+[14:4:8:250 Wed 11/1/2023]  Application Started
+[14:11:41:977 Wed 11/1/2023]  Application Started
+[14:17:53:306 Wed 11/1/2023]  Application Started
+[14:20:3:209 Wed 11/1/2023]  Application Started
+[16:15:49:815 Wed 11/1/2023]  Application Started
+[16:15:52:673 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[16:16:2:526 Wed 11/1/2023]  Application Started
+[16:16:4:76 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[16:16:18:432 Wed 11/1/2023]  Application Started
+[16:16:38:46 Wed 11/1/2023]  Application Started
+[16:17:14:215 Wed 11/1/2023]  Application Started
+[16:17:55:120 Wed 11/1/2023]  Application Started
+[16:19:30:656 Wed 11/1/2023]  Application Started
+[16:19:42:467 Wed 11/1/2023]  Application Started
+[16:21:20:188 Wed 11/1/2023]  Application Started
+[16:22:17:117 Wed 11/1/2023]  Application Started
+[16:22:55:853 Wed 11/1/2023]  Application Started
+[16:23:45:934 Wed 11/1/2023]  Application Started
+[16:24:54:780 Wed 11/1/2023]  Application Started
+[16:25:7:593 Wed 11/1/2023]  Application Started
+[16:25:26:587 Wed 11/1/2023]  Application Started
+[16:25:53:31 Wed 11/1/2023]  Application Started
+[16:30:22:609 Wed 11/1/2023]  Application Started
+[16:31:57:207 Wed 11/1/2023]  Application Started
+[16:32:2:239 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:21:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[16:32:13:753 Wed 11/1/2023]  Application Started
+[16:32:15:682 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[16:33:50:45 Wed 11/1/2023]  Application Started
+[16:33:52:246 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[16:35:6:746 Wed 11/1/2023]  Application Started
+[16:38:31:172 Wed 11/1/2023]  Application Started
+[16:38:56:638 Wed 11/1/2023]  Application Started
+[16:39:28:681 Wed 11/1/2023]  Application Started
+[16:39:38:58 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[16:39:58:439 Wed 11/1/2023]  Application Started
+[16:42:42:566 Wed 11/1/2023]  Application Started
+[16:42:44:743 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[16:43:40:225 Wed 11/1/2023]  Application Started
+[16:44:14:904 Wed 11/1/2023]  Application Started
+[16:49:3:679 Wed 11/1/2023]  Application Started
+[16:49:22:718 Wed 11/1/2023]  Application Started
+[16:49:55:346 Wed 11/1/2023]  Application Started
+[16:50:14:521 Wed 11/1/2023]  Application Started
+[16:50:40:600 Wed 11/1/2023]  Application Started
+[16:51:56:77 Wed 11/1/2023]  Application Started
+[16:52:28:555 Wed 11/1/2023]  Application Started
+[16:54:24:944 Wed 11/1/2023]  Application Started
+[16:55:38:18 Wed 11/1/2023]  Application Started
+[16:55:52:488 Wed 11/1/2023]  Application Started
+[16:56:4:481 Wed 11/1/2023]  Application Started
+[16:56:14:56 Wed 11/1/2023]  Application Started
+[16:56:31:786 Wed 11/1/2023]  Application Started
+[16:57:56:26 Wed 11/1/2023]  Application Started
+[16:58:25:528 Wed 11/1/2023]  Application Started
+[16:59:11:377 Wed 11/1/2023]  Application Started
+[16:59:27:454 Wed 11/1/2023]  Application Started
+[17:7:52:817 Wed 11/1/2023]  Application Started
+[17:7:55:800 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:8:20:424 Wed 11/1/2023]  Application Started
+[17:8:52:961 Wed 11/1/2023]  Application Started
+[17:9:50:701 Wed 11/1/2023]  Application Started
+[17:10:1:17 Wed 11/1/2023]  Application Started
+[17:14:45:453 Wed 11/1/2023]  Application Started
+[17:21:45:963 Wed 11/1/2023]  Application Started
+[17:23:15:321 Wed 11/1/2023]  Application Started
+[17:23:26:695 Wed 11/1/2023]  Application Started
+[17:24:3:194 Wed 11/1/2023]  Application Started
+[17:25:22:771 Wed 11/1/2023]  Application Started
+[17:27:33:142 Wed 11/1/2023]  Application Started
+[17:27:42:315 Wed 11/1/2023]  Application Started
+[17:27:59:904 Wed 11/1/2023]  Application Started
+[17:28:36:979 Wed 11/1/2023]  Application Started
+[17:29:20:411 Wed 11/1/2023]  Application Started
+[17:38:8:532 Wed 11/1/2023]  Application Started
+[17:38:10:603 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   ReferenceError: input is not defined
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:18:46)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[17:38:33:192 Wed 11/1/2023]  Application Started
+[17:38:33:670 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   ReferenceError: moda is not defined
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:21:24)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[17:38:42:757 Wed 11/1/2023]  Application Started
+[17:38:45:141 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:39:2:529 Wed 11/1/2023]  Application Started
+[17:39:3:74 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:39:20:759 Wed 11/1/2023]  Application Started
+[17:39:21:406 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:40:25:422 Wed 11/1/2023]  Application Started
+[17:40:26:414 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:41:13:142 Wed 11/1/2023]  Application Started
+[17:41:13:560 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'initial_option')
+       at file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:28:56
+       at Array.map (<anonymous>)
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:28:37)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[17:41:41:958 Wed 11/1/2023]  Application Started
+[17:41:42:124 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:42:28:625 Wed 11/1/2023]  Application Started
+[17:42:30:159 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:43:20:954 Wed 11/1/2023]  Application Started
+[17:43:21:329 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:44:6:932 Wed 11/1/2023]  Application Started
+[17:44:7:231 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:44:24:711 Wed 11/1/2023]  Application Started
+[17:44:25:206 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   ReferenceError: options is not defined
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:28:19)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[17:44:55:378 Wed 11/1/2023]  Application Started
+[17:44:55:642 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:47:11:485 Wed 11/1/2023]  Application Started
+[17:47:12:19 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting 'build')
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:23:30)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[17:47:33:41 Wed 11/1/2023]  Application Started
+[17:47:33:943 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot set properties of undefined (setting 'build')
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:23:30)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[17:48:2:785 Wed 11/1/2023]  Application Started
+[17:48:3:648 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:48:32:652 Wed 11/1/2023]  Application Started
+[17:48:32:819 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:51:43:441 Wed 11/1/2023]  Application Started
+[17:51:43:704 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:51:56:991 Wed 11/1/2023]  Application Started
+[17:51:57:119 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:52:13:841 Wed 11/1/2023]  Application Started
+[17:52:14:959 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:30:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:43:29)
+
+[17:52:34:585 Wed 11/1/2023]  Application Started
+[17:52:35:442 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[17:52:45:465 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:2:4:820 Wed 11/1/2023]  Application Started
+[18:2:14:846 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:3:22:760 Wed 11/1/2023]  Application Started
+[18:3:24:551 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:3:39:365 Wed 11/1/2023]  Application Started
+[18:3:41:377 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:4:11:963 Wed 11/1/2023]  Application Started
+[18:4:12:174 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:5:56:568 Wed 11/1/2023]  Application Started
+[18:5:57:112 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:7:11:698 Wed 11/1/2023]  Application Started
+[18:7:13:375 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:8:18:635 Wed 11/1/2023]  Application Started
+[18:8:19:915 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:12:3:715 Wed 11/1/2023]  Application Started
+[18:12:6:693 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:12:23:415 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:13:1:460 Wed 11/1/2023]  Application Started
+[18:13:4:813 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[18:17:17:478 Wed 11/1/2023]  Application Started
+[18:17:48:711 Wed 11/1/2023]  Application Started
+[18:17:59:16 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.normal interaction 'register'
+      Result:  "FAIL"
+   TypeError: Catalog.Shortcuts[name] is not a function
+       at Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:55:58)
+
+[18:19:3:521 Wed 11/1/2023]  Application Started
+[18:19:9:207 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.normal interaction 'register'
+      Result:  "FAIL"
+   TypeError: Catalog.Shortcuts[name] is not a function
+       at Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:55:58)
+
+[18:19:37:576 Wed 11/1/2023]  Application Started
+[18:19:41:285 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.normal interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'name')
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:16:20)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:47:14)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:55:29)
+
+[18:21:23:352 Wed 11/1/2023]  Application Started
+[18:21:26:360 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.normal interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'name')
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:16:20)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:47:14)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:56:29)
+
+[18:22:55:838 Wed 11/1/2023]  Application Started
+[18:23:0:51 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.normal interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'name')
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:16:20)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:47:14)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:56:29)
+
+[18:25:37:206 Wed 11/1/2023]  Application Started
+[18:25:50:48 Wed 11/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[7:47:7:258 Thu 12/1/2023]  Application Started
+[7:47:11:232 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[7:47:23:21 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[7:47:35:463 Thu 12/1/2023]  Application Started
+[7:47:37:928 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:4:20:112 Thu 12/1/2023]  Application Started
+[8:5:31:93 Thu 12/1/2023]  Application Started
+[8:5:51:365 Thu 12/1/2023]  Application Started
+[8:8:20:42 Thu 12/1/2023]  Application Started
+[8:8:22:791 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:8:30:376 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:9:6:258 Thu 12/1/2023]  Application Started
+[8:9:7:303 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:9:48:790 Thu 12/1/2023]  Application Started
+[8:9:50:942 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[8:10:29:449 Thu 12/1/2023]  Application Started
+[8:10:31:552 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[8:13:21:363 Thu 12/1/2023]  Application Started
+[8:13:25:314 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:13:49:856 Thu 12/1/2023]  Application Started
+[8:13:52:149 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:18:30:35 Thu 12/1/2023]  Application Started
+[8:18:33:280 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:20:59:858 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[8:21:30:484 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[8:22:26:249 Thu 12/1/2023]  Application Started
+[8:22:28:776 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[8:23:27:673 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[8:25:8:83 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[8:25:55:65 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:40:29)
+
+[8:27:20:643 Thu 12/1/2023]  Application Started
+[8:27:22:901 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:27:56:864 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:32:16:636 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:33:41:32 Thu 12/1/2023]  Application Started
+[8:33:42:480 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:34:0:650 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[8:36:24:474 Thu 12/1/2023]  Application Started
+[8:36:26:928 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:39:22:651 Thu 12/1/2023]  Application Started
+[8:39:26:475 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:39:39:817 Thu 12/1/2023]  Application Started
+[8:39:41:653 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[8:41:10:899 Thu 12/1/2023]  Application Started
+[9:47:56:992 Thu 12/1/2023]  Application Started
+[9:48:1:867 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:48:10:588 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:54:47:473 Thu 12/1/2023]  Application Started
+[9:54:50:93 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:56:39:916 Thu 12/1/2023]  Application Started
+[9:56:40:672 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: data is not iterable
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:19:23)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:39:29)
+
+[9:57:0:220 Thu 12/1/2023]  Application Started
+[9:57:1:254 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'push')
+       at Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:21:39)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:39:29)
+
+[9:57:31:75 Thu 12/1/2023]  Application Started
+[9:57:32:549 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:40:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:39:29)
+
+[9:58:1:27 Thu 12/1/2023]  Application Started
+[9:58:1:663 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:41:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:39:29)
+
+[9:59:11:726 Thu 12/1/2023]  Application Started
+[9:59:12:379 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.register (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:42:21)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:39:29)
+
+[9:59:24:4 Thu 12/1/2023]  Application Started
+[9:59:25:982 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[9:59:44:835 Thu 12/1/2023]  Application Started
+[9:59:46:823 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:14:4:793 Thu 12/1/2023]  Application Started
+[10:14:9:146 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+[10:14:32:323 Thu 12/1/2023]  Application Started
+[10:14:34:833 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:18:25:886 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:39:29)
+
+[10:18:44:649 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:9:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:39:29)
+
+[10:19:46:569 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:20:38:73 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:23:12:379 Thu 12/1/2023]  Application Started
+[10:23:13:941 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:24:58:366 Thu 12/1/2023]  Application Started
+[10:25:6:101 Thu 12/1/2023]  Application Started
+[10:25:21:184 Thu 12/1/2023]  Application Started
+[10:25:52:731 Thu 12/1/2023]  Application Started
+[10:30:31:643 Thu 12/1/2023]  Application Started
+[10:30:55:440 Thu 12/1/2023]  Application Started
+[10:31:3:783 Thu 12/1/2023]  Application Started
+[10:31:26:149 Thu 12/1/2023]  Application Started
+[10:36:23:163 Thu 12/1/2023]  Application Started
+[10:36:27:300 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:36:37:201 Thu 12/1/2023]  Application Started
+[10:36:53:392 Thu 12/1/2023]  Application Started
+[10:37:18:576 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:38:0:424 Thu 12/1/2023]  Application Started
+[10:39:30:146 Thu 12/1/2023]  Application Started
+[10:39:33:450 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:41:51:511 Thu 12/1/2023]  Application Started
+[10:41:54:517 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:43:5:71 Thu 12/1/2023]  Application Started
+[10:43:7:444 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:47:19:973 Thu 12/1/2023]  Application Started
+[10:47:25:61 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[10:50:39:617 Thu 12/1/2023]  Application Started
+[10:51:3:615 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+      Result:  "FAIL"
+   ReferenceError: manifest is not defined
+       at Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:50:20)
+       at Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:45:65)
+
+[10:51:21:499 Thu 12/1/2023]  Application Started
+[10:51:24:822 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[10:54:19:565 Thu 12/1/2023]  Application Started
+[10:54:24:892 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:55:11:860 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:55:16:26 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[10:55:53:593 Thu 12/1/2023]  Application Started
+[10:55:57:684 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[10:57:13:490 Thu 12/1/2023]  Application Started
+[10:57:18:242 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[10:58:7:967 Thu 12/1/2023]  Application Started
+[10:58:12:118 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[10:58:16:529 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:2:22:933 Thu 12/1/2023]  Application Started
+[12:2:26:613 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:53:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:46:29)
+
+[12:2:54:195 Thu 12/1/2023]  Application Started
+[12:2:58:658 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[12:3:4:652 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:53:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:46:29)
+
+[12:6:50:173 Thu 12/1/2023]  Application Started
+[12:6:53:932 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notify (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:53:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:46:29)
+
+[12:8:20:15 Thu 12/1/2023]  Application Started
+[12:8:24:842 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:8:55:380 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:12:57:655 Thu 12/1/2023]  Application Started
+[12:13:1:503 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:15:4:586 Thu 12/1/2023]  Application Started
+[12:15:8:468 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:15:21:806 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+[12:16:24:67 Thu 12/1/2023]  Application Started
+[12:16:28:587 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:17:23:464 Thu 12/1/2023]  Application Started
+[12:17:26:833 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:17:51:507 Thu 12/1/2023]  Application Started
+[12:17:54:228 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:18:57:847 Thu 12/1/2023]  Application Started
+[12:19:4:925 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:19:29:345 Thu 12/1/2023]  Application Started
+[12:19:31:429 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:19:45:17 Thu 12/1/2023]  Application Started
+[12:20:17:16 Thu 12/1/2023]  Application Started
+[12:20:36:201 Thu 12/1/2023]  Application Started
+[12:20:39:778 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:21:8:713 Thu 12/1/2023]  Application Started
+[12:21:13:990 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:22:17:269 Thu 12/1/2023]  Application Started
+[12:22:20:622 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:22:45:476 Thu 12/1/2023]  Application Started
+[12:22:47:907 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:23:13:142 Thu 12/1/2023]  Application Started
+[12:23:17:603 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:23:47:596 Thu 12/1/2023]  Application Started
+[12:23:50:79 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:24:18:172 Thu 12/1/2023]  Application Started
+[12:24:20:956 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:25:53:250 Thu 12/1/2023]  Application Started
+[12:25:57:489 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:26:28:427 Thu 12/1/2023]  Application Started
+[12:26:30:833 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:29:23:147 Thu 12/1/2023]  Application Started
+[12:29:26:961 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:29:45:220 Thu 12/1/2023]  Application Started
+[12:29:48:582 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:30:5:585 Thu 12/1/2023]  Application Started
+[12:30:8:594 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:30:40:241 Thu 12/1/2023]  Application Started
+[12:30:45:99 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:31:59:791 Thu 12/1/2023]  Application Started
+[12:32:2:454 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:32:37:557 Thu 12/1/2023]  Application Started
+[12:32:39:302 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:33:11:792 Thu 12/1/2023]  Application Started
+[12:33:15:108 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:33:56:461 Thu 12/1/2023]  Application Started
+[12:33:59:117 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:35:6:490 Thu 12/1/2023]  Application Started
+[12:35:14:137 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:36:1:532 Thu 12/1/2023]  Application Started
+[12:36:3:904 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:36:49:595 Thu 12/1/2023]  Application Started
+[12:36:58:391 Thu 12/1/2023]  Application Started
+[12:37:1:528 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:37:38:372 Thu 12/1/2023]  Application Started
+[12:38:13:547 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+[12:39:8:227 Thu 12/1/2023]  Application Started
+[12:39:12:536 Thu 12/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'

@@ -352,6 +352,10 @@ export default class DirectoryManifest {
             .then(data => data.CONSTANT.liveFileLocation);
          this.logdir = await this.ConfigFile.read()
             .then(data => data.logs.folderLocation);
+         this.uidir = await this.ConfigFile.read()
+            .then(data => data.CONSTANT.UIFileLocation);
+         this.userdir = await this.ConfigFile.read()
+            .then(data => data.CONSTANT.userFileLocation)
          var livedir = this.livedir;
          var logdir = this.logdir;
 
@@ -518,7 +522,7 @@ export default class DirectoryManifest {
                   let brArr = str.split('\n');
                   for (var i = 1; i < brArr.length; i++) brArr[i] = (typeof brArr[i] == 'undefined') ? '' : `\n   ${brArr[i]}`;
                   if (!lineBreak && str.indexOf('\n') !== -1) {
-                     brArr[1] = (typeof brArr[1] == 'undefined') ? '' : `\n${brArr[1]}`;
+                     brArr[1] = (typeof brArr[1] == 'undefined') ? '' : `${brArr[1]}`;
                      lineBreak = true;
                   }
                   return ''.concat(...brArr);
@@ -636,6 +640,97 @@ export default class DirectoryManifest {
                }
             }
          })();
+
+         //* Create UI file wrapper
+         this.UIFile = await new (class extends JSONFile {
+            constructor(filepath){
+               super(filepath);
+            }
+            async CompileModal(uiname,options = {},view){//! Delete if still not used
+               const data = typeof view == 'undefined' ? (await this.read())[uiname] : view;
+               if (typeof data == 'undefined') throw new Error('UI data not founs; please check ui name');
+               var modal = Object.assign({},data.modal);
+
+               for (const i of data.alternations){
+                  let index = Object.keys(options).indexOf(i.action_id);
+                  let nodeArr = nodePathArr(i.key);
+                  let overwrite;
+                  if (index == -1){
+                     overwrite = i.options[i.defaultOption];
+                  } else {
+                     overwrite = i.options[options[Object.keys(options)[index]]];
+                  }
+                  if (typeof overwrite == 'undefined') throw new Error('Alternate option not available in UI; please check UI data.');
+                  let recursive = {data: modal,overwrite};
+                  for (var j = nodeArr.length-1; j >= 0; j--){
+                     for (var k = 0; k < j; k++){
+                        recursive.data = recursive.data[nodeArr[k]];
+                     }
+                     recursive.data[nodeArr[j]] = recursive.overwrite;
+                     recursive.overwrite = recursive.data;
+                     recursive.data = modal;
+                  }
+                  modal = Object.assign({},recursive.overwrite);
+               }
+               return modal;
+            }
+            CompileEventModal(modal){
+               const excludeKeys = [
+                  'id',
+                  'team_id',
+                  'state',
+                  'hash',
+                  'private_metadata',
+                  'previous_view_id',
+                  'root_view_id',
+                  'app_id',
+                  'external_id',
+                  'app_installed_team_id',
+                  'bot_id'
+               ];
+               var compile = {};
+               for (const i in modal){
+                  if (excludeKeys.indexOf(i) == -1) compile[i] = modal[i];
+               };
+               return compile;
+            }
+            async getViewData(uiname){
+               const data = await this.read()
+                  .then(data => data[uiname]);
+               if (typeof data == 'undefined') throw new Error('UI view data not available for name; please check UI data for valid keys');
+               return data.modal;
+            }
+         })(this.uidir);
+
+         //* Create user data file wrapper
+         this.UserFile = await new (class extends JSONFile {
+            constructor(filepath){
+               super(filepath);
+            }
+            async getUserData(id){
+               const data = await this.read()
+                  .then(d => d.data);
+               var user;
+               for (const i of data){
+                  if (i.user_id == id){
+                     user = i;
+                     break;
+                  }
+               }
+               return user;
+            }
+            async setUserData(id,data){
+               const userData = await this.read()
+                  .then(d => d.data);
+               var compile = [];
+               for (const i of userData){
+                  if (i.user_id == id) compile.push(data);
+                  else compile.push(i);
+               }
+               await this.writePath('data',compile);
+            }
+         })(this.userdir);
+
          resolve(this);
       })
    }

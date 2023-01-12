@@ -1,6 +1,8 @@
 {
    "CONSTANT": {
       "liveFileLocation": "./sys/data/live.json",
+      "UIFileLocation": "./sys/ui.json",
+      "userFileLocation": "./sys/data/users.json",
       "intervals": {
          "scheduler": 1000,
          "config": 100
@@ -9,5 +11,11 @@
    "logs": {
       "folderLocation": "./sys/logs",
       "interval": 604800
-   }
+   },
+   "availableTeams": [
+      "Build",
+      "Programming",
+      "Finance",
+      "Wiring"
+   ]
 }

@@ -50,6 +50,14 @@ export const timeout = (execution,time) => {
    })
 };
 
+export const formPayload = (payload = {}) => {
+   const {body} = payload;
+   if (typeof body.type == 'undefined'){
+      if (typeof body.command !== 'undefined') body.type = 'command';
+   }
+   return payload;
+}
+
 export const logFormat = {
    header: ['\x1b[0m\x1b[32m','===========','\x1b[36m','Starting Application','\x1b[32m','===========\x1b[0m'],
    bulletPoint: ['\x1b[0m\x1b[34m','   ->','\x1b[0m\x1b[33m'],
