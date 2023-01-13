@@ -7,6 +7,7 @@ const Catalog = {
       uidata.trigger_id = payload.body.trigger_id;
 
       await client.client.views.open(uidata);
+      return {Result: 'SUCCESS'};
     },
     register: async ({ payload, manifest, client }) => {
       //todo - Make initial value set to user data
@@ -29,29 +30,38 @@ const Catalog = {
       }
 
 
-      if (userData.name !== null) modal.view.blocks[0].element.initial_value = userData.name;
-      if (userData.phone !== null) modal.view.blocks[1].element.initial_value = userData.phone;
-      if (userData.team !== null){
-         modal.view.blocks[2].element.initial_option = {
-            text: {type: 'plain_text', text: userData.team},
-            value: userData.team
-         };
+      if (typeof userData !== 'undefined'){
+         if (userData.name !== null) modal.view.blocks[0].element.initial_value = userData.name;
+         if (userData.phone !== null) modal.view.blocks[1].element.initial_value = userData.phone;
+         if (userData.team !== null){
+            modal.view.blocks[2].element.initial_option = {
+               text: {type: 'plain_text', text: userData.team},
+               value: userData.team
+            };
+         }
       }
-      modal.view.blocks[4].accessory = userData.notifications ? alternations.yes : alternations.no;
+
+      modal.view.blocks[4].accessory = (userData?.notifications ?? true) ? alternations.yes : alternations.no;
       modal.trigger_id = payload.body.trigger_id;
       const reply = await client.client.views.open(modal);
+      return {Result: 'SUCCESS'};
     },
   },
   MessageShortcuts: {
-    test: async (payload) => {
-      return { Result: "SUCCESS" };
-    },
     notify: async ({payload, manifest, client}) => {
       var uidata = await manifest.UIFile.getViewData('notifyShortcut');
       uidata.view.blocks[2].element.initial_value = payload.body.message.text;
-      uidata.trigger_id = payload.body.trigger_id;
 
+      var metadata = {
+         channel: payload.shortcut.channel,
+         message_ts: payload.shortcut.message_ts,
+         hasFiles: typeof payload.shortcut.message.files !== 'undefined'
+      }
+      uidata.view.private_metadata = JSON.stringify(metadata);
+
+      uidata.trigger_id = payload.body.trigger_id;
       await client.client.views.open(uidata);
+      return {Result: 'SUCCESS'};
     }
   },
   Shortcuts: {},

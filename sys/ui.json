@@ -274,7 +274,7 @@
                   },
                   "hint": {
                      "type": "plain_text",
-                     "text": "Any files attached to this message will not be able to be send."
+                     "text": "Any files attached to this message will not be sent."
                   }
                }
             ],

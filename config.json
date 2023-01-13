@@ -6,7 +6,8 @@
       "intervals": {
          "scheduler": 1000,
          "config": 100
-      }
+      },
+      "appPhoneNumber": "+17622490390"
    },
    "logs": {
       "folderLocation": "./sys/logs",
@@ -17,5 +18,6 @@
       "Programming",
       "Finance",
       "Wiring"
-   ]
+   ],
+   "botName": "Ramsfellow"
 }

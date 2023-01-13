@@ -58,6 +58,41 @@ export const formPayload = (payload = {}) => {
    return payload;
 }
 
+export const compileSMSDate = () => {
+   var date = new Date(), dateStr;
+   var monthIndex = ['Jan', 'Feb','Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',' Sep', 'Oct', 'Nov', 'Dec'];
+   var weekIndex = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday','Sunday'];
+
+   dateStr = `${weekIndex[date.getDay()]} ${monthIndex[date.getMonth()]} ${date.getDate()}`;
+   switch (`${date.getDate()}`){
+      case '1':
+      case '21':
+      case '31':
+         dateStr += 'st ';
+         break;
+      case '2':
+      case '22':
+         dateStr+= 'nd ';
+         break;
+      case '3':
+      case '23':
+         dateStr += 'rd ';
+         break;
+      default:
+         dateStr += 'th ';
+   };
+   dateStr += `${date.getFullYear()} at `;
+   if ((date.getHours()+1)%12 !== 0) dateStr += (date.getHours()+1) % 12;
+   else dateStr += 12;
+   dateStr += ':';
+   if (`${date.getMinutes()}`.length == 1) dateStr += `0${date.getMinutes()}`;
+   else dateStr += date.getMinutes();
+   
+   if (date.getHours() > 11) dateStr += ' pm';
+   else dateStr += ' am';
+   return dateStr;
+} 
+
 export const logFormat = {
    header: ['\x1b[0m\x1b[32m','===========','\x1b[36m','Starting Application','\x1b[32m','===========\x1b[0m'],
    bulletPoint: ['\x1b[0m\x1b[34m','   ->','\x1b[0m\x1b[33m'],

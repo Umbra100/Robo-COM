@@ -724,9 +724,9 @@ export default class DirectoryManifest {
                   .then(d => d.data);
                var compile = [];
                for (const i of userData){
-                  if (i.user_id == id) compile.push(data);
-                  else compile.push(i);
+                  if (i.user_id !== id) compile.push(i);
                }
+               compile.push(data);
                await this.writePath('data',compile);
             }
          })(this.userdir);

@@ -32,24 +32,31 @@ Improved system logging
 Added registration functionality
 Creates Notify functionality (without SMS)
 
+Added full SMS integration for notify
+
 System Todo
 -----------
 
 - Create batch script to start bot
-- Have register command send DM with /help contentst5g
+- Have register command send DM with /help content
 - Add error check for user not registered under teams
+- Add comments
+- Go over system logging
 
 Things to test in deployment
 ----------------------------
 
 - Registration for other users
 
-Maybe Add Later:
+Maybe Add/Change Later:
 ----------------
 
+- File SMS Uploading
 - Admin capability
 - Event management
 - Shortcut mode instead of commands (chooseable)
+- Remove name field in registration (can just use slack real name)
 
 Temp
 ----
+

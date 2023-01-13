@@ -1,10 +1,11 @@
 import fs from 'node:fs';
 import scbolt from '@slack/bolt';
+import tw from 'twilio';
 import env from 'dotenv';
 
 import Catalog from './interface.mjs';
 import DirectoryManifest from './util/directory.mjs';
-import { logFormat, timeout, formPayload } from './util/other.mjs';
+import { logFormat, timeout, formPayload, compileSMSDate } from './util/other.mjs';
 
 var schedulerInterval, config, online = false;
 
@@ -17,11 +18,11 @@ const Slack = new scbolt.App({
    socketMode: true,
    appToken: process.env.SLACK_APP_TOKEN,
 });
+const Twilio = new tw(process.env.TWILIO_SID,process.env.TWILIO_TOKEN);
 
 //todo - develop /notify command per notebook outline
 
-//todo - Make message shortcut notify button UI better
-//todo - Program rest of notify message shortcut
+//todo - Tie app to SMS delivery
 
 const handler = {
    message: async (e) => {
@@ -70,6 +71,7 @@ const handler = {
       await payload.ack();
       switch (payload.body.actions[0].action_id){
          case 'notificationInput':
+            const optionData = await config.availableTeams;
             input = {
                name: payload.body.view.state.values.nameField.nameInput.value,
                phone: payload.body.view.state.values.phoneField.phonenumberInput.value,
@@ -77,6 +79,16 @@ const handler = {
                notification: payload.body.actions[0].text.text
             };
             modal = await Dir.UIFile.getViewData('register');
+            modal.view.blocks[2].element.options = [];
+            for (const i of optionData){
+               modal.view.blocks[2].element.options.push({
+                  text: {
+                     type: 'plain_text',
+                     text: i
+                  },
+                  value: i
+               });
+            }
             if (input.name !== null) modal.view.blocks[0].element.initial_value = input.name;
             if (input.phone !== null) modal.view.blocks[1].element.initial_value = input.phone;
             if (input.team !== null) modal.view.blocks[2].element.initial_option = {
@@ -111,7 +123,7 @@ const handler = {
             if (input.recipientButton == 'Yes'){
                if (typeof payload.body.view.blocks[2].hint !== 'undefined') modal.view.blocks[2].hint = {
                   type: 'plain_text',
-                  text: 'Any files attached to this message will not be able to be send.'
+                  text: 'Any files attached to this message will not be sent.'
                };
                const teams = await Dir.ConfigFile.read()
                   .then(d => d.availableTeams);
@@ -143,7 +155,7 @@ const handler = {
             } else {
                if (typeof payload.body.view.blocks[3].hint !== 'undefined') modal.view.blocks[2].hint = {
                   type: 'plain_text',
-                  text: 'Any files attached to this message will not be able to be send.'
+                  text: 'Any files attached to this message will not be sent.'
                };
                modal.view.blocks[0].accessory = choiceData[0].yes;
             }
@@ -158,11 +170,12 @@ const handler = {
    },
    viewSubmission: async (payload) => {
       await payload.ack();
+      var input;
       switch (payload.body.view.callback_id){
          case 'registerData':
             const overwrite = {
                name: payload.view.state.values.nameField.nameInput.value,
-               phone: payload.view.state.values.phoneField.phonenumberInput.value,
+               phone: ''.concat(...payload.view.state.values.phoneField.phonenumberInput.value.split('-')),
                team: payload.view.state.values.teamField.teamInput.selected_option.value,
                notifications: payload.view.blocks[4].accessory.text.text == 'Yes',
                user_id: payload.body.user.id
@@ -171,7 +184,61 @@ const handler = {
             break;
          case 'notifyShortcutData':
          case 'notifyCommandData':
-            console.log('Notify!');
+            var date = compileSMSDate();
+            const teams = await Dir.ConfigFile.read()
+               .then(data => data.availableTeams);
+            const users = await Dir.UserFile.read()
+               .then(data => data.data);
+            var recipients = [];
+            input = {
+               message: payload.body.view.state.values.messageField.messageInput.value,
+               recipients: typeof payload.body.view.state.values.recipientField == 'undefined' ? ['All'] : (
+                  payload.body.view.state.values.recipientField.recipientInput.selected_options.map(i => i.value)
+               )
+            };
+            const metadata = JSON.parse(payload.body.view.private_metadata);
+            var data = {
+               senderName: await Dir.UserFile.getUserData(payload.body.user.id).then(d => d?.name) ?? (
+                  await Slack.client.users.info({
+                     user: payload.body.user.id
+                  }).then(d => d.user.profile.real_name)
+               ),
+               senderTeam: await Dir.UserFile.getUserData(payload.body.user.id).then(d => d?.team) ?? '',
+               message: input.message,
+               date,
+               channel: payload.body.view.private_metadata == '' ? null : (
+                  `#${metadata.channel.name}`
+               ),
+               url: await Slack.client.chat.getPermalink({
+                  token: process.env.SLACK_BOT_TOKEN,
+                  channel: metadata.channel.id,
+                  message_ts: metadata.message_ts
+               }).then(d => d.permalink)
+            };
+
+            var message = ''.concat(
+               `${data.senderName} ${(data.senderTeam == '' ? '' : (
+                  `from the ${data.senderTeam.toLowerCase()} team `
+               ))}sent an important message in ${data.channel} chat!\n\n`,
+               `"${data.message}"`,
+               (metadata.hasFiles) ? '\n\n(has attached files)\n' : '\n\n',
+               `${data.url}`
+            );
+
+            for (const i of input.recipients){
+               if (i == 'All'){
+                  recipients = users.map(j => j.phone);
+               } else {
+                  if (teams.indexOf(i) == -1){
+                     if (recipients.indexOf(i) == -1) recipients.push(i);
+                  } else {
+                     for (const j of users){
+                        if (j.team == i && recipients.indexOf(j.phone) == -1) recipients.push(j.phone);
+                     }
+                  }
+               }
+            }
+            await SendSMS({text: message},...recipients);
             break;
       }
    },
@@ -198,6 +265,25 @@ const handler = {
       if (online) console.log(...logFormat.normal,'Config Data Updated');
    }
 };
+
+const SendSMS = async ({text, mediaurls},...phones) => {
+   for (const i of phones){
+      await (new Promise(async (resolve,reject) => {
+         setTimeout(async () => {
+            await Twilio.messages.create({
+               body: text,
+               from: config.CONSTANT.appPhoneNumber,
+               mediaUrl: mediaurls,
+               to: i
+            });
+            resolve();
+         },1100);
+      }))
+         .catch(err => {
+            console.error(`Error sending SMS to '${i}'; `,err);
+         })
+   }
+}
 
 //STARTUP
 await (async () => {
