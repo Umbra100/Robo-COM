@@ -19,5 +19,42 @@
       "Finance",
       "Wiring"
    ],
+   "schedule": {
+      "Monday": {
+         "notifyTime": "9:00 am",
+         "message": "",
+         "active": true
+      },
+      "Tuesday": {
+         "notifyTime": "9:00 am",
+         "message": "",
+         "active": true
+      },
+      "Wednesday": {
+         "notifyTime": "9:00 am",
+         "message": "",
+         "active": true
+      },
+      "Thursday": {
+         "notifyTime": "9:00 am",
+         "message": "",
+         "active": true
+      },
+      "Friday": {
+         "notifyTime": "9:00 am",
+         "message": "",
+         "active": true
+      },
+      "Saturday": {
+         "notifyTime": "9:00 am",
+         "message": "",
+         "active": true
+      },
+      "Sunday": {
+         "notifyTime": "9:00 am",
+         "message": "",
+         "active": true
+      }
+   },
    "botName": "Ramsfellow"
 }

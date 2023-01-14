@@ -1666,3 +1666,77 @@ $>> [16:14:34:126 Sun 8/1/2023]  LOG FILE INITIALIZED
 [16:47:23:334 Fri 13/1/2023]  Application Started
 [16:47:32:910 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
       Result:  "SUCCESS"
+
+[16:53:21:421 Fri 13/1/2023]  Application Started
+[17:13:17:453 Fri 13/1/2023]  Application Started
+[17:13:20:887 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading 'open')
+       at Object.shutdown (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:53:32)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:41:29)
+
+[17:13:46:674 Fri 13/1/2023]  Application Started
+[17:13:50:845 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.shutdown (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:53:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:41:29)
+
+[17:14:10:332 Fri 13/1/2023]  Application Started
+[17:14:13:306 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:15:59:689 Fri 13/1/2023]  Application Started
+[17:16:0:589 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:16:29:961 Fri 13/1/2023]  Application Started
+[17:16:32:317 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:17:21:145 Fri 13/1/2023]  Application Started
+[17:17:38:808 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:33:3:305 Fri 13/1/2023]  Application Started
+[17:33:6:607 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:34:28:33 Fri 13/1/2023]  Application Started
+[17:34:31:244 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:34:57:214 Fri 13/1/2023]  Application Started
+[17:34:59:103 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:35:32:994 Fri 13/1/2023]  Application Started
+[17:35:34:917 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:39:54:632 Fri 13/1/2023]  Application Started
+[17:40:3:328 Fri 13/1/2023]  Application Started
+[17:40:9:659 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:44:26:291 Fri 13/1/2023]  Application Started
+[17:44:29:937 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:45:46:371 Fri 13/1/2023]  Application Started
+[17:45:49:439 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:46:44:429 Fri 13/1/2023]  Application Started
+[17:46:53:245 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:48:38:187 Fri 13/1/2023]  Application Started
+[17:48:51:685 Fri 13/1/2023]  Application Started
+[17:48:52:691 Fri 13/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'shutdown'
+      Result:  "Command Sent"
+
+[17:48:58:928 Fri 13/1/2023]  Application Stopped

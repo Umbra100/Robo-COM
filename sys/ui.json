@@ -285,5 +285,41 @@
             }
          }
       }
+   },
+   "shutdown": {
+      "modal": {
+         "trigger_id": null,
+         "view": {
+            "type": "modal",
+            "title": {
+               "type": "plain_text",
+               "text": "Authentication"
+            },
+            "blocks": [
+               {
+                  "type": "input",
+                  "block_id": "passwordInput",
+                  "label": {
+                     "type": "plain_text",
+                     "text": "Enter Password"
+                  },
+                  "element": {
+                     "type": "plain_text_input",
+                     "action_id": "passwordData",
+                     "placeholder": {
+                        "type": "plain_text",
+                        "text": "Password"
+                     },
+                     "multiline": false
+                  }
+               }
+            ],
+            "callback_id": "shutdownData",
+            "submit": {
+               "type": "plain_text",
+               "text": "Shutdown"
+            }
+         }
+      }
    }
 }

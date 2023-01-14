@@ -25,10 +25,6 @@ const Twilio = new tw(process.env.TWILIO_SID,process.env.TWILIO_TOKEN);
 //todo - Tie app to SMS delivery
 
 const handler = {
-   message: async (e) => {
-      console.log('test2');
-      console.log(e);
-   },
    interaction: async (payload) => {
       await payload.ack();
       var log = {type: undefined, result: undefined}, name, user;
@@ -170,7 +166,7 @@ const handler = {
    },
    viewSubmission: async (payload) => {
       await payload.ack();
-      var input;
+      var input, data, modal;
       switch (payload.body.view.callback_id){
          case 'registerData':
             const overwrite = {
@@ -197,7 +193,7 @@ const handler = {
                )
             };
             const metadata = JSON.parse(payload.body.view.private_metadata);
-            var data = {
+            data = {
                senderName: await Dir.UserFile.getUserData(payload.body.user.id).then(d => d?.name) ?? (
                   await Slack.client.users.info({
                      user: payload.body.user.id
@@ -240,6 +236,21 @@ const handler = {
             }
             await SendSMS({text: message},...recipients);
             break;
+         case 'shutdownData':
+            console.log(payload.body.user);
+            data = payload.body.view.state.values.passwordInput.passwordData.value;
+            if (data !== process.env.APPLICATION_PASSWORD){
+               modal = await Dir.UIFile.getViewData('shutdown');
+               modal.view.blocks[0].hint = {
+                  type: 'plain_text',
+                  text: '❗️Password Incorrect❗️'
+               };
+               modal.trigger_id = payload.body.trigger_id;
+               await Slack.client.views.open(modal);
+            } else {
+               await ShutDown();
+            }
+            break;      
       }
    },
    schedule: async () => {
@@ -283,6 +294,21 @@ const SendSMS = async ({text, mediaurls},...phones) => {
             console.error(`Error sending SMS to '${i}'; `,err);
          })
    }
+}
+const SendSlackDM = async ({text, userid}) => {
+   await Slack.client.chat.postMessage({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: userid,
+      text
+   });
+}
+const ShutDown = async () => {
+   await Dir.LogFile.log('Application Stopped');
+   await SendSlackDM({
+      text: 'Application Has Stopped',
+      userid: process.env.OWNER_ID
+   });
+   process.exit();
 }
 
 //STARTUP
@@ -332,4 +358,3 @@ await (async () => {
    online = true;
    console.log(...logFormat.footer);
 })();
-
