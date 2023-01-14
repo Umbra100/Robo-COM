@@ -5,9 +5,9 @@ import env from 'dotenv';
 
 import Catalog from './interface.mjs';
 import DirectoryManifest from './util/directory.mjs';
-import { logFormat, timeout, formPayload, compileSMSDate } from './util/other.mjs';
+import { logFormat, timeout, formPayload, parseNotifyTime } from './util/other.mjs';
 
-var schedulerInterval, config, online = false;
+var schedulerInterval, config, online = false, dailyNotificationSent = false, dailyNotifiicationResetInterval;
 
 env.config();
 const Dir = await new DirectoryManifest('./config.json');
@@ -253,7 +253,8 @@ const handler = {
             break;      
       }
    },
-   schedule: async () => {
+   scheduler: async () => {
+      //LOG ENTRIES
       const logEntries = await Dir.LiveFile.EntryArray.log.getAll();
       var latestEntry = logEntries[0];
       if (typeof latestEntry == 'undefined') {
@@ -269,6 +270,47 @@ const handler = {
          console.log(...logFormat.normal,`Executed log entry; Created log file:\n${JSON.stringify(latestEntry)}`);
          await Dir.LogFile.new();
       }
+      //DAILY NOTIFICATIONS
+      const dailyNotifyData = await config.schedule, date = new Date();
+      const weekdays = [
+         'Sunday',
+         'Monday',
+         'Tuesday',
+         'Wednesday',
+         'Thursday',
+         'Friday',
+         'Saturday'
+       ];
+       const data = dailyNotifyData[weekdays[date.getDay()]];
+       if (data.active){
+         let time = parseNotifyTime(data.notifyTime);
+         if (time.hour == date.getHours() && time.min == date.getMinutes()){
+            const users = await Dir.UserFile.read()
+               .then(d => d.data);
+            const sent = await Dir.LiveFile.read()
+               .then(d => d.dailyNotificationSent);
+            var recipients = [];
+            for (const i of users){
+               if (i.notifications) recipients.push(i.phone);
+            };
+            if (recipients !== [] && !sent && ! dailyNotificationSent) {
+               dailyNotificationSent = true;
+               await SendSMS({text: data.message,},...recipients);
+               await Dir.LiveFile.writePath('dailyNotification',{sent: true, timeSent: `${new Date().toString()}`});
+               console.log(...logFormat.normal,'Daily Notification Sent');
+               await Dir.LogFile.log('Daily Notification Sent');
+               dailyNotifiicationResetInterval = setInterval(async () => {
+                  var notifyData = await Dir.LiveFile.read().then(d => d.dailyNotification.timeSent);
+                  notifyData = new Date(notifyData);
+                  if (new Date().getTime() - notifyData.getTime() >= 300_000){
+                     await Dir.LiveFile.writePath('dailyNotification',{send: false, timeSent: null});
+                     dailyNotificationSent = false;
+                     clearInterval(dailyNotifiicationResetInterval);
+                  }
+               },1000);
+            };
+         }
+       }
    },
    updateConfig: async () => {
       const data = await Dir.ConfigFile.read();
@@ -315,6 +357,8 @@ const ShutDown = async () => {
 await (async () => {
    console.log(...logFormat.header);
    const uidata = await Dir.UIFile.read();
+   const livedata = await Dir.LiveFile.read();
+   dailyNotificationSent = livedata.dailyNotificationSent;
    //Surface Interactions
    for (var i in Catalog.Commands){
       await Slack.command(`/${i}`,(payload) => {handler.interaction(formPayload(payload))});
@@ -339,7 +383,7 @@ await (async () => {
    fs.watchFile('./config.json', {interval: config.CONSTANT.intervals.config},handler.updateConfig);
    console.log(...logFormat.bulletPoint,'Config Data Loaded And Data Watcher Active');
 
-   schedulerInterval = setInterval(handler.schedule,config.CONSTANT.intervals.scheduler);
+   schedulerInterval = setInterval(handler.scheduler,config.CONSTANT.intervals.scheduler);
    console.log(...logFormat.bulletPoint,'Log Schedular Active');
 
    console.log(...logFormat.bulletPoint,'Establishing Slack Connection...',...logFormat.reset);

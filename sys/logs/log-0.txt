@@ -1740,3 +1740,32 @@ $>> [16:14:34:126 Sun 8/1/2023]  LOG FILE INITIALIZED
       Result:  "Command Sent"
 
 [17:48:58:928 Fri 13/1/2023]  Application Stopped
+[18:8:41:49 Fri 13/1/2023]  Application Started
+[18:12:22:336 Fri 13/1/2023]  Application Started
+[18:12:41:610 Fri 13/1/2023]  Application Started
+[18:13:7:923 Fri 13/1/2023]  Application Started
+[18:14:55:813 Fri 13/1/2023]  Application Started
+[18:35:23:280 Fri 13/1/2023]  Application Started
+[18:36:7:438 Fri 13/1/2023]  Application Started
+[18:36:22:552 Fri 13/1/2023]  Application Started
+[18:37:12:80 Fri 13/1/2023]  Application Started
+[18:37:23:589 Fri 13/1/2023]  Application Started
+[18:37:33:998 Fri 13/1/2023]  Application Started
+[18:40:39:450 Fri 13/1/2023]  Application Started
+[18:40:52:841 Fri 13/1/2023]  Application Started
+[18:43:16:387 Fri 13/1/2023]  Application Started
+[18:46:46:436 Fri 13/1/2023]  Application Started
+[18:48:19:440 Fri 13/1/2023]  Application Started
+[18:52:57:363 Fri 13/1/2023]  Application Started
+[18:53:1:725 Fri 13/1/2023]  Daily Notification Sent
+[18:53:21:969 Fri 13/1/2023]  Application Started
+[18:54:48:304 Fri 13/1/2023]  Application Started
+[18:55:1:705 Fri 13/1/2023]  Daily Notification Sent
+[18:57:19:128 Fri 13/1/2023]  Application Started
+[18:58:2:522 Fri 13/1/2023]  Daily Notification Sent
+[8:13:10:945 Sat 14/1/2023]  Application Started
+[8:18:48:132 Sat 14/1/2023]  Application Started
+[8:19:52:895 Sat 14/1/2023]  Application Started
+[8:20:2:288 Sat 14/1/2023]  Daily Notification Sent
+[8:29:56:854 Sat 14/1/2023]  Application Started
+[8:30:7:318 Sat 14/1/2023]  Daily Notification Sent

@@ -33,6 +33,7 @@ Added registration functionality
 Creates Notify functionality (without SMS)
 
 Added full SMS integration for notify
+Added Shutdown command
 
 System Todo
 -----------

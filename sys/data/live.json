@@ -1,5 +1,1 @@
-{
-  "logEntries": [
-    { "name": "log-0", "timeCreated": "2023-01-08T23:14:34.126Z" }
-   ]
-}
+{"logEntries":[{"name":"log-0","timeCreated":"2023-01-08T23:14:34.126Z"}],"dailyNotification":{"send":false,"timeSent":null}}

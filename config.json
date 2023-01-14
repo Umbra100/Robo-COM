@@ -22,38 +22,38 @@
    "schedule": {
       "Monday": {
          "notifyTime": "9:00 am",
-         "message": "",
+         "message": "Friendly reminder! We have robotics today from 2:30 pm - 7 pm, be sure to come!",
          "active": true
       },
       "Tuesday": {
          "notifyTime": "9:00 am",
-         "message": "",
+         "message": "Second day of the week reminder! Robotics today from 2:30 pm - 7 pm, make sure to be there!",
          "active": true
       },
       "Wednesday": {
          "notifyTime": "9:00 am",
-         "message": "",
+         "message": "I have another reminder for you! Robotics from 2:30 - 7 once again!",
          "active": true
       },
       "Thursday": {
          "notifyTime": "9:00 am",
-         "message": "",
+         "message": "Another morning reminder! More Robo work from 2:30 - 7!",
          "active": true
       },
       "Friday": {
-         "notifyTime": "9:00 am",
-         "message": "",
+         "notifyTime": "2:30 pm",
+         "message": "No robot today ;(. But we do have Robotics tomorrow bright and early from 8 am - 3 pm! So make sure to get a good nights sleep!",
          "active": true
       },
       "Saturday": {
          "notifyTime": "9:00 am",
          "message": "",
-         "active": true
+         "active": false
       },
       "Sunday": {
          "notifyTime": "9:00 am",
          "message": "",
-         "active": true
+         "active": false
       }
    },
    "botName": "Ramsfellow"
