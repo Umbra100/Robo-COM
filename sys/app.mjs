@@ -5,7 +5,8 @@ import env from 'dotenv';
 
 import Catalog from './interface.mjs';
 import DirectoryManifest from './util/directory.mjs';
-import { logFormat, timeout, formPayload, parseNotifyTime } from './util/other.mjs';
+import { interfaceHandlers } from './handler.mjs';
+import { logFormat, timeout, formPayload, parseNotifyTime, getActionIds } from './util/other.mjs';
 
 var schedulerInterval, config, online = false, dailyNotificationSent = false, dailyNotifiicationResetInterval;
 
@@ -20,9 +21,7 @@ const Slack = new scbolt.App({
 });
 const Twilio = new tw(process.env.TWILIO_SID,process.env.TWILIO_TOKEN);
 
-//todo - develop /notify command per notebook outline
-
-//todo - Tie app to SMS delivery
+//todo - Make engineering notebook data structure and representation method
 
 const handler = {
    interaction: async (payload) => {
@@ -63,110 +62,306 @@ const handler = {
       }
    },
    modalInteraction: async (payload) => {
-      var modal, reply, input, choiceData;
+      var modal, reply, input, choiceData, value, dateValue, metadata, button, users;
       await payload.ack();
-      switch (payload.body.actions[0].action_id){
-         case 'notificationInput':
-            const optionData = await config.availableTeams;
-            input = {
-               name: payload.body.view.state.values.nameField.nameInput.value,
-               phone: payload.body.view.state.values.phoneField.phonenumberInput.value,
-               team: payload.body.view.state.values.teamField.teamInput.selected_option,
-               notification: payload.body.actions[0].text.text
-            };
-            modal = await Dir.UIFile.getViewData('register');
-            modal.view.blocks[2].element.options = [];
-            for (const i of optionData){
-               modal.view.blocks[2].element.options.push({
-                  text: {
-                     type: 'plain_text',
-                     text: i
-                  },
-                  value: i
-               });
-            }
-            if (input.name !== null) modal.view.blocks[0].element.initial_value = input.name;
-            if (input.phone !== null) modal.view.blocks[1].element.initial_value = input.phone;
-            if (input.team !== null) modal.view.blocks[2].element.initial_option = {
-               text: {type: 'plain_text', text: input.team.text.text},
-               value: input.team.value
-            };
-
-            choiceData = await Dir.UIFile.read()
-               .then(data => data.register.alternations[0].options);
-            if (input.notification == 'Yes'){
-               modal.view.blocks[4].accessory = choiceData.no;
-            } else {
-               modal.view.blocks[4].accessory = choiceData.yes;
-            }
-            reply = await Slack.client.views.update({
-               token: process.env.SLACK_BOT_TOKEN,
-               view: modal.view,
-               view_id: payload.body.view.id
-            });
-            break;
-         case 'recipientButtonInput':
-            input = {
-               message: payload.body.view.state.values.messageField.messageInput.value,
-               recipientButton: payload.body.view.blocks[0].accessory.text.text
-            }
-            modal = await Dir.UIFile.getViewData('notifyCommand');
-
-            if (input.message !== null) modal.view.blocks[2].element.initial_value = input.message;
-            choiceData = await Dir.UIFile.read()
-               .then(data => data.notifyCommand.alternations);
-
-            if (input.recipientButton == 'Yes'){
-               if (typeof payload.body.view.blocks[2].hint !== 'undefined') modal.view.blocks[2].hint = {
-                  type: 'plain_text',
-                  text: 'Any files attached to this message will not be sent.'
+      try {
+         switch (payload.body.actions[0].action_id){
+            case 'notificationInput':
+               const optionData = await config.availableTeams;
+               input = {
+                  name: payload.body.view.state.values.nameField.nameInput.value,
+                  phone: payload.body.view.state.values.phoneField.phonenumberInput.value,
+                  team: payload.body.view.state.values.teamField.teamInput.selected_option,
+                  notification: payload.body.actions[0].text.text
                };
-               const teams = await Dir.ConfigFile.read()
-                  .then(d => d.availableTeams);
-               const users = await Dir.UserFile.read()
-                  .then(d => d.data);
-               modal.view.blocks[0].accessory = choiceData[0].no;
-               modal.view.blocks.splice(1,0,choiceData[1].recipientChoice);
-               
-               modal.view.blocks[1].element.options = [];
-               for (const i of teams){
-                  modal.view.blocks[1].element.options.push({
+               modal = await Dir.UIFile.getViewData('register');
+               modal.view.blocks[2].element.options = [];
+               for (const i of optionData){
+                  modal.view.blocks[2].element.options.push({
                      text: {
                         type: 'plain_text',
-                        text: `✴️   ${i.toUpperCase()} TEAM`,
-                        emoji: true
+                        text: i
                      },
                      value: i
-                  })
+                  });
                }
+               if (input.name !== null) modal.view.blocks[0].element.initial_value = input.name;
+               if (input.phone !== null) modal.view.blocks[1].element.initial_value = input.phone;
+               if (input.team !== null) modal.view.blocks[2].element.initial_option = {
+                  text: {type: 'plain_text', text: input.team.text.text},
+                  value: input.team.value
+               };
+   
+               choiceData = await Dir.UIFile.read()
+                  .then(data => data.register.alternations[0].options);
+               if (input.notification == 'Yes'){
+                  modal.view.blocks[4].accessory = choiceData.no;
+               } else {
+                  modal.view.blocks[4].accessory = choiceData.yes;
+               }
+               reply = await Slack.client.views.update({
+                  token: process.env.SLACK_BOT_TOKEN,
+                  view: modal.view,
+                  view_id: payload.body.view.id
+               });
+               break;
+            case 'recipientButtonInput':
+               input = {
+                  message: payload.body.view.state.values.messageField.messageInput.value,
+                  recipientButton: payload.body.view.blocks[0].accessory.text.text
+               }
+               modal = await Dir.UIFile.getViewData('notifyCommand');
+   
+               if (input.message !== null) modal.view.blocks[2].element.initial_value = input.message;
+               choiceData = await Dir.UIFile.read()
+                  .then(data => data.notifyCommand.alternations);
+   
+               if (input.recipientButton == 'Yes'){
+                  if (typeof payload.body.view.blocks[2].hint !== 'undefined') modal.view.blocks[2].hint = {
+                     type: 'plain_text',
+                     text: 'Any files attached to this message will not be sent.'
+                  };
+                  const teams = await Dir.ConfigFile.read()
+                     .then(d => d.availableTeams);
+                  const users = await Dir.UserFile.read()
+                     .then(d => d.data);
+                  modal.view.blocks[0].accessory = choiceData[0].no;
+                  modal.view.blocks.splice(1,0,choiceData[1].recipientChoice);
+                  
+                  modal.view.blocks[1].element.options = [];
+                  for (const i of teams){
+                     modal.view.blocks[1].element.options.push({
+                        text: {
+                           type: 'plain_text',
+                           text: `✴️   ${i.toUpperCase()} TEAM`,
+                           emoji: true
+                        },
+                        value: i
+                     })
+                  }
+                  for (const i of users){
+                     modal.view.blocks[1].element.options.push({
+                        text: {
+                           type: 'plain_text',
+                           text: i.name
+                        },
+                        value: i.phone
+                     })
+                  }
+               } else {
+                  if (typeof payload.body.view.blocks[3].hint !== 'undefined') modal.view.blocks[2].hint = {
+                     type: 'plain_text',
+                     text: 'Any files attached to this message will not be sent.'
+                  };
+                  modal.view.blocks[0].accessory = choiceData[0].yes;
+               }
+   
+               await Slack.client.views.update({
+                  token: process.env.SLACK_BOT_TOKEN,
+                  view: modal.view,
+                  view_id: payload.body.view.id
+               })
+               break;
+            case 'notebookEntryToggle':
+               modal = await Dir.UIFile.getViewData('notebook');
+               choiceData = await Dir.UIFile.read()
+                  .then(d => d.notebook.alternations);
+               value = payload.body.actions[0].value;
+               metadata = JSON.parse(payload.body.view.private_metadata);
+   
+               if (value == 'Off'){
+                  dateValue = payload.body.view.state.values.dateField.notebookLogDatePick.selected_date;
+                  modal.view.blocks[2].accessory = choiceData[0].options.toggleOn;
+                  modal.view.blocks[3].accessory = choiceData[0].options.toggleOff;
+                  modal.view.blocks[2].accessory.action_id = 'notebookEntryToggle';
+                  modal.view.blocks[3].accessory.action_id = 'notebookInfoToggle';
+   
+                  modal.view.blocks[4].elements[0].initial_date = `${dateValue}`;
+                  for (const i of choiceData[1].options.makeEntry){
+                     modal.view.blocks.push(i);
+                  }
+
+                  metadata.makeEntry = true;
+                  modal.view.private_metadata = JSON.stringify(metadata);
+   
+                  await Slack.client.views.update({
+                     token: process.env.SLACK_BOT_TOKEN,
+                     view: modal.view,
+                     view_id: payload.body.view.id
+                  });
+               }
+               break;
+            case 'notebookInfoToggle':
+               modal = await Dir.UIFile.getViewData('notebook');
+               choiceData = await Dir.UIFile.read()
+                  .then(d => d.notebook.alternations);
+               value = payload.body.actions[0].value;
+               metadata = JSON.parse(payload.body.view.private_metadata);
+   
+               if (value == 'Off'){
+                  dateValue = payload.body.view.state.values.dateField.notebookLogDatePick.selected_date;
+                  modal.view.blocks[2].accessory = choiceData[0].options.toggleOff;
+                  modal.view.blocks[3].accessory = choiceData[0].options.toggleOn;
+                  modal.view.blocks[2].accessory.action_id = 'notebookEntryToggle';
+                  modal.view.blocks[3].accessory.action_id = 'notebookInfoToggle';
+   
+                  modal.view.blocks[4].elements[0].initial_date = `${dateValue}`;
+                  for (const i of choiceData[1].options.viewEntry){
+                     modal.view.blocks.push(i);
+                  }
+      
+                  metadata.makeEntry = false;
+                  modal.view.private_metadata = JSON.stringify(metadata);
+   
+                  await Slack.client.views.update({
+                     token: process.env.SLACK_BOT_TOKEN,
+                     view: modal.view,
+                     view_id: payload.body.view.id
+                  });
+               }
+               break;
+            case 'fileURLAdd':
+               modal = await Dir.UIFile.getViewData('notebook');
+               choiceData = await Dir.UIFile.read()
+                  .then(d => d.notebook.alternations);
+               value = payload.body.actions[0].value;
+               input = payload.body.view.state.values;
+               users = await interfaceHandlers.getMeshedUsers({ client: Slack, manifest: Dir });
+   
+               dateValue = input.dateField.notebookLogDatePick.selected_date;
+               metadata = JSON.parse(payload.body.view.private_metadata);
+
+               input[`fileURLField${metadata.fileURLs}`] = {[`fileURLInput${metadata.fileURLs}`]: {value: ''}};
+               metadata.fileURLs++;
+   
+               modal.view.blocks[2].accessory = choiceData[0].options.toggleOn;
+               modal.view.blocks[3].accessory = choiceData[0].options.toggleOff;
+               modal.view.blocks[2].accessory.action_id = 'notebookEntryToggle';
+               modal.view.blocks[3].accessory.action_id = 'notebookInfoToggle';
+   
+               button = choiceData[1].options.makeEntry.pop();
+               modal.view.blocks[4].elements[0].initial_date = `${dateValue}`;
+               for (const i of choiceData[1].options.makeEntry) modal.view.blocks.push(i);
+               modal.view.blocks[6].element.initial_value = input.notebookTitleField.notebookTitleInput.value || '';
+               modal.view.blocks[6].element.focus_on_load = false;
+               modal.view.blocks[7].element.initial_value = input.notebookDescriptionField.notebookDescriptionInput.value || '';
+
+               modal.view.blocks[8].element.options = [];
                for (const i of users){
-                  modal.view.blocks[1].element.options.push({
+                  modal.view.blocks[8].element.options.push({
                      text: {
                         type: 'plain_text',
                         text: i.name
                      },
-                     value: i.phone
+                     value: JSON.stringify(i)
                   })
-               }
-            } else {
-               if (typeof payload.body.view.blocks[3].hint !== 'undefined') modal.view.blocks[2].hint = {
-                  type: 'plain_text',
-                  text: 'Any files attached to this message will not be sent.'
                };
-               modal.view.blocks[0].accessory = choiceData[0].yes;
-            }
 
-            await Slack.client.views.update({
-               token: process.env.SLACK_BOT_TOKEN,
-               view: modal.view,
-               view_id: payload.body.view.id
-            })
-            break;
+               for (let i = 0; i < metadata.fileURLs; i++){
+                  let push = choiceData[1].options.enterFileURL;
+                  push.label.text = (i == 0) ? 'Files' : ' ';
+                  if (i == metadata.fileURLs-1) push.element.focus_on_load = true;
+                  push.element.initial_value = input[`fileURLField${i}`][`fileURLInput${i}`].value || '';
+                  push.block_id = `fileURLField${i}`;
+                  push.element.action_id = `fileURLInput${i}`;
+                  modal.view.blocks.push(JSON.parse(JSON.stringify(push)));
+               };
+
+               if (metadata.fileURLs > 0) button.elements.push(choiceData[1].options.removeFileURLButton);
+
+               modal.view.blocks.push(button);
+               modal.view.private_metadata = JSON.stringify(metadata);
+   
+               await Slack.client.views.update({
+                  token: process.env.SLACK_BOT_TOKEN,
+                  view: modal.view,
+                  view_id: payload.body.view.id
+               });
+               break;
+            case 'fileURLRemove':
+               modal = await Dir.UIFile.getViewData('notebook');
+               choiceData = await Dir.UIFile.read()
+                  .then(d => d.notebook.alternations);
+               value = payload.body.actions[0].value;
+               input = payload.body.view.state.values;
+               users = {
+                  slack: await Slack.client.users.list({token: process.env.SLACK_BOT_TOKEN}),
+                  local: await Dir.UserFile.read().then(data => data.data),
+               };
+               users.localIds = users.local.map(i => i.user_id);
+   
+               dateValue = input.dateField.notebookLogDatePick.selected_date;
+               metadata = JSON.parse(payload.body.view.private_metadata);
+               metadata.fileURLs--;
+   
+               modal.view.blocks[2].accessory = choiceData[0].options.toggleOn;
+               modal.view.blocks[3].accessory = choiceData[0].options.toggleOff;
+               modal.view.blocks[2].accessory.action_id = 'notebookEntryToggle';
+               modal.view.blocks[3].accessory.action_id = 'notebookInfoToggle';
+   
+               button = choiceData[1].options.makeEntry.pop();
+               modal.view.blocks[4].elements[0].initial_date = `${dateValue}`;
+               for (const i of choiceData[1].options.makeEntry) modal.view.blocks.push(i);
+               modal.view.blocks[6].element.initial_value = input.notebookTitleField.notebookTitleInput.value || '';
+               modal.view.blocks[6].element.focus_on_load = false;
+               modal.view.blocks[7].element.initial_value = input.notebookDescriptionField.notebookDescriptionInput.value || '';
+               
+               modal.view.blocks[8].element.options = [];
+               for (const i of users.localIds){
+                  let localData = await Dir.UserFile.getUserData(i);
+                  if (typeof localData == 'undefined'){
+                     modal.view.blocks[8].element.options.push(await Slack.client.users.info({
+                        token: process.env.SLACK_BOT_TOKEN,
+                        user: i
+                     }).then(data => {
+                        return {
+                           text: {
+                              type: 'plain_text',
+                              text: data.user.real_name
+                           },
+                           value: data.user.real_name
+                        }
+                     }));
+                  } else {
+                     modal.view.blocks[8].element.options.push({
+                        text: {
+                           type: 'plain_text',
+                           text: localData.name
+                        },
+                        value: localData.name
+                     });
+                  }
+               }
+
+               for (let i = 0; i < metadata.fileURLs; i++){
+                  let push = choiceData[1].options.enterFileURL;
+                  push.label.text = (i == 0) ? 'Files' : ' ';
+                  if (i == metadata.fileURLs-1) push.element.focus_on_load = true;
+                  push.element.initial_value = input[`fileURLField${i}`][`fileURLInput${i}`].value || '';
+                  push.block_id = `fileURLField${i}`;
+                  push.element.action_id = `fileURLInput${i}`;
+                  modal.view.blocks.push(JSON.parse(JSON.stringify(push)));
+               };
+
+               if (metadata.fileURLs > 0) button.elements.push(choiceData[1].options.removeFileURLButton);
+
+               modal.view.blocks.push(button);
+               modal.view.private_metadata = JSON.stringify(metadata);
+   
+               await Slack.client.views.update({
+                  token: process.env.SLACK_BOT_TOKEN,
+                  view: modal.view,
+                  view_id: payload.body.view.id
+               });
+               break;
+         }
+      } catch (err){
+         console.error(err);
       }
    },
    viewSubmission: async (payload) => {
       await payload.ack();
-      var input, data, modal;
+      var input, data, modal, metadata;
       switch (payload.body.view.callback_id){
          case 'registerData':
             const overwrite = {
@@ -192,7 +387,7 @@ const handler = {
                   payload.body.view.state.values.recipientField.recipientInput.selected_options.map(i => i.value)
                )
             };
-            const metadata = JSON.parse(payload.body.view.private_metadata);
+            metadata = JSON.parse(payload.body.view.private_metadata);
             data = {
                senderName: await Dir.UserFile.getUserData(payload.body.user.id).then(d => d?.name) ?? (
                   await Slack.client.users.info({
@@ -251,6 +446,32 @@ const handler = {
                await ShutDown();
             }
             break;      
+         case 'notebookData':
+            input = payload.body.view.state.values;
+            metadata = JSON.parse(payload.body.view.private_metadata);
+            if (metadata.makeEntry){
+               var write = {};
+               data = await Dir.NotebookFile.read();
+               write.title = input.notebookTitleField.notebookTitleInput.value;
+               write.description = input.notebookDescriptionField.notebookDescriptionInput.value;
+               write.files = [];
+               for (let i = 0; i < metadata.fileURLs; i++){
+                  write.files.push(input[`fileURLField${i}`][`fileURLInput${i}`].value);
+               }
+
+               if (typeof data[`${input.dateField.notebookLogDatePick.selected_date}`] !== 'undefined'){
+                  console.log('No!');
+               } else {
+                  await Dir.NotebookFile.writePath(`${input.dateField.notebookLogDatePick.selected_date}`,write);
+               }
+               //todo - store entry input data by date: {...}
+               //todo - make sure program senses if an entry already exists
+               console.log(await Slack.client.users.info({
+                  token: process.env.SLACK_BOT_TOKEN,
+                  user: 'U04H4NHJC95'
+               }));
+            }
+            break;
       }
    },
    scheduler: async () => {
@@ -355,6 +576,7 @@ const ShutDown = async () => {
 
 //STARTUP
 await (async () => {
+
    console.log(...logFormat.header);
    const uidata = await Dir.UIFile.read();
    const livedata = await Dir.LiveFile.read();
@@ -370,7 +592,7 @@ await (async () => {
       await Slack.shortcut(`${i}`,(payload) => {handler.interaction(formPayload(payload))});
    }
    //UI Interactions
-   for (var i of Catalog.keys.ui){
+   for (var i of [...getActionIds(uidata),'notebookEntryToggle','notebookInfoToggle']){
       await Slack.action(`${i}`,(payload) => {handler.modalInteraction(payload)});
    }
    //View Submission

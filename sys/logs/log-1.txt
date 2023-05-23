@@ -1,0 +1,456 @@
+
+[8:31:2:101 Sat 21/1/2023]  Application Started
+[8:31:30:428 Sat 21/1/2023]  Application Started
+[8:31:37:426 Sat 21/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "SUCCESS"
+
+[8:33:21:164 Sat 21/1/2023]  Application Started
+[8:39:44:625 Sat 21/1/2023]  Application Started
+[8:39:48:46 Sat 21/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:41:18:440 Sat 21/1/2023]  Application Started
+[8:42:2:51 Sat 21/1/2023]  Application Started
+[8:51:22:79 Sat 21/1/2023]  Application Started
+[8:53:10:130 Sat 21/1/2023]  Application Started
+[8:53:17:501 Sat 21/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:58:30:121 Sat 21/1/2023]  Application Started
+[8:58:38:145 Sat 21/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[9:0:14:761 Sat 21/1/2023]  Application Started
+[9:0:18:18 Sat 21/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[9:39:13:150 Sat 21/1/2023]  Application Started
+[9:39:31:736 Sat 21/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:13:28:178 Sun 22/1/2023]  Application Started
+[20:13:35:436 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:16:16:64 Sun 22/1/2023]  Application Started
+[20:16:51:228 Sun 22/1/2023]  Application Started
+[20:18:49:693 Sun 22/1/2023]  Application Started
+[20:20:12:991 Sun 22/1/2023]  Application Started
+[20:20:23:647 Sun 22/1/2023]  Application Started
+[20:20:28:245 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:22:18:485 Sun 22/1/2023]  Application Started
+[20:22:21:504 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:23:4:140 Sun 22/1/2023]  Application Started
+[20:23:6:832 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:24:20:62 Sun 22/1/2023]  Application Started
+[20:29:41:95 Sun 22/1/2023]  Application Started
+[20:29:48:81 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:30:13:132 Sun 22/1/2023]  Application Started
+[20:30:44:39 Sun 22/1/2023]  Application Started
+[20:31:13:605 Sun 22/1/2023]  Application Started
+[20:31:24:444 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:31:53:627 Sun 22/1/2023]  Application Started
+[20:32:57:578 Sun 22/1/2023]  Application Started
+[20:33:0:484 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:33:57:107 Sun 22/1/2023]  Application Started
+[20:41:54:623 Sun 22/1/2023]  Application Started
+[20:41:59:218 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:43:48:627 Sun 22/1/2023]  Application Started
+[20:43:53:387 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:44:41:314 Sun 22/1/2023]  Application Started
+[20:44:44:169 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:46:4:336 Sun 22/1/2023]  Application Started
+[20:46:7:235 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:46:54:579 Sun 22/1/2023]  Application Started
+[20:46:57:691 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:47:46:773 Sun 22/1/2023]  Application Started
+[20:47:49:707 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:48:52:545 Sun 22/1/2023]  Application Started
+[20:48:55:99 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:50:48:454 Sun 22/1/2023]  Application Started
+[20:50:52:696 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[20:51:35:326 Sun 22/1/2023]  Application Started
+[20:51:38:754 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:10:28:999 Sun 22/1/2023]  Application Started
+[21:10:39:349 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:15:1:491 Sun 22/1/2023]  Application Started
+[21:15:5:569 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:19:34:385 Sun 22/1/2023]  Application Started
+[21:19:39:400 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:20:12:537 Sun 22/1/2023]  Application Started
+[21:20:15:392 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:21:13:340 Sun 22/1/2023]  Application Started
+[21:21:18:802 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:21:54:194 Sun 22/1/2023]  Application Started
+[21:22:4:109 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:22:50:817 Sun 22/1/2023]  Application Started
+[21:22:56:534 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:24:7:696 Sun 22/1/2023]  Application Started
+[21:24:11:938 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:25:32:149 Sun 22/1/2023]  Application Started
+[21:27:3:923 Sun 22/1/2023]  Application Started
+[21:28:7:615 Sun 22/1/2023]  Application Started
+[21:28:10:687 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:28:42:206 Sun 22/1/2023]  Application Started
+[21:28:44:723 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:29:17:800 Sun 22/1/2023]  Application Started
+[21:29:19:267 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:31:27:564 Sun 22/1/2023]  Application Started
+[21:31:30:508 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:32:8:691 Sun 22/1/2023]  Application Started
+[21:32:12:646 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:32:31:689 Sun 22/1/2023]  Application Started
+[21:32:49:602 Sun 22/1/2023]  Application Started
+[21:33:13:973 Sun 22/1/2023]  Application Started
+[21:34:11:401 Sun 22/1/2023]  Application Started
+[21:34:12:639 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:35:19:43 Sun 22/1/2023]  Application Started
+[21:35:23:393 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:37:4:70 Sun 22/1/2023]  Application Started
+[21:37:4:721 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:37:28:912 Sun 22/1/2023]  Application Started
+[21:37:29:956 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:37:50:367 Sun 22/1/2023]  Application Started
+[21:37:54:128 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:38:12:497 Sun 22/1/2023]  Application Started
+[21:38:13:257 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:39:27:105 Sun 22/1/2023]  Application Started
+[21:39:28:450 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:40:21:25 Sun 22/1/2023]  Application Started
+[21:40:22:739 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:40:36:940 Sun 22/1/2023]  Application Started
+[21:40:39:998 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:41:2:620 Sun 22/1/2023]  Application Started
+[21:41:10:846 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:42:26:99 Sun 22/1/2023]  Application Started
+[21:42:29:176 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:48:40:783 Sun 22/1/2023]  Application Started
+[21:48:43:487 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:49:2:245 Sun 22/1/2023]  Application Started
+[21:49:6:365 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:51:34:26 Sun 22/1/2023]  Application Started
+[21:51:36:4 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:52:8:924 Sun 22/1/2023]  Application Started
+[21:52:11:227 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:53:3:785 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:54:29:148 Sun 22/1/2023]  Application Started
+[21:54:45:420 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:56:14:856 Sun 22/1/2023]  Application Started
+[21:56:16:499 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[21:56:58:325 Sun 22/1/2023]  Application Started
+[21:57:15:382 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "SUCCESS"
+
+[21:58:4:428 Sun 22/1/2023]  Application Started
+[21:58:17:812 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "SUCCESS"
+
+[21:58:59:666 Sun 22/1/2023]  Application Started
+[21:59:2:547 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "SUCCESS"
+
+[21:59:35:361 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'register'
+      Result:  "SUCCESS"
+
+[21:59:49:610 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "SUCCESS"
+
+[22:0:22:340 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed shortcut.message interaction 'notify'
+      Result:  "SUCCESS"
+
+[22:0:42:894 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notify'
+      Result:  "SUCCESS"
+
+[22:7:10:354 Sun 22/1/2023]  Application Started
+[22:7:11:691 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:15:31:260 Sun 22/1/2023]  Application Started
+[22:16:13:212 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:18:2:801 Sun 22/1/2023]  Application Started
+[22:18:4:145 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:20:50:834 Sun 22/1/2023]  Application Started
+[22:20:51:905 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:24:21:811 Sun 22/1/2023]  Application Started
+[22:24:23:841 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:24:30:649 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:26:7:725 Sun 22/1/2023]  Application Started
+[22:26:12:140 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:27:46:751 Sun 22/1/2023]  Application Started
+[22:27:49:729 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:28:26:407 Sun 22/1/2023]  Application Started
+[22:28:33:357 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:29:16:47 Sun 22/1/2023]  Application Started
+[22:29:20:248 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:29:51:225 Sun 22/1/2023]  Application Started
+[22:29:53:425 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:30:17:119 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:32:15:491 Sun 22/1/2023]  Application Started
+[22:32:18:637 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[22:32:36:40 Sun 22/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[7:58:22:898 Mon 23/1/2023]  Application Started
+[7:58:26:703 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[7:58:59:828 Mon 23/1/2023]  Application Started
+[7:59:1:396 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:1:52:755 Mon 23/1/2023]  Application Started
+[8:1:55:944 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:2:56:168 Mon 23/1/2023]  Application Started
+[8:2:58:315 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:3:54:993 Mon 23/1/2023]  Application Started
+[8:3:57:34 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:5:57:501 Mon 23/1/2023]  Application Started
+[8:5:59:923 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:8:46:673 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:14:50:926 Mon 23/1/2023]  Application Started
+[8:14:52:806 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:25:56:548 Mon 23/1/2023]  Application Started
+[8:25:59:144 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   ReferenceError: Cannot access 'users' before initialization
+       at Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:64:20)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[8:26:35:901 Mon 23/1/2023]  Application Started
+[8:26:37:655 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading '0')
+       at Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:71:37)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[8:27:16:918 Mon 23/1/2023]  Application Started
+[8:27:19:650 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:33:17:94 Mon 23/1/2023]  Application Started
+[8:33:19:305 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading '0')
+       at Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:71:37)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[8:33:39:586 Mon 23/1/2023]  Application Started
+[8:33:40:594 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   TypeError: Cannot read properties of undefined (reading '0')
+       at Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:72:37)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[8:34:18:270 Mon 23/1/2023]  Application Started
+[8:34:19:997 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:106:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[8:34:43:571 Mon 23/1/2023]  Application Started
+[8:34:45:524 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:36:57:95 Mon 23/1/2023]  Application Started
+[8:36:59:288 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:106:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[8:37:40:778 Mon 23/1/2023]  Application Started
+[8:37:42:576 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:42:20:767 Mon 23/1/2023]  Application Started
+[8:42:23:332 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[8:44:16:981 Mon 23/1/2023]  Application Started
+[8:44:20:632 Mon 23/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[19:16:4:506 Tue 24/1/2023]  Application Started
+[19:16:37:502 Tue 24/1/2023]  Application Started
+[19:16:42:602 Tue 24/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:108:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[19:23:21:273 Tue 24/1/2023]  Application Started
+[19:23:25:166 Tue 24/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:108:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[19:30:0:139 Tue 24/1/2023]  Application Started
+[19:30:3:390 Tue 24/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "FAIL"
+   Error: An API error occurred: invalid_arguments
+       at platformErrorFromResult (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/errors.js:56:33)
+       at WebClient.apiCall (/Users/carsonangell/Documents/Main/Technology/Robo-COM/node_modules/@slack/web-api/dist/WebClient.js:181:56)
+       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+       at async Object.notebook (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/interface.mjs:108:7)
+       at async Object.interaction (file:///Users/carsonangell/Documents/Main/Technology/Robo-COM/sys/app.mjs:35:29)
+
+[19:35:40:737 Tue 24/1/2023]  Application Started
+[19:35:43:879 Tue 24/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[19:39:24:606 Tue 24/1/2023]  Application Started
+[19:39:28:705 Tue 24/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[19:40:19:736 Tue 24/1/2023]  Application Started
+[19:40:22:115 Tue 24/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+[19:41:25:107 Tue 24/1/2023]  Application Started
+[19:41:27:364 Tue 24/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
+
+
+$>> [15:22:56:490 Sun 29/1/2023]  LOG FILE TERMINATED

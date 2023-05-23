@@ -86,7 +86,6 @@
       },
       "alternations": [
          {
-            "action_id": "notificationInput",
             "options": {
                "yes": {
                   "type": "button",
@@ -111,7 +110,7 @@
                      },
                      "deny": {
                         "type": "plain_text",
-                        "text": "No Go Back!"
+                        "text": "No"
                      }
                   }
                },
@@ -321,5 +320,219 @@
             }
          }
       }
+   },
+   "notebook": {
+      "modal": {
+         "trigger_id": null,
+         "view": {
+            "type": "modal",
+            "title": {
+               "type": "plain_text",
+               "text": "Engineering Notebook"
+            },
+            "blocks": [
+               {
+                  "type": "header",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "What do you want to do?"
+                  },
+                  "block_id": "notebookHeader"
+               },
+               {
+                  "type": "divider"
+               },
+               {
+                  "type": "section",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Make A New Entry"
+                  },
+                  "block_id": "section02",
+                  "accessory": null
+               },
+               {
+                  "type": "section",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Look At Previous Entries"
+                  },
+                  "block_id": "section03",
+                  "accessory": null
+               },
+               {
+                  "type": "actions",
+                  "block_id": "dateField",
+                  "elements": [
+                     {
+                        "type": "datepicker",
+                        "action_id": "notebookLogDatePick",
+                        "initial_date": null
+                     }
+                  ]
+               },
+               {
+                  "type": "divider"
+               }
+            ],
+            "callback_id": "notebookData",
+            "submit": {
+               "type": "plain_text",
+               "text": "Submit"
+            }
+         }
+      },
+      "alternations": [
+         {
+            "options": {
+               "toggleOn": {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": " "
+                  },
+                  "action_id": null,
+                  "style": "primary",
+                  "value": "On"
+               },
+               "toggleOff": {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": " "
+                  },
+                  "action_id": null,
+                  "value": "Off",
+                  "style": "danger"
+               }
+            }
+         },
+         {
+            "options": {
+               "makeEntry": [
+                  {
+                     "type": "input",
+                     "label": {
+                        "type": "plain_text",
+                        "text": "Title"
+                     },
+                     "block_id": "notebookTitleField",
+                     "element": {
+                        "type": "plain_text_input",
+                        "action_id": "notebookTitleInput",
+                        "max_length": 100,
+                        "focus_on_load": true,
+                        "placeholder": {
+                           "type": "plain_text",
+                           "text": "We did a thing!"
+                        }
+                     }
+                  },
+                  {
+                     "type": "input",
+                     "label": {
+                        "type": "plain_text",
+                        "text": "Description"
+                     },
+                     "block_id": "notebookDescriptionField",
+                     "element": {
+                        "type": "plain_text_input",
+                        "action_id": "notebookDescriptionInput",
+                        "placeholder": {
+                           "type": "plain_text",
+                           "text": "We did a thing by doing..."
+                        },
+                        "multiline": true
+                     },
+                     "optional": true
+                  },
+                  {
+                     "type": "input",
+                     "block_id": "userField",
+                     "label": {
+                        "type": "plain_text",
+                        "text": " "
+                     },
+                     "element": {
+                        "type": "multi_static_select",
+                        "action_id": "userInput",
+                        "options": null,
+                        "placeholder": {
+                           "type": "plain_text",
+                           "text": "People That Attended"
+                        }
+                     }
+                  },
+                  {
+                     "type": "actions",
+                     "block_id": "fileURLFieldButton",
+                     "elements": [
+                        {
+                           "type": "button",
+                           "text": {
+                              "type": "plain_text",
+                              "text": "Add File URL"
+                           },
+                           "action_id": "fileURLAdd"
+                        }
+                     ]
+                  }
+               ],
+               "viewEntry": [
+                  {
+                     "type": "header",
+                     "block_id": "notebookViewHeader",
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Test!"
+                     }
+                  }
+               ],
+               "overwriteConfirm": {
+                  "title": {
+                     "type": "plain_text",
+                     "text": "Are you sure?"
+                  },
+                  "text": {
+                     "type": "mrkdwn",
+                     "text": "A engineering note already exists on this date. Are you sure you want to overwrite it?"
+                  },
+                  "confirm": {
+                     "type": "plain_text",
+                     "text": "Yes"
+                  },
+                  "deny": {
+                     "type": "plain_text",
+                     "text": "No, go back!"
+                  }
+               },
+               "enterFileURL": {
+                  "type": "input",
+                  "block_id": "fileURLField0",
+                  "label": {
+                     "type": "plain_text",
+                     "text": " "
+                  },
+                  "element": {
+                     "type": "plain_text_input",
+                     "action_id": "fileURLInput0",
+                     "placeholder": {
+                        "type": "plain_text",
+                        "text": "https://www.example.com/robot.jpg"
+                     }
+                  }
+               },
+               "removeFileURLButton": {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Remove Last"
+                  },
+                  "action_id": "fileURLRemove",
+                  "style": "danger"
+               }
+            }
+         }
+      ]
    }
 }

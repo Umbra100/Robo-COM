@@ -1,4 +1,5 @@
 import { JSONFile } from "./util/directory.mjs";
+import { interfaceHandlers } from "./handler.mjs";
 
 const Catalog = {
   Commands: {
@@ -52,6 +53,38 @@ const Catalog = {
 
       await client.client.views.open(uidata);
       return {Result: 'Command Sent'};
+    },
+    notebook: async ({ payload, manifest, client }) => {
+      const uidata = await manifest.UIFile.getViewData('notebook');
+      const alternations = await manifest.UIFile.read()
+         .then(data => data.notebook.alternations);
+      var buttonBlocks = [alternations[0].options.toggleOn,alternations[0].options.toggleOff];
+      var users = await interfaceHandlers.getMeshedUsers({ client, manifest });
+
+      buttonBlocks[0].action_id = 'notebookEntryToggle';
+      buttonBlocks[1].action_id = 'notebookInfoToggle';
+      uidata.view.blocks[2].accessory = buttonBlocks[0];
+      uidata.view.blocks[3].accessory = buttonBlocks[1];
+      uidata.view.blocks[4].elements[0].initial_date = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`;
+      uidata.view.private_metadata = JSON.stringify({fileURLs: 0, makeEntry: true});
+
+      for (const i of alternations[1].options.makeEntry) uidata.view.blocks.push(i);
+
+      uidata.view.blocks[8].element.options = [];
+      for (const i of users){
+         uidata.view.blocks[8].element.options.push({
+            text: {
+               type: 'plain_text',
+               text: i.name
+            },
+            value: JSON.stringify(i)
+         })
+      };
+      
+      uidata.trigger_id = payload.body.trigger_id;
+
+      await client.client.views.open(uidata);
+      return {Result: 'SUCCESS'};
     }
   },
   MessageShortcuts: {
@@ -71,14 +104,7 @@ const Catalog = {
       return {Result: 'SUCCESS'};
     }
   },
-  Shortcuts: {},
-  keys: {
-    ui: ['notificationInput','recipientButtonInput']
-  }
+  Shortcuts: {}
 };
-
-const helper = {
-   UI: new JSONFile('./sys/ui.json')
-}
 
 export default Catalog;

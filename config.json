@@ -3,6 +3,7 @@
       "liveFileLocation": "./sys/data/live.json",
       "UIFileLocation": "./sys/ui.json",
       "userFileLocation": "./sys/data/users.json",
+      "notebookFileLocation": "./sys/data/notebook.json",
       "intervals": {
          "scheduler": 1000,
          "config": 100

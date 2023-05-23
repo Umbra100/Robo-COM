@@ -355,7 +355,9 @@ export default class DirectoryManifest {
          this.uidir = await this.ConfigFile.read()
             .then(data => data.CONSTANT.UIFileLocation);
          this.userdir = await this.ConfigFile.read()
-            .then(data => data.CONSTANT.userFileLocation)
+            .then(data => data.CONSTANT.userFileLocation);
+         this.notebookdir = await this.ConfigFile.read()
+            .then(data => data.CONSTANT.notebookFileLocation);
          var livedir = this.livedir;
          var logdir = this.logdir;
 
@@ -730,6 +732,13 @@ export default class DirectoryManifest {
                await this.writePath('data',compile);
             }
          })(this.userdir);
+
+         //* Create engineering notebook data file wrapper
+         this.NotebookFile = await new (class extends JSONFile {
+            constructor(filepath){
+               super(filepath);
+            }
+         })(this.notebookdir);
 
          resolve(this);
       })

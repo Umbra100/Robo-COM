@@ -69,6 +69,15 @@ export const parseNotifyTime = (time) => {
    }
 }
 
+export const getActionIds = (view = {}) => {
+   var action_ids = [];
+   for (const i in view){
+      if (typeof view[i] == 'object') action_ids = [...action_ids,...getActionIds(view[i])];
+      else if (i == 'action_id' && typeof i == 'string') action_ids.push(view[i]);
+   }
+   return action_ids;
+}
+
 export const logFormat = {
    header: ['\x1b[0m\x1b[32m','===========','\x1b[36m','Starting Application','\x1b[32m','===========\x1b[0m'],
    bulletPoint: ['\x1b[0m\x1b[34m','   ->','\x1b[0m\x1b[33m'],

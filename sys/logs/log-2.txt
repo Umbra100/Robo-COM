@@ -1,0 +1,5 @@
+$>> [15:22:56:496 Sun 29/1/2023]  LOG FILE INITIALIZED
+
+[15:22:56:782 Sun 29/1/2023]  Application Started
+[15:23:34:38 Sun 29/1/2023]  User carsonjesseangell(U04H4NHJC95) executed command interaction 'notebook'
+      Result:  "SUCCESS"
