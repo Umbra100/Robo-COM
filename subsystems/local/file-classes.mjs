@@ -105,7 +105,7 @@ export class JSONFile {
     * @param {Object} [options] Writing options for node
     *    @param {String} options.action Action specify how to the data is stored ('set' | 'append' | 'prepend' | 'delete')
     *    @param {Boolean} [options.parse] Whether or not to parse JSON data into Javascript object data type
-    * @returns {Promise.Object} Overwritten data at node
+    * @returns {any} Overwritten data at node
     */
    async writePath(path,data,options = {action: 'set', parse: true}){
       var pathArray = nodePathArr(path), {action, parse} = options, originalPath = path;
@@ -147,6 +147,27 @@ export class JSONFile {
       }
       const result = JSONFile.followNodePath(originalPath, await this.write(recursive.overwrite));
       return parse ? result : JSON.stringify(result);
+   }
+   /**
+    * Gets the file size of the designated txt file
+    * @returns {JSONSize} Object containing
+    * @typedef {Object} JSONSize
+    * @property {Number} size Number measurement of the size unit
+    * @property {String} unit Unit of the size measurement. Can be either 'B', 'KB', 'MB', or 'GB'.
+    */
+   async getSize(){
+      var size = (await fs.stat(this.filepath)).size;
+      var unitCount = 0, units = ['B','KB','MB','GB'];
+      while (size >= 1){
+         if (size / 1024 < 1) {
+            size = Math.round(size * 100) / 100;
+            break;
+         } else {
+            size = size / 1024;
+            unitCount++;
+         };
+      }
+      return {size,unit: units[unitCount]};
    }
 }
 
@@ -209,7 +230,7 @@ export class TXTFile {
     * @param {Object} [options] Options on how to write to file
     * @param {String} options.action Action user to write to file (set | append | prepend | clear | insert | newline)
     * @param {Number} [options.index] Index to insert string after (required if using 'insert' action)
-    * @returns {String} Overwritten data of text file
+    * @returns {String} New contents of txt file
     */
    async write(data,options = {action: 'set', index: undefined}){
       const {action,index} = options;
@@ -246,6 +267,28 @@ export class TXTFile {
       if (checkData !== readData) throw new Error('Data did not write correctly');
       return checkData;
    }
+   /**
+    * Gets the file size of the designated txt file
+    * @async
+    * @returns {TXTSize} Object containing
+    * @typedef {Object} TXTSize
+    * @property {Number} size Number measurement of the size unit
+    * @property {String} unit Unit of the size measurement. Can be either 'B', 'KB', 'MB', or 'GB'.
+    */
+   async getSize(){
+      var size = (await fs.stat(this.filepath)).size;
+      var unitCount = 0, units = ['B','KB','MB','GB'];
+      while (size >= 1){
+         if (size / 1024 < 1) {
+            size = Math.round(size * 100) / 100;
+            break;
+         } else {
+            size = size / 1024;
+            unitCount++;
+         };
+      }
+      return {size,unit: units[unitCount]};
+   }
 }
 
 /**General File wrapper */
@@ -269,15 +312,22 @@ export class File {
  * @returns {Array} A path array outlining where the path to follow leads
  */
 const nodePathArr = (str) => {
-   const splitDot = str.split('.');
    var pathArr = [];
-   for (const i of splitDot){
-      if (i.indexOf('[') !== -1){
-         let splitBracket = i.split('[');
-         pathArr.push(splitBracket[0]);
-         splitBracket = splitBracket.slice(1,splitBracket.length);
-         splitBracket.forEach(i => pathArr.push(parseInt(i.slice(0,i.indexOf(']')))));
-      } else pathArr.push(i);
+   var inQuote = false, segment = '';
+   for (const i of str){
+      if (i == `'` || i == `"`){
+         inQuote = !inQuote;
+         continue;
+      }
+
+      if ((i == '.' || i == '[') && !inQuote){
+         if (segment !== '') pathArr.push(segment);
+         segment = '';
+      } else if (i == ']' && !inQuote){
+         pathArr.push(parseInt(segment));
+         segment = '';
+      } else segment += i;
    }
+   if (segment !== '') pathArr.push(segment);
    return pathArr;
 };

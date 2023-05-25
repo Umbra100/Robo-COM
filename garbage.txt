@@ -1,0 +1,68 @@
+const objectFormatRaw = (obj) => {
+   const recursive = (val, meta) => {
+      var str = '';
+      const indentBase = '  ';
+      const type = (val instanceof Array) ? 'array' : typeof val;
+      const indentStr = indentBase.repeat(meta.indentCount);
+      switch (type){
+         case 'array':
+            str = `[\n`;
+            for (const i of val){
+               if (typeof i !== 'object'){
+                  if (typeof i == 'string') str += `${indentBase}${indentStr}'${i}'\n`;
+                  else str += `${indentBase}${indentStr}${i}\n`;
+               }
+               else str += `${indentBase}${indentStr}${recursive(i,{indentCount: meta.indentCount+1})}`;
+            }
+            str += `${indentStr}]\n`;
+            break;
+         case 'object':
+            str = '{\n';
+            for (const j in val){
+               str += `${indentBase}${indentStr}${j}: `;
+               if (typeof val[j] !== 'object'){
+                  if (typeof val[j] == 'string') str += `'${val[j]}'\n`;
+                  else str += `${val[j]}\n`;
+               }
+               else str += `${recursive(val[j],{indentCount: meta.indentCount+1})}`;
+            }
+            str += `${indentStr}}\n`;
+            break;
+         default: throw new TypeError(`Expected type 'object' or 'array', recieved '${type}'`);
+      }
+      return str;
+   }
+   return recursive(obj,{indentCount: 0});
+}
+const objectFormatPolished = (obj) => {
+   const recursive = (val, meta) => {
+      var str = '\n';
+      const indentBase = '  ';
+      const type = (val instanceof Array) ? 'array' : typeof val;
+      const indentStr = indentBase.repeat(meta.indentCount);
+      switch (type){
+         case 'array':
+            for (const i of val){
+               if (typeof i !== 'object'){
+                  if (typeof i == 'string') str += `${indentBase}${indentStr}'${i}'\n`;
+                  else str += `${indentBase}${indentStr}${i}\n`;
+               }
+               else str += `${indentBase}${indentStr}${recursive(i,{indentCount: meta.indentCount+1})}`;
+            }
+            break;
+         case 'object':
+            for (const j in val){
+               str += `${indentBase}${indentStr}${j[0].toUpperCase()}${j.slice(1,j.length)}: `;
+               if (typeof val[j] !== 'object'){
+                  if (typeof val[j] == 'string') str += `'${val[j]}'\n`;
+                  else str += `${val[j]}\n`;
+               }
+               else str += `${recursive(val[j],{indentCount: meta.indentCount+1})}`;
+            }
+            break;
+         default: throw new TypeError(`Expected type 'object' or 'array', recieved '${type}'`);
+      }
+      return str;
+   }
+   return recursive(obj,{indentCount: 0});
+}
