@@ -69,7 +69,12 @@ export const terminalFormatter = {
    bulletPoint: "\x1b[32m->  \x1b[0m",
    errorPoint: "\x1b[31m-!>  \x1b[0m",
    subBulletPoint: "       \x1b[34m- \x1b[0m",
-   reset: "\x1b[0m"
+   reset: "\x1b[0m",
+   header: "\x1b[36m===============\x1b[1m\x1b[32m Starting Application \x1b[1m\x1b[36m===============\x1b[0m",
+   bootBulletPoint: "   \x1b[32m▣\x1b[0m ",
+   bootSubBulletPoint: "       \x1b[34m□\x1b[0m",
+   bootSpecialSubBulletPoint: "       \x1b[33m□\x1b[0m",
+   footer: "\x1b[36m===============\x1b[1m\x1b[32m  Application Online  \x1b[1m\x1b[36m===============\x1b[0m"
 }
 
 /**

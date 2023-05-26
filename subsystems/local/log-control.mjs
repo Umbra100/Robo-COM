@@ -40,7 +40,7 @@ class LogManifest {
             /**Local interval meta data */
             this.#intervalMeta = {
                timeDelay: options.interval,
-               active: true,
+               active: false,
                functionDelay: 100,
                function: null,
                initializationDate: null

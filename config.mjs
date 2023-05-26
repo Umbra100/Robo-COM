@@ -7,8 +7,8 @@ existing log files.*/
 
 /** The amount of time the app waits before creating a new log file. This makes things better to organize. Please set
 these two values according to each other. */
-   static log_time_interval = 1;
-   static log_time_unit = 'minute';
+   static log_time_interval = 2;
+   static log_time_unit = 'Weeks';
 
 }
 export default ConfigFile;

@@ -291,6 +291,34 @@ export class TXTFile {
    }
 }
 
+/**A general file wrapper. This adapts to the class depending on what the file extension is */
+export class File {
+   /**
+    * Creates a file wrapper based on the file's extension. Only has special support for txt and json files.
+    * @param {String} filepath The file path leading to the file
+    * @returns {File | TXTFile | JSONFile} The file wrapper
+    */
+   constructor(filepath){
+      switch (path.extname(filepath)){
+         case '.txt': return new TXTFile(filepath);
+         case '.json': return new JSONFile(filepath);
+         default:
+            this.filepath = filepath;
+      }
+   }
+   /**
+    * Reads the raw data of the file
+    * @returns {any} Data of the file
+    */
+   async read(){return await fs.readFile(this.filepath,{ encoding: 'utf8' });}
+   /**
+    * Writs raw data to the given file
+    * @param {any} data The data to write to the file
+    * @returns {void}
+    */
+   async write(data){return await fs.writeFile(this.filepath, data, { encoding: 'utf8' });}
+}
+
 /**
  * Returns an array that contains keys of the objects that lead to a value inside a parent object
  * @param {String} str Javascript literal syntax of object reference in a string
