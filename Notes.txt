@@ -1,0 +1,3 @@
+Things to do at end of development:
+
+- Change log directory config value to absolute value (per server computer))

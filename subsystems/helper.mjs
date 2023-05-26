@@ -1,3 +1,5 @@
+import ConfigFile from "../config.mjs";
+
 /**
  * Performs a deep scan of the biggest object and compared all key-value pairs to see if objects are equal
  * @param {Object} obj1 First object to compare
@@ -29,7 +31,7 @@ export const clockFormatter = {
       if (readable) return ''.concat(
          time.getHours() == 12 ? time.getHours() : time.getHours() % 12,':',
          `${time.getMinutes()}`.length == 1 ? `0${time.getMinutes()}` : `${time.getMinutes()}`,
-         time.getHours() > 12 ? ' PM' : ' AM'
+         time.getHours() > 11 ? ' PM' : ' AM'
       );
       else return ''.concat(
          time.getHours(),':',
@@ -61,3 +63,38 @@ export const clockFormatter = {
       );
    }
 }
+
+/**Collection of console log color and format codes. Used to help style the node terminal. */
+export const terminalFormatter = {
+   bulletPoint: "\x1b[32m->  \x1b[0m",
+   errorPoint: "\x1b[31m-!>  \x1b[0m",
+   subBulletPoint: "       \x1b[34m- \x1b[0m",
+   reset: "\x1b[0m"
+}
+
+/**
+ * Gets the amount of time the log system waits until creating a new file (per config file value) in milliseconds
+ * @returns {Number} The amount of time that the config is set to (in milliseconds)
+ */
+export const getConfigTimeDelay = () => {
+   var date = new Date(), dateChange = new Date(date);
+   const configValue = ConfigFile.log_time_unit;
+   const unit = `${configValue[0].toUpperCase()}${configValue.slice(1,configValue.length)}${configValue[configValue.length-1] == 's' ? '' : 's'}`;
+   
+   switch (unit){
+      case 'Days':
+         dateChange.setDate(dateChange.getDate() + ConfigFile.log_time_interval);
+         break;
+      case 'Months':
+         dateChange.setMonth(dateChange.getMonth() + ConfigFile.log_time_interval);
+         break;
+      case 'Weeks':
+         dateChange.setDate(dateChange.getDate() + (ConfigFile.log_time_interval * 7));
+         break;
+      default:
+         dateChange[`set${unit}`](dateChange[`get${unit}`]() + ConfigFile.log_time_interval);
+   }
+   return Date.parse(dateChange) - Date.parse(date);
+}
+
+//todo - Make local file client

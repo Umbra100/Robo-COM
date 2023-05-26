@@ -1,14 +1,14 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { TXTFile, JSONFile } from './file-classes.mjs';
-import { clockFormatter } from '../helper.mjs';
+import { clockFormatter, terminalFormatter } from '../helper.mjs';
 
 class LogManifest {
    /**
     * Creates a wrapper of the entire log file directory
     * @param {Object} options Options to dictate how the log manifest behaves
     * @param {String} options.directory Log file directory to manipulate
-    * @param {Number} options.interval Log file creation interval (in seconds)
+    * @param {Number} options.interval Log file creation interval (in milliseconds)
     * @async
     */
    #intervalMeta
@@ -40,11 +40,13 @@ class LogManifest {
             /**Local interval meta data */
             this.#intervalMeta = {
                timeDelay: options.interval,
-               active: false,
+               active: true,
                functionDelay: 100,
-               function: null
+               function: null,
+               initializationDate: null
             };
             this.#intervalMeta.function = setInterval(() => this.#intervalEvent(this.#intervalMeta.active),this.#intervalMeta.functionDelay);
+            this.#intervalMeta.initializationDate = Date.parse((await this.metadata.getFileData(this.currentFile)).initializedOn);
             /**Meta data for the file creation interval */
             this.interval = {
                /**
@@ -52,12 +54,10 @@ class LogManifest {
                 * @returns {Boolean} Whether the interval is active
                 */
                getActivity: () => this.#intervalMeta.active,
-               /**
-                * Sets whether or not the log file interval is active
-                * @param {Boolean} val What to set the interval activity to
-                * @returns {void}
-                */
-               setActivity: (val) => {this.#intervalMeta.active = val;},
+               /**Activates the log file interval */
+               activate: () => {this.#intervalMeta.active = true},
+               /**Deactivates the log file interval*/
+               deactiveate: () => {this.#intervalMeta.active = false},
                /**
                 * Gets the time delay that the interval uses for new log file creation
                 * @returns {Number} Amount of time the interval waits before creating a new log file (in seconds)
@@ -71,7 +71,10 @@ class LogManifest {
    async #intervalEvent(active){
       try {
          if (active){
-
+            if (Date.parse(new Date()) - this.#intervalMeta.initializationDate > this.#intervalMeta.timeDelay){
+               await this.createNewLogFile();
+               console.log(terminalFormatter.bulletPoint, 'Interval Passed; transferred to new log file');
+            }
          }
       } catch(err){
          console.error(err);
@@ -99,6 +102,7 @@ class LogManifest {
       this.files[newName] = new LogFile(`${this.directory}/${newName}`);
       await this.currentFile.initialize();
       await this.metadata.setCurrentFile(newName);
+      this.#intervalMeta.initializationDate = Date.parse(date);
 
       const fileSize = await this.currentFile.getSize();
       await this.metadata.setFileProperty(this.currentFile,'size',`${fileSize.size} ${fileSize.unit}`);

@@ -291,21 +291,6 @@ export class TXTFile {
    }
 }
 
-/**General File wrapper */
-export class File {
-   /**
-    * Returns a class instance based on the file extension (compatible file types: JSON, TXT)
-    * @param {String} filepath File path of desired file
-    */
-   constructor(filepath){
-      switch (path.extname(filepath)){
-         case '.json': return new JSONFile(filepath);
-         case '.txt': return new TXTFile(filepath);
-         default: throw new Error(`Incompatible file type '${path.extname(filepath)}'`)
-      }
-   }
-}
-
 /**
  * Returns an array that contains keys of the objects that lead to a value inside a parent object
  * @param {String} str Javascript literal syntax of object reference in a string
