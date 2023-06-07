@@ -45,7 +45,7 @@ class LogManifest {
                function: null,
                initializationDate: null
             };
-            this.#intervalMeta.function = setInterval(() => this.#intervalEvent(this.#intervalMeta.active),this.#intervalMeta.functionDelay);
+            this.#intervalMeta.function = setInterval(async () => {await this.#intervalEvent();},this.#intervalMeta.functionDelay);
             this.#intervalMeta.initializationDate = Date.parse((await this.metadata.getFileData(this.currentFile)).initializedOn);
             /**Meta data for the file creation interval */
             this.interval = {
@@ -68,16 +68,17 @@ class LogManifest {
             return this;
          });
    }
-   async #intervalEvent(active){
+   //!alert if error
+   async #intervalEvent(){
       try {
-         if (active){
+         if (this.#intervalMeta.active){
             if (Date.parse(new Date()) - this.#intervalMeta.initializationDate > this.#intervalMeta.timeDelay){
                await this.createNewLogFile();
                console.log(terminalFormatter.bulletPoint, 'Interval Passed; transferred to new log file');
             }
          }
       } catch(err){
-         console.error(err);
+         console.error(terminalFormatter.errorPoint,err);
       }
    }
    /**

@@ -4,9 +4,11 @@ import LogManifest from "./log-control.mjs";
 import { File, JSONFile, TXTFile } from "./file-classes.mjs";
 import ConfigFile from "../../config.mjs";
 import { getConfigTimeDelay, terminalFormatter } from "../helper.mjs";
+import { Subsystem } from '../highway.mjs';
 
 /**The client responsible for all local file manipulations. */
 class LocalClient {
+   #subsystem
    constructor(){
       return Promise.resolve()
          .then(async () => {
@@ -20,6 +22,7 @@ class LocalClient {
             console.log(terminalFormatter.bootSubBulletPoint,'Log Interval Active');
 
             console.log(terminalFormatter.bootSpecialSubBulletPoint,'Client Active');
+            this.#subsystem = new Subsystem('Local',this);
             return this;
          })
    }

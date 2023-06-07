@@ -1,3 +1,27 @@
 Things to do at end of development:
 
-- Change log directory config value to absolute value (per server computer))
+- Change log directory config value to absolute value (per server computer)
+
+Things to do when setting up:
+ 
+ -> General
+   - Use OpenSSL to create a new SSL certificate in JHS robotics name (use email as well)
+ -> Slack
+   - Go to slack application dashboard
+   - Customize app appearance
+   - Create App Level token names 'socket-mode'
+   - Put app level token in .env labeled 'SLACK_APP_LEVEL_TOKEN'
+   - Enable Socket Mode
+
+
+{
+  ok: true,
+  app_id: 'A05A1D2FZQU',
+  token_type: 'bot',
+  scope: 'calls:write',
+  access_token: 'xoxe.xoxb-1-MS0yLTQ2MjEwMDM5ODQ2NDAtNTMzNjAxOTI3NTQ3Ny01MzM4ODM4MDIxODc1LTUzNTMwNjQ3OTczOTMtODI1MTAzN2M5YjA5NGE2MDkwOWUxOGFhNTliM2FjNjIyYzVjZDU4NDQ1MTY4YzAxNzFkMjFjYTJhMmQwMDU4MA',
+  expires_in: 43200,
+  refresh_token: 'xoxe-1-My0xLTQ2MjEwMDM5ODQ2NDAtNTMzODgzODAyMTg3NS01MzQyOTE4NjgyMDY4LWYwNGE2YzhlZjU5ZGNmZjA2YWRiMjEzZDRhYWQ4ODRhYjI4OTkwZTRhNDFjODVlY2M2NDI3ZTg0OWNmZTNhZTU',
+  bot_user_id: 'U059W0K83E1',
+  team: { id: 'T04J903UYJU', name: 'Slack API Testing' }
+}

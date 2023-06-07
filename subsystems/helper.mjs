@@ -101,5 +101,3 @@ export const getConfigTimeDelay = () => {
    }
    return Date.parse(dateChange) - Date.parse(date);
 }
-
-//todo - Make local file client
