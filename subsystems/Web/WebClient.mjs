@@ -1,7 +1,7 @@
 import app from 'express';
 import https from 'https';
 import { terminalFormatter } from '../helper.mjs';
-import Highway from '../highway.mjs';
+import Highway from '../Highway.mjs';
 
 class WebClient {
    #app

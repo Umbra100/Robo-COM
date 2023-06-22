@@ -4,7 +4,8 @@
   "description": "General commuications app for the JHS Robotics team",
   "main": "app.mjs",
   "scripts": {
-    "start": "node app.mjs"
+    "start": "node app.mjs",
+    "refresh-token": "node devtools/refreshToken.mjs"
   },
   "author": "Carson Angell",
   "license": "ISC",

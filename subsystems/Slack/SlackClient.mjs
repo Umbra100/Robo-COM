@@ -1,6 +1,6 @@
 import axios from "axios";
-import WebSocket from "ws";
-import Highway from "../highway.mjs";
+import SlackWebSocket from "./SlackWebSocket.mjs";
+import Highway from "../Highway.mjs";
 import { terminalFormatter } from "../helper.mjs";
 
 //todo - Create refresh token interval
@@ -74,45 +74,20 @@ class SlackClient {
                 */
                getTimeDelay: () => this.#intervalMeta.timeDelay
             };
-            console.log(terminalFormatter.bootSubBulletPoint,'Toke Refresh Interval Active');
+            console.log(terminalFormatter.bootSubBulletPoint,'Token Refresh Interval Active');
 
             //Makes HTTP request to slack api to create a websocket for event recieving
-            const socketRequest = await axios.request({
-               method: 'POST',
-               url: 'https://slack.com/api/apps.connections.open',
-               headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                  'Authorization': `Bearer ${this.#auth.app_level_token}`
-               }
-            })
-               .then(res => {
-                  if (res.data.ok) return res.data.url;
-                  else throw new Error(`Slack Socket Mode Request Failed; ${JSON.stringify(res.data)}`);
-               })
-            
-            //If the request was successfuly, create the websocket and wait until it is online
-            if (typeof socketRequest !== 'undefined'){
-               this.#websocket = new WebSocket(socketRequest);
-               await (new Promise((resolve,reject) => {
-                  this.#websocket.onopen = () => {
-                     console.log(terminalFormatter.bootSubBulletPoint,'Web Socket Connected; Waiting for ping');
-                  }
-                  this.#websocket.onmessage = (e) => {
-                     var data = JSON.parse(e.data);
-                     if (data.type == 'hello'){
-                        console.log(terminalFormatter.bootSubBulletPoint,'Ping Recieved; Web Socket Online');
-                        this.#websocket.onmessage = undefined;
-                     }
-                     resolve();
-                  }
-               }))
-            }
+            this.#websocket = await new SlackWebSocket({
+               app_level_token: this.#auth.app_level_token,
+               access_token: this.#tokenData.access_token
+            });
 
             console.log(terminalFormatter.bootSpecialSubBulletPoint,'Client Active');
             this.#subsystem = new Highway.Subsystem('Slack',this);
             return this;
          });
    }
+   /**Refreshed the access token */
    async #refreshToken(){
       const date = new Date();
       var request = await axios.request({
@@ -129,16 +104,16 @@ class SlackClient {
          })
       })
          .then(res => {
-            if (res.ok) return res.data;
-            else console.error(res.data);
+            if (res.data.ok) return res.data;
+            else throw new Error(`Error occurred while attempting to refresh access token, '${res.data}'`);
          });
       request.date_collected = date.toString();
       this.#tokenData = request;
       return await this.#files.tokenStore.write(request);
    }
    //!alert if error
+   /**Interval function the slack client interval uses */
    async #intervalEvent(){
-      console.log('test2');
       try {
          if (this.#intervalMeta.active){
             var date = Date.parse(new Date()) / 1000;
@@ -150,6 +125,9 @@ class SlackClient {
       } catch(err){
          console.error(terminalFormatter.errorPoint,err);
       }
+   }
+   async forceRefresh(){
+      return await this.#refreshToken();
    }
 }
 

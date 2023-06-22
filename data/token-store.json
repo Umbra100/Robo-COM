@@ -1,15 +1,1 @@
-{
-   "ok": true,
-   "app_id": "A05A1D2FZQU",
-   "token_type": "bot",
-   "scope": "chat:write,commands",
-   "access_token": "xoxe.xoxb-1-MS0yLTQ2MjEwMDM5ODQ2NDAtNTMzOTI5NDUzMzg2My01MzUzODM3MDc1Njk4LTUzODQ2Mjc0NjExNTgtNjM5NjZhNmU3YjdlNWI2N2MyZDFkZDA0MGZlMzNlNzFhMjNiNWI3YThlMGFhNzAxOTJhMDBjNjJkNjFlMThmMw",
-   "expires_in": 43200,
-   "refresh_token": "xoxe-1-My0xLTQ2MjEwMDM5ODQ2NDAtNTM1MzgzNzA3NTY5OC01MzY2NDg2MTcyNDQ5LTk1NjAyZmNlY2IzMWQ4OGU3NTRkMTFiYmI5NmU3NDkwZDU1ZjU2MzlkM2U2NjQwMDVmMDg1MThjMTgwMGY5ZWI",
-   "bot_user_id": "U059W0K83E1",
-   "team": {
-      "id": "T04J903UYJU",
-      "name": "Slack API Testing"
-   },
-   "date_collected": "Wed Jun 07 2023 16:25:25 GMT-0600 (Mountain Daylight Time)"
-}
+{"ok":true,"access_token":"xoxe.xoxb-1-MS0yLTQ2MjEwMDM5ODQ2NDAtNTMzOTI5NDUzMzg2My01MzUzODM3MDc1Njk4LTUzOTg0NzE1NDc0NTgtZTA4YzQ0NjM0N2YyYWIzYTEyZWY1NjY0MWE3MGNkODY1ODkwMmIxOTlhOTA4NWM5ZWRmYzI2YWRkMGU3ZmVkOA","expires_in":43200,"refresh_token":"xoxe-1-My0xLTQ2MjEwMDM5ODQ2NDAtNTM1MzgzNzA3NTY5OC01Mzk4MzQ1OTQ1MzQ3LTFmZGQ4MWFmYTAzNjk3YzJhOWE0NGRmZWY3NTdmZGFjOTRmMDk5Y2Q4ODIwOTYyMTkxNmJlYTJjMzFmYTgzZmQ","token_type":"bot","app_id":"A05ADQE3EHY","scope":"chat:write,commands","bot_user_id":"U059Z8NFPRD","team":{"id":"T04J903UYJU","name":"Slack API Testing"},"enterprise":null,"is_enterprise_install":false,"date_collected":"Thu Jun 08 2023 18:24:08 GMT-0600 (Mountain Daylight Time)"}

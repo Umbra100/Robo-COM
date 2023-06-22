@@ -1,10 +1,10 @@
-import LocalClientClass from "./subsystems/Local/LocalClient.mjs";
-import SlackClientClass from './subsystems/Slack/SlackClient.mjs';
-import WebClientClass from "./subsystems/Web/WebClient.mjs";
+import LocalClientClass from "../subsystems/Local/LocalClient.mjs";
+import SlackClientClass from '../subsystems/Slack/SlackClient.mjs';
+import WebClientClass from "../subsystems/Web/WebClient.mjs";
 
-import ConfigFile from "./config.mjs";
-import Highway from "./subsystems/Highway.mjs";
-import { terminalFormatter } from "./subsystems/helper.mjs";
+import ConfigFile from "../config.mjs";
+import Highway from "../subsystems/Highway.mjs";
+import { terminalFormatter } from "../subsystems/helper.mjs";
 import env from 'dotenv';
 env.config({ path: './security/.env' });
 console.log(terminalFormatter.header);
@@ -41,13 +41,5 @@ SlackClient = await new SlackClientClass({
 
 console.log(terminalFormatter.footer);
 
-/* What I did last
-
-Last time I made the Slack client code friendly. I also made the socket mode detached from the main
-cleint file. I creates a refresh token script that force refreshes the access token from the node
-terminal. And now i'm working on interacting with Slack itself.
-
-*/
-
-//todo - later make sure token exchange works (when it's expired)
-//todo - later add a error alerting system to alert admin if a important error occurs (at "//!alert if error" marked spots)
+await SlackClient.forceRefresh();
+console.log(terminalFormatter.bulletPoint,'Token Refreshed');
