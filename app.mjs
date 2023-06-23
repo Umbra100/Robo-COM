@@ -39,17 +39,7 @@ SlackClient = await new SlackClientClass({
    app_level_token: process.env.SLACK_APP_LEVEL_TOKEN
 });
 
+await LocalClient.logs.currentFile.log('Application Online');
 console.log(terminalFormatter.footer);
 
-// await SlackClient.start();
-
-/* What I did last
-
-Last time I made the Slack client code friendly. I also made the socket mode detached from the main
-cleint file. I creates a refresh token script that force refreshes the access token from the node
-terminal. And now i'm working on interacting with Slack itself.
-
-*/
-
-//todo - later make sure token exchange works (when it's expired)
-//todo - later add a error alerting system to alert admin if a important error occurs (at "//!alert if error" marked spots)
+//todo - Finish register shortcut functionality (conjunction with other features)

@@ -1,50 +1,229 @@
 {
-  "initial": {
-    "type": "modal",
-    "callback_id": "register",
-    "title": {
-      "type": "plain_text",
-      "text": "Register"
-    },
-    "blocks": [
-      {
-        "type": "divider"
+   "part1": {
+      "type": "modal",
+      "title": {
+         "type": "plain_text",
+         "text": "Registration - Part 1"
       },
-      {
-        "type": "input",
-        "block_id": "text_input",
-        "element": {
-          "type": "plain_text_input",
-          "action_id": "plain_text_input_action",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Billy Joe"
-          }
-        },
-        "label": {
-          "type": "plain_text",
-          "text": "Name"
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "text": "Click Me"
+      "callback_id": "register",
+      "private_metadata": "{\"part\": 1}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "name_text_field",
+            "element": {
+               "type": "plain_text_input",
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Billy Joe"
+               }
             },
-            "value": "click_me_123",
-            "action_id": "button"
-          }
-        ]
+            "label": {
+               "type": "plain_text",
+               "text": "Name"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "team_select_field",
+            "label": {
+               "type": "plain_text",
+               "text": "Team Selection"
+            },
+            "element": {
+               "type": "multi_static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select"
+               },
+               "options": null,
+               "action_id": "action"
+            }
+         },
+         {
+            "type": "context",
+            "elements": [
+               {
+                  "type": "plain_text",
+                  "text": "Select what teams you are interested in being a part of. If you aren't sure what you want to choose, you can try asking someone on the team to get you started."
+               }
+            ]
+         },
+         {
+            "type": "input",
+            "block_id": "outreach_field",
+            "label": {
+               "type": "plain_text",
+               "text": "Outreach"
+            },
+            "element": {
+               "type": "checkboxes",
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "I am interested in participating in outreach events"
+                     },
+                     "value": "yes"
+                  }
+               ],
+               "action_id": "action"
+            },
+            "optional": true
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Welcome to the JHS Robotics Team! We can't wait to have you working with us. If you have any questions at all, don't be afraid to ask."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "Cute Cat Image"
+            }
+         }
+      ],
+      "submit": {
+         "type": "plain_text",
+         "text": "Submit"
       }
-    ],
-    "submit": {
-      "type": "plain_text",
-      "text": "Submit"
-    },
-    "notify_on_close": true
-  }
+   },
+   "part2": {
+      "type": "modal",
+      "title": {
+         "type": "plain_text",
+         "text": "Registration - Part 2"
+      },
+      "callback_id": "register",
+      "private_metadata": "{\"part\": 2, \"personal_email_added\": false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "In order to complete your registration you need to provied necessary contact information. We use this so we can contact you or your family members about events, meal plans and other things."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "personal_phone_number",
+            "element": {
+               "type": "plain_text_input",
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Phone Number"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Personal Contact Info"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "school_email",
+            "element": {
+               "type": "email_text_input",
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "School Email"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Add Personal Email"
+                  },
+                  "value": "add_personal_email",
+                  "action_id": "personal_email_button"
+               }
+            ]
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "guardian_name",
+            "element": {
+               "type": "plain_text_input",
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Name"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Parent/Guardian Contact Info"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "guardian_phone_number",
+            "element": {
+               "type": "plain_text_input",
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Phone Number"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "guardian_email",
+            "element": {
+               "type": "email_text_input",
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Email"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         }
+      ],
+      "submit": {
+         "type": "plain_text",
+         "text": "Submit"
+      }
+   }
 }

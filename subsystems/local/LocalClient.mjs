@@ -96,6 +96,16 @@ class LocalClient {
       
       return new File(filepath);
    }
+
+   /**
+    * Formats and logs a value into the designated log file
+    * @param  {...any} args Arguments to log into the log file
+    * @async
+    * @returns {String} New contents of log file
+    */
+   async log(...args){
+      return await this.logs.currentFile.log(...args);
+   }
 }
 
 export default LocalClient;

@@ -80,3 +80,5 @@ const logger = new (class {
 })();
 
 export default SlackClient
+
+//todo - send new users a welcome message that sends them to registration
