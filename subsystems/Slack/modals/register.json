@@ -1,34 +1,50 @@
 {
-   "initial": {
-      "type": "modal",
-      "title": {
-         "type": "plain_text",
-         "text": "Register"
+  "initial": {
+    "type": "modal",
+    "callback_id": "register",
+    "title": {
+      "type": "plain_text",
+      "text": "Register"
+    },
+    "blocks": [
+      {
+        "type": "divider"
       },
-      "blocks": [
-         {
-            "type": "divider"
-         },
-         {
-            "type": "input",
-            "block_id": "text_input",
-            "element": {
-               "type": "plain_text_input",
-               "action_id": "plain_text_input_action",
-               "placeholder": {
-                  "type": "plain_text",
-                  "text": "Billy Joe"
-               }
+      {
+        "type": "input",
+        "block_id": "text_input",
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "plain_text_input_action",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Billy Joe"
+          }
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Name"
+        }
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": "Click Me"
             },
-            "label": {
-               "type": "plain_text",
-               "text": "Name"
-            }
-         }
-      ],
-      "submit": {
-         "type": "plain_text",
-         "text": "Submit"
+            "value": "click_me_123",
+            "action_id": "button"
+          }
+        ]
       }
-   }
+    ],
+    "submit": {
+      "type": "plain_text",
+      "text": "Submit"
+    },
+    "notify_on_close": true
+  }
 }

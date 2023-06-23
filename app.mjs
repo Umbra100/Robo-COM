@@ -41,6 +41,8 @@ SlackClient = await new SlackClientClass({
 
 console.log(terminalFormatter.footer);
 
+// await SlackClient.start();
+
 /* What I did last
 
 Last time I made the Slack client code friendly. I also made the socket mode detached from the main
