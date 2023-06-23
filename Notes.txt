@@ -1,9 +1,9 @@
 Things to do at end of development:
 
 - Change log directory config value to absolute value (per server computer)
-- Change Registration P1 image source to something better (maybe)
+- Change Registration P1 image source to something better (maybe); you can use google drive images with inspecting them
 - Change Registration P1 to have a link to more info about outreach
-- Change Registration P2 image source to something better
+- Change Registration P2 image source to something better; you can use google drive images with inspecting them
 
 Things to do when setting up:
  
