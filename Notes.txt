@@ -15,4 +15,7 @@ Things to do when setting up:
    - Create App Level token names 'socket-mode'
    - Put app level token in .env labeled 'SLACK_APP_LEVEL_TOKEN'
    - Enable Socket Mode
+-> Twilio
+   - Port forward host computer ip address for the express app
+   - Change the configured webhook url for message recieving to point to the ip address of host computer
 

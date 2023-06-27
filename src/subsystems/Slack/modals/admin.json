@@ -1,0 +1,138 @@
+{
+   "initial": {
+      "title": {
+         "type": "plain_text",
+         "text": "Admin Panel"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Submit"
+      },
+      "type": "modal",
+      "callback_id": "admin",
+      "private_metadata": "{\"submitType\":\"initial\"}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Use this panel to customize and view different things according to the application. These changes affect the overall functionality of the app and how the users can use it."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Change Season Dates"
+                  },
+                  "value": "change_season_dates",
+                  "action_id": "admin_change_season_dates"
+               },
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "View Registered Users"
+                  },
+                  "value": "view_registered_users",
+                  "action_id": "admin_view_registered_users"
+               }
+            ]
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Add Scheduling Changes"
+                  },
+                  "value": "add_scheduling_changes",
+                  "action_id": "admin_add_scheduling_changes"
+               },
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Change User Permissions"
+                  },
+                  "value": "change_user_persimissions",
+                  "action_id": "admin_change_user_persimissions"
+               }
+            ]
+         }
+      ]
+   },
+   "season_dates": {
+      "title": {
+         "type": "plain_text",
+         "text": "Season Dates"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "admin",
+      "private_metadata": "{\"submitType\":\"season_dates\"}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "This is where you can change the season start and end dates. This is used to calibrate the scheduling of the application. Please make sure you use the dates for when *_robotics itself_* starts and ends."
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "startDate",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a start date"
+               },
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Start"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "endDate",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select an end date"
+               },
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Label"
+            }
+         }
+      ]
+   }
+}

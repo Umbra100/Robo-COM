@@ -1,8 +1,9 @@
 import Shortcut from "../Shortcut.mjs";
-import Highway from "../../Highway.mjs";
-import ConfigFile from "../../../config.mjs";
+import Highway from "../../../Highway.mjs";
+import ConfigFile from "../../../ConfigFile.mjs";
+import EmailValidator from 'email-validator';
 import env from 'dotenv';
-import { terminalFormatter } from "../../helper.mjs";
+import { terminalFormatter } from "../../../helper.mjs";
 
 env.config({path: './security/.env'});
 
@@ -63,7 +64,8 @@ const RegisterShortcut = new Shortcut('register')
             break;
       }
    })
-   .onAction('personal_email_button',async (pkg) => {await P2addPersonalEmailEvent(pkg);});
+   .onAction('personal_email_button',async (pkg) => {await P2addPersonalEmailEvent(pkg);})
+   .onAction('reminder_action',async ({ ack }) => {await ack();});
 
 /**Handles the submission event for part one of registration */
 P1submitEvent = async ({ ack, body, view, client }) => {
@@ -128,9 +130,14 @@ P2submitEvent = async ({ ack, body, view, client}) => {
       registration_stage: 'Part 2 Complete'
    };
 
+   var settingsData = {
+      recieve_daily_reminders: typeof view.state.values.reminder.reminder_action.selected_options[0] !== 'undefined'
+   };
+
    //Overwrites user data
    var data = (await userFile.read())[body.user.id];
    Object.assign(data,dataForm);
+   Object.assign(data.settings,settingsData);
    await userFile.writePath(body.user.id,data);
 
    await Highway.makeRequest('Local','log',[`User '${data.slack_name}' (${data.name}) has completed registration.`]);
@@ -162,8 +169,12 @@ P2addPersonalEmailEvent = async ({ ack, body: { view }, client }) => {
         }
       };
 
-      modal.blocks[4].element.initial_value = view.state.values.school_email.action.value;
-      modal.blocks[9].element.initial_value = view.state.values.guardian_email.action.value;
+      if (EmailValidator.validate(view.state.values.school_email.action.value)){
+         modal.blocks[4].element.initial_value = view.state.values.school_email.action.value;
+      }
+      if (EmailValidator.validate(view.state.values.guardian_email.action.value)){
+         modal.blocks[9].element.initial_value = view.state.values.guardian_email.action.value;
+      }
 
       meta.personal_email_added = true;
       modal.private_metadata = JSON.stringify(meta);
@@ -178,3 +189,5 @@ P2addPersonalEmailEvent = async ({ ack, body: { view }, client }) => {
 }
 
 export default RegisterShortcut;
+
+//todo - program to check email validation

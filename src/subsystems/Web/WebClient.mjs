@@ -1,7 +1,8 @@
 import app from 'express';
 import https from 'https';
-import { terminalFormatter } from '../helper.mjs';
-import Highway from '../Highway.mjs';
+import ConfigFile from '../../ConfigFile.mjs';
+import Highway from '../../Highway.mjs';
+import { terminalFormatter } from '../../helper.mjs';
 
 class WebClient {
    #app
@@ -9,16 +10,11 @@ class WebClient {
    #server
    #sslkey
    #sslcert
-   /**
-    * Creates a web client used for interacting with endpoints both with other APIs and itself
-    * @param {Object} options Options to decide how the web client will behave
-    * @param {Number} options.port The port that the HTTPS server will listen on
-    */
-   constructor(options){
-      return Promise.resolve(options)
-         .then(async (options) => {
+   constructor(){
+      return Promise.resolve()
+         .then(async () => {
             console.log(terminalFormatter.bootBulletPoint,'Starting Web System Client');
-            this.port = options.port;
+            this.port = ConfigFile.clients.web.server_port;
             this.#sslkey = await Highway.makeRequest('Local','readFile',[{filepath: './security/.key'}]);
             this.#sslcert = await Highway.makeRequest('Local','readFile',[{filepath: './security/.cert'}]);
 

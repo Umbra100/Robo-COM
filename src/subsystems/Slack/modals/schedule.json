@@ -1,0 +1,736 @@
+{
+   "initial": {
+      "title": {
+         "type": "plain_text",
+         "text": "Scheduling"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Submit"
+      },
+      "type": "modal",
+      "callback_id": "schedule",
+      "private_metadata": "{\"scheduleType\":\"initial\",\"weekOptionsLoaded\":false,\"monthOptionsLoaded\":false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*What time basis are you scheduling for?*"
+            },
+            "accessory": {
+               "type": "static_select",
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Day"
+                     },
+                     "value": "day"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Week"
+                     },
+                     "value": "week"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Month"
+                     },
+                     "value": "month"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Custom"
+                     },
+                     "value": "custom"
+                  }
+               ],
+               "action_id": "period_choose"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "plain_text",
+               "text": "Choose what days, weeks, or months you aren't going to be available for roboics. Anything you configure can be changed later on. Simply execute the same command and go to the same time period to change it!"
+            }
+         },
+         {
+            "type": "image",
+            "image_url": "https://i1.wp.com/thetempest.co/wp-content/uploads/2017/08/The-wise-words-of-Michael-Scott-Imgur-2.jpg?w=1024&ssl=1",
+            "alt_text": "inspiration"
+         }
+      ]
+   },
+   "day": {
+      "title": {
+         "type": "plain_text",
+         "text": "Scheduling - Day"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "schedule",
+      "private_metadata": "{\"scheduleType\":\"day\",\"weekOptionsLoaded\":false,\"monthOptionsLoaded\":false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*What time basis are you scheduling for?*"
+            },
+            "accessory": {
+               "type": "static_select",
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Day"
+                     },
+                     "value": "day"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Week"
+                     },
+                     "value": "week"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Month"
+                     },
+                     "value": "month"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Custom"
+                     },
+                     "value": "custom"
+                  }
+               ],
+               "action_id": "period_choose"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Choose what specific days you are and aren't going to be at robotics. The application will not notify you on these days to attend. So you can rest easy! You can always go back can change your scheduling if plans change."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "datepicker",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a date"
+               },
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Day"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "checkboxes",
+            "element": {
+               "type": "checkboxes",
+               "options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I am going to be at robotics this day."
+                     },
+                     "value": "attending"
+                  },
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I would like to recieve the engineering notebook log for this day."
+                     },
+                     "value": "recieve_notebook"
+                  }
+               ],
+               "initial_options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I am going to be at robotics this day."
+                     },
+                     "value": "attending"
+                  }
+               ],
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Attendance"
+            }
+         }
+      ]
+   },
+   "week": {
+      "title": {
+         "type": "plain_text",
+         "text": "Scheduling - Week"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "schedule",
+      "private_metadata": "{\"scheduleType\":\"week\",\"weekOptionsLoaded\":false,\"monthOptionsLoaded\":false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*What time basis are you scheduling for?*"
+            },
+            "accessory": {
+               "type": "static_select",
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Day"
+                     },
+                     "value": "day"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Week"
+                     },
+                     "value": "week"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Month"
+                     },
+                     "value": "month"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Custom"
+                     },
+                     "value": "custom"
+                  }
+               ],
+               "action_id": "period_choose"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Choose what weeks you want to schedule differently from others. The application will not notify you on these days to attend. So you can rest easy! You can always go back can change your scheduling if plans change."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*Pick a week to schedule*"
+            },
+            "block_id": "chosen_week",
+            "accessory": {
+               "type": "static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select week"
+               },
+               "options": [],
+               "action_id": "action"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "What days are you not going to be here?"
+            },
+            "block_id": "chosen_attendence_weekdays",
+            "accessory": {
+               "type": "multi_static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select days"
+               },
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Monday"
+                     },
+                     "value": "monday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Tuesday"
+                     },
+                     "value": "tuesday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Wednesday"
+                     },
+                     "value": "Wednesday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Thursday"
+                     },
+                     "value": "thursday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Friday"
+                     },
+                     "value": "friday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Saturday"
+                     },
+                     "value": "saturday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Sunday"
+                     },
+                     "value": "sunday"
+                  }
+               ],
+               "action_id": "action"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "What days do you want to be send an engineering notebook log?"
+            },
+            "block_id": "chosen_notebook_days",
+            "accessory": {
+               "type": "multi_static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select days"
+               },
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Monday"
+                     },
+                     "value": "monday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Tuesday"
+                     },
+                     "value": "tuesday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Wednesday"
+                     },
+                     "value": "Wednesday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Thursday"
+                     },
+                     "value": "thursday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Friday"
+                     },
+                     "value": "friday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Saturday"
+                     },
+                     "value": "saturday"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Sunday"
+                     },
+                     "value": "sunday"
+                  }
+               ],
+               "action_id": "action"
+            }
+         },
+         {
+            "type": "context",
+            "elements": [
+               {
+                  "type": "mrkdwn",
+                  "text": "This field is optional"
+               }
+            ]
+         }
+      ]
+   },
+   "month": {
+      "title": {
+         "type": "plain_text",
+         "text": "Scheduling - Month"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Submit"
+      },
+      "type": "modal",
+      "callback_id": "schedule",
+      "private_metadata": "{\"scheduleType\":\"month\",\"weekOptionsLoaded\":false,\"monthOptionsLoaded\":false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*What time basis are you scheduling for?*"
+            },
+            "accessory": {
+               "type": "static_select",
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Day"
+                     },
+                     "value": "day"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Week"
+                     },
+                     "value": "week"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Month"
+                     },
+                     "value": "month"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Custom"
+                     },
+                     "value": "custom"
+                  }
+               ],
+               "action_id": "period_choose"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Choose which months you will not be available for robotics. The application will not notify during these times. So you can rest easy! You can always go back can change your scheduling if plans change."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*Pick a month to schedule*"
+            },
+            "block_id": "month_picker",
+            "accessory": {
+               "type": "static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select month"
+               },
+               "options": [],
+               "action_id": "action"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "reason",
+            "element": {
+               "type": "plain_text_input",
+               "multiline": true,
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Write the reason for your absence"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Reason"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": " "
+            },
+            "block_id": "checkboxes",
+            "accessory": {
+               "type": "checkboxes",
+               "options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I am going to be at robotics during this time period."
+                     },
+                     "value": "attending"
+                  }
+               ],
+               "initial_options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I am going to be at robotics during this time period."
+                     },
+                     "value": "attending"
+                  }
+               ],
+               "action_id": "action"
+            }
+         },
+         {
+            "type": "context",
+            "elements": [
+               {
+                  "type": "plain_text",
+                  "text": "Being gone for this extended amount of time requires a valid reason. Upon submission one of the club leaders will be notified to approve your request."
+               }
+            ]
+         }
+      ]
+   },
+   "custom": {
+      "title": {
+         "type": "plain_text",
+         "text": "Scheduling - Custom"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Submit"
+      },
+      "type": "modal",
+      "callback_id": "schedule",
+      "private_metadata": "{\"scheduleType\":\"custom\",\"weekOptionsLoaded\":false,\"monthOptionsLoaded\":false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*What time basis are you scheduling for?*"
+            },
+            "accessory": {
+               "type": "static_select",
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Day"
+                     },
+                     "value": "day"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Week"
+                     },
+                     "value": "week"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Month"
+                     },
+                     "value": "month"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Custom"
+                     },
+                     "value": "custom"
+                  }
+               ],
+               "action_id": "period_choose"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Choose a time period that you will not be available for robotics. The application will not notify during these times. So you can rest easy! You can always go back can change your scheduling if plans change."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "from_date",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a date"
+               },
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "From"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "to_date",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a date"
+               },
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "To"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "checkboxes",
+            "element": {
+               "type": "checkboxes",
+               "options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I am going to be at robotics during this period."
+                     },
+                     "value": "attending"
+                  },
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I would like to recieve the engineering notebook log for each day (sends daily)."
+                     },
+                     "value": "recieve_notebook"
+                  }
+               ],
+               "initial_options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I am going to be at robotics during this period."
+                     },
+                     "value": "attending"
+                  }
+               ],
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         }
+      ]
+   }
+}

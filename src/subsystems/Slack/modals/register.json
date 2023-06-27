@@ -97,11 +97,15 @@
       }
    },
    "part2": {
-      "type": "modal",
       "title": {
          "type": "plain_text",
          "text": "Registration - Part 2"
       },
+      "submit": {
+         "type": "plain_text",
+         "text": "Submit"
+      },
+      "type": "modal",
       "callback_id": "register",
       "private_metadata": "{\"part\": 2, \"personal_email_added\": false}",
       "blocks": [
@@ -219,11 +223,35 @@
                "type": "plain_text",
                "text": " "
             }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*Reminders*"
+            },
+            "block_id": "reminder",
+            "accessory": {
+               "type": "checkboxes",
+               "options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "*I would like to recieve daily reminders*"
+                     },
+                     "description": {
+                        "type": "mrkdwn",
+                        "text": "This will send a daily reminder about coming to robotics"
+                     },
+                     "value": "reminders-active"
+                  }
+               ],
+               "action_id": "reminder_action"
+            }
          }
-      ],
-      "submit": {
-         "type": "plain_text",
-         "text": "Submit"
-      }
+      ]
    }
 }

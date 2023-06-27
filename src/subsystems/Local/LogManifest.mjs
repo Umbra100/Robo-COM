@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { TXTFile, JSONFile } from './file-classes.mjs';
-import { clockFormatter, terminalFormatter } from '../helper.mjs';
+import { clockFormatter, terminalFormatter } from '../../helper.mjs';
 
 class LogManifest {
    /**

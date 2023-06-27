@@ -1,4 +1,4 @@
-import ConfigFile from "../config.mjs";
+import ConfigFile from "./ConfigFile.mjs";
 
 /**
  * Performs a deep scan of the biggest object and compared all key-value pairs to see if objects are equal
@@ -83,21 +83,21 @@ export const terminalFormatter = {
  */
 export const getConfigTimeDelay = () => {
    var date = new Date(), dateChange = new Date(date);
-   const configValue = ConfigFile.log_time_unit;
+   const configValue = ConfigFile.logs.time_unit;
    const unit = `${configValue[0].toUpperCase()}${configValue.slice(1,configValue.length)}${configValue[configValue.length-1] == 's' ? '' : 's'}`;
    
    switch (unit){
       case 'Days':
-         dateChange.setDate(dateChange.getDate() + ConfigFile.log_time_interval);
+         dateChange.setDate(dateChange.getDate() + ConfigFile.logs.time_interval);
          break;
       case 'Months':
-         dateChange.setMonth(dateChange.getMonth() + ConfigFile.log_time_interval);
+         dateChange.setMonth(dateChange.getMonth() + ConfigFile.logs.time_interval);
          break;
       case 'Weeks':
-         dateChange.setDate(dateChange.getDate() + (ConfigFile.log_time_interval * 7));
+         dateChange.setDate(dateChange.getDate() + (ConfigFile.logs.time_interval * 7));
          break;
       default:
-         dateChange[`set${unit}`](dateChange[`get${unit}`]() + ConfigFile.log_time_interval);
+         dateChange[`set${unit}`](dateChange[`get${unit}`]() + ConfigFile.logs.time_interval);
    }
    return Date.parse(dateChange) - Date.parse(date);
 }

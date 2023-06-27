@@ -2,9 +2,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import LogManifest from "./LogManifest.mjs";
 import { File, JSONFile, TXTFile } from "./file-classes.mjs";
-import ConfigFile from "../../config.mjs";
-import { getConfigTimeDelay, terminalFormatter } from "../helper.mjs";
-import { Subsystem } from '../Highway.mjs';
+import ConfigFile from '../../ConfigFile.mjs';
+import { getConfigTimeDelay, terminalFormatter } from "../../helper.mjs";
+import { Subsystem } from '../../Highway.mjs';
 
 /**The client responsible for all local file manipulations. */
 class LocalClient {
@@ -14,7 +14,7 @@ class LocalClient {
          .then(async () => {
             console.log(terminalFormatter.bootBulletPoint,'Starting Local File System Client');
             this.logs = await new LogManifest({
-               directory: ConfigFile.log_directory,
+               directory: ConfigFile.logs.directory,
                interval: getConfigTimeDelay()
             });
             console.log(terminalFormatter.bootSubBulletPoint,'Log Manifest Created');

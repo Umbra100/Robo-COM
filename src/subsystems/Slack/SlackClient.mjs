@@ -1,11 +1,13 @@
 import boltpkg from '@slack/bolt';
 const { App: Bolt } = boltpkg;
 import fs from 'node:fs/promises';
-import Highway from '../Highway.mjs';
+import Highway from '../../Highway.mjs';
 import env from 'dotenv';
-import { terminalFormatter } from '../helper.mjs';
+import { terminalFormatter } from '../../helper.mjs';
 
 import RegisterShortcut from './handlers/RegisterShortcut.mjs';
+import ScheduleShortcut from './handlers/ScheduleShortcut.mjs';
+import AdminShortcut from './handlers/AdminShortcut.mjs';
 
 env.config({path: './security'});
 
@@ -36,15 +38,17 @@ class SlackClient extends Bolt {
             console.log(terminalFormatter.bootSubBulletPoint,'Web Socket Connected');
 
             //Gets modal data for slack to use
-            const dir = await fs.readdir('./subsystems/Slack/modals',{encoding: 'utf8'});
+            const dir = await fs.readdir('./src/subsystems/Slack/modals',{encoding: 'utf8'});
             for (const i of dir){
                let name = i.slice(0,i.indexOf('.'));
-               modals[name] = JSON.parse(await Highway.makeRequest('Local','readFile',[{filepath: `./subsystems/Slack/modals/${i}`}]));
+               modals[name] = JSON.parse(await Highway.makeRequest('Local','readFile',[{filepath: `./src/subsystems/Slack/modals/${i}`}]));
             }
             console.log(terminalFormatter.bootSubBulletPoint,'Modal Data Retrieved');
 
             //Shortcut activations
             RegisterShortcut.activate(cls,modals);
+            ScheduleShortcut.activate(cls,modals);
+            AdminShortcut.activate(cls,modals);
 
             console.log(terminalFormatter.bootSubBulletPoint,'Event Listeners Active');
 
