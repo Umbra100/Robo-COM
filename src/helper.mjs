@@ -40,25 +40,28 @@ export const clockFormatter = {
       );
    },
    /**
-    * Creates a string that notes the current date in mm/dd/yyyy form or Mon Date Year form
+    * Creates a string that notes the provided date in mm/dd/yyyy form or Mon Date Year form
+    * @param {Date | String} date Date object to format
     * @param {Boolean} readable Whether or not to return the date in a more human readable form (mm/dd/yyyy or Mon Date Year)
     * @returns {String} A string containing a date notation
     */
-   createDate: (readable = false) => {
+   createDate: (date,readable = false) => {
       const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const time = new Date();
+      const time = (date instanceof Date) ? date : new Date(date);
+      const month = parseInt(JSON.stringify(time).split('T')[0].split('-')[1])-1;
+      const day = parseInt(JSON.stringify(time).split('T')[0].split('-')[2]);
       if (readable) return ''.concat(
-            months[time.getMonth()],' ',
-            time.getDate(),(
-               time.getDate() == 1 || time.getDate() == 21 || time.getDate() == 31 ? 'st ' :
-               time.getDate() == 2 || time.getDate() == 22 ? 'nd ' :
-               time.getDate() == 3 || time.getDate() == 23 ? 'rd ' : 'th '
+            months[month],' ',
+            day,(
+               day == 1 || day == 21 || day == 31 ? 'st ' :
+               day == 2 || day == 22 ? 'nd ' :
+               day == 3 || day == 23 ? 'rd ' : 'th '
             ),
             time.getFullYear()
          );
       else return ''.concat(
-         time.getMonth()+1,'/',
-         time.getDate(),'/',
+         month+1,'/',
+         day,'/',
          time.getFullYear()
       );
    }
@@ -100,4 +103,33 @@ export const getConfigTimeDelay = () => {
          dateChange[`set${unit}`](dateChange[`get${unit}`]() + ConfigFile.logs.time_interval);
    }
    return Date.parse(dateChange) - Date.parse(date);
+}
+
+/**
+ * Removes the ordinal indicator from a date string. Used to make date processing easier.
+ * @param {String} date Readable date format (Jan 1st 2000)
+ * @returns {String} Date format without the ordinal indicator (Jan 1 2023)
+ */
+export const removeOrdinalIndicator = (date) => {
+   var index = (
+      date.indexOf('st') !== -1 ? date.indexOf('st') :
+      date.indexOf('nd') !== -1 ? date.indexOf('nd') :
+      date.indexOf('rd') !== -1 ? date.indexOf('rd') :
+      date.indexOf('th') !== -1 ? date.indexOf('th') : date.length
+   );
+
+   return ''.concat(date.slice(0,index),date.slice(index + 2));
+}
+
+/**
+ * Merges two arrays while keeping the data
+ * @param {Array} arr1 Array to use as a base for modification
+ * @param {Array} arr2 Takes elements from this array; if they are not in arr1 then add them.
+ * @returns {Array} Merged array
+ */
+export const mergeArrays = (arr1,arr2) => {
+   var retArr = [];
+   for (const i of arr1) if (retArr.indexOf(i) == -1) retArr.push(i);
+   for (const j of arr2) if (retArr.indexOf(j) == -1) retArr.push(j);
+   return retArr;
 }

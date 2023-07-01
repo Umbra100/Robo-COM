@@ -6,6 +6,7 @@ import env from 'dotenv';
 import { terminalFormatter } from '../../helper.mjs';
 
 import RegisterShortcut from './handlers/RegisterShortcut.mjs';
+import RegisterAlert from './handlers/RegisterAlert.mjs';
 import ScheduleShortcut from './handlers/ScheduleShortcut.mjs';
 import AdminShortcut from './handlers/AdminShortcut.mjs';
 
@@ -16,7 +17,8 @@ var modals = {};
 class SlackClient extends Bolt {
    #subsystem
    constructor(){
-      console.log(terminalFormatter.bootBulletPoint,'Starting Slack System Client')
+      console.log(terminalFormatter.bootBulletPoint,'Starting Slack System Client');
+      //Creates the base Bolt client
       super({
          token: process.env.SLACK_BOT_TOKEN,
          appToken: process.env.SLACK_APP_LEVEL_TOKEN,
@@ -25,6 +27,7 @@ class SlackClient extends Bolt {
          socketMode: true
       });
       console.log(terminalFormatter.bootSubBulletPoint,'Bolt Client Started');
+      //Starts socket mode and does other initialization steps
       return Promise.resolve(this)
          .then(async cls => {
             //Starts socket mode connection
@@ -46,9 +49,10 @@ class SlackClient extends Bolt {
             console.log(terminalFormatter.bootSubBulletPoint,'Modal Data Retrieved');
 
             //Shortcut activations
-            RegisterShortcut.activate(cls,modals);
-            ScheduleShortcut.activate(cls,modals);
-            AdminShortcut.activate(cls,modals);
+            await RegisterShortcut.activate(cls,modals);
+            await RegisterAlert.activate(cls,modals);
+            await ScheduleShortcut.activate(cls,modals);
+            await AdminShortcut.activate(cls,modals);
 
             console.log(terminalFormatter.bootSubBulletPoint,'Event Listeners Active');
 

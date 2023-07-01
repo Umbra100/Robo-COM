@@ -46,5 +46,6 @@
    "season_dates": {
       "start": "2023-04-01",
       "end": "2023-08-31"
-   }
+   },
+   "reason_for_absence_threshold": 14
 }

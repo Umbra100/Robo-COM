@@ -27,14 +27,16 @@ const AdminShortcut = new Shortcut('admin')
             break;
       }
    })
-   //Uploads season date changing modal when that panel button is pressed
+   //Uploads season date changing modal when that configuration button is pressed
    .onAction('admin_change_season_dates',async ({ ack, client, body }) => {
       await ack();
 
+      //Gets modal data and changes it to show existing season dates
       var modal = AdminShortcut.modal.season_dates;
       if (ConfigFile.season_dates.start !== null) modal.blocks[2].element.initial_date = ConfigFile.season_dates.start;
       if (ConfigFile.season_dates.end !== null) modal.blocks[3].element.initial_date = ConfigFile.season_dates.end;
 
+      //Uploads modal
       await client.views.update({
          token: process.env.SLACK_BOT_TOKEN,
          view: modal,
@@ -44,7 +46,9 @@ const AdminShortcut = new Shortcut('admin')
 
 /**Handles submissions for the season date changing */
 const seasonDatesSubmitHandler = async ({ body }) => {
+   //If the settings did not change; return
    if (body.view.state.values.startDate.action.selected_date == ConfigFile.season_dates.start && body.view.state.values.endDate.action.selected_date == ConfigFile.season_dates.end) return;
+   //Stores the season dates in the config file
    await ConfigJSON.writePath('season_dates',{
       start: body.view.state.values.startDate.action.selected_date,
       end: body.view.state.values.endDate.action.selected_date

@@ -18,7 +18,9 @@ export class JSONFile {
     * @returns {any} Value at the end of path in object
     */
    static followNodePath(path,obj){
+      //Gets patha array to follow
       var pathArray = nodePathArr(path);
+      //Follows path array in specified object
       for (const i of pathArray){
          if (typeof obj !== 'undefined') obj = obj[i];
          else throw new Error(`Object node path does not exist in object`);

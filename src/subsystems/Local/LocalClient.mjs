@@ -13,11 +13,13 @@ class LocalClient {
       return Promise.resolve()
          .then(async () => {
             console.log(terminalFormatter.bootBulletPoint,'Starting Local File System Client');
+            //Creates the log manifest. Handles all log files in the system
             this.logs = await new LogManifest({
                directory: ConfigFile.logs.directory,
                interval: getConfigTimeDelay()
             });
             console.log(terminalFormatter.bootSubBulletPoint,'Log Manifest Created');
+            //Activates the interval to check when a new log file needs creation
             this.logs.interval.activate();
             console.log(terminalFormatter.bootSubBulletPoint,'Log Interval Active');
 

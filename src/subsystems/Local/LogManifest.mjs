@@ -20,11 +20,12 @@ class LogManifest {
             
             this.directory = options.directory;
 
+            //Gets the directory data of the log directory; if there is no metadata file throw an error
             var dir = await fs.readdir(this.directory,{encoding: 'utf8'});
             if (dir.indexOf('meta.json') == -1) throw new Error(`Log directory must contain a meta JSON file containing metadata of log files`);
             dir.splice(dir.indexOf('meta.json'),1);
 
-            /**Wrapper for the metadata file in the log system */
+            /**Wrapper for the metadata file in the log system*/
             this.metadata = new LogMetaFile(`${this.directory}/meta.json`);
             const data = await this.metadata.read();
             
@@ -69,6 +70,7 @@ class LogManifest {
          });
    }
    //!alert if error
+   /**Creates a new log file when the specified amount of time has passed */
    async #intervalEvent(){
       try {
          if (this.#intervalMeta.active){
@@ -89,7 +91,7 @@ class LogManifest {
     */
    async createNewLogFile(){
       const date = new Date();
-      const newName = `${clockFormatter.createDate(true)}.txt`;
+      const newName = `${clockFormatter.createDate(new Date(),true)}.txt`;
       await this.currentFile.log(`Interval passed; transferring to new log file.`,{name: newName});
       await this.currentFile.terminate();
       await this.metadata.createFile(newName,{
@@ -127,7 +129,7 @@ export class LogFile extends TXTFile {
     * @returns {String} New contents of log file
     */
    async log(...args){
-      var str = `> [${clockFormatter.createDate()} at ${clockFormatter.createTime()}] `;
+      var str = `> [${clockFormatter.createDate(new Date())} at ${clockFormatter.createTime()}] `;
       for (const i of args){
          switch (typeof i){
             case 'object':
@@ -159,7 +161,7 @@ export class LogFile extends TXTFile {
    async initialize(){
       var str = ''.concat(
          '--# Log File Initialized on ',
-         clockFormatter.createDate(true),
+         clockFormatter.createDate(new Date(),true),
          ' at ',
          clockFormatter.createTime(true),
          ' #--\n'
@@ -176,7 +178,7 @@ export class LogFile extends TXTFile {
    async terminate(){
       var str = ''.concat(
          '\n--# Log File Terminated on ',
-         clockFormatter.createDate(true),
+         clockFormatter.createDate(new Date(),true),
          ' at ',
          clockFormatter.createTime(true),
          ' #--'
@@ -187,6 +189,7 @@ export class LogFile extends TXTFile {
    }
 }
 
+/**Wrapper for log file metadata */
 export class LogMetaFile extends JSONFile {
    constructor(filepath){
       super(filepath);

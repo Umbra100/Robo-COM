@@ -24,6 +24,7 @@ class TwilioClient {
     * @param {Object} options Options for sending the message
     * @param {String} options.to Phone number of the recipient to send to
     * @param {String} options.body Body of the message to send
+    * @async
     * @returns Message response data
     */
    async send({ to, body }){

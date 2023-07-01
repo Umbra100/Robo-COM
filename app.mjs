@@ -48,3 +48,6 @@ console.log(terminalFormatter.footer);
 
 //todo - Handle schedule submissions
 //todo - Make notification system (accomodate for scheduling as well)
+
+//* Note: Date classes cannot process dates that have day suffixes such as 'rd' or 'st'
+//* Note: Date classes that are created with format 'mm/dd/yy' are 6 hours ahead of 'Month Day Year' format
