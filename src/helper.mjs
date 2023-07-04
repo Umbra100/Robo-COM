@@ -47,9 +47,9 @@ export const clockFormatter = {
     */
    createDate: (date,readable = false) => {
       const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const time = (date instanceof Date) ? date : new Date(date);
-      const month = parseInt(JSON.stringify(time).split('T')[0].split('-')[1])-1;
-      const day = parseInt(JSON.stringify(time).split('T')[0].split('-')[2]);
+      const month = parseInt(JSON.stringify(date).split('T')[0].split('-')[1])-1;
+      const day = parseInt(JSON.stringify(date).split('T')[0].split('-')[2]);
+      if (typeof date == 'string') date = new Date(date);
       if (readable) return ''.concat(
             months[month],' ',
             day,(
@@ -57,12 +57,12 @@ export const clockFormatter = {
                day == 2 || day == 22 ? 'nd ' :
                day == 3 || day == 23 ? 'rd ' : 'th '
             ),
-            time.getFullYear()
+            date.getFullYear()
          );
       else return ''.concat(
          month+1,'/',
          day,'/',
-         time.getFullYear()
+         date.getFullYear()
       );
    }
 }

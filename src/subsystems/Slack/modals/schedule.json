@@ -19,54 +19,94 @@
             "type": "section",
             "text": {
                "type": "mrkdwn",
-               "text": "*What time basis are you scheduling for?*"
+               "text": "Welcome to the scheduling feature. You can use this to mark down when you are/aren't going to be at robotics. Any dates you put down can be seen by the team leads; so this handles a lot of the communication for you."
             },
             "accessory": {
-               "type": "static_select",
-               "options": [
-                  {
-                     "text": {
-                        "type": "plain_text",
-                        "text": "Day"
-                     },
-                     "value": "day"
-                  },
-                  {
-                     "text": {
-                        "type": "plain_text",
-                        "text": "Week"
-                     },
-                     "value": "week"
-                  },
-                  {
-                     "text": {
-                        "type": "plain_text",
-                        "text": "Month"
-                     },
-                     "value": "month"
-                  },
-                  {
-                     "text": {
-                        "type": "plain_text",
-                        "text": "Custom"
-                     },
-                     "value": "custom"
-                  }
-               ],
-               "action_id": "period_choose"
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
             }
+         },
+         {
+            "type": "divider"
          },
          {
             "type": "section",
             "text": {
-               "type": "plain_text",
-               "text": "Choose what days, weeks, or months you aren't going to be available for roboics. Anything you configure can be changed later on. Simply execute the same command and go to the same time period to change it!"
+               "type": "mrkdwn",
+               "text": "*Because of different events, you may need to schedule different time durations. Pick the one that best fits your scenario:*"
             }
          },
          {
-            "type": "image",
-            "image_url": "https://i1.wp.com/thetempest.co/wp-content/uploads/2017/08/The-wise-words-of-Michael-Scott-Imgur-2.jpg?w=1024&ssl=1",
-            "alt_text": "inspiration"
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "static_select",
+                  "placeholder": {
+                     "type": "plain_text",
+                     "text": "Select a time basis"
+                  },
+                  "options": [
+                     {
+                        "text": {
+                           "type": "plain_text",
+                           "text": "Day"
+                        },
+                        "value": "day"
+                     },
+                     {
+                        "text": {
+                           "type": "plain_text",
+                           "text": "Week"
+                        },
+                        "value": "week"
+                     },
+                     {
+                        "text": {
+                           "type": "plain_text",
+                           "text": "Month"
+                        },
+                        "value": "month"
+                     },
+                     {
+                        "text": {
+                           "type": "plain_text",
+                           "text": "Custom"
+                        },
+                        "value": "custom"
+                     }
+                  ],
+                  "action_id": "initial_period_choose"
+               },
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Go to Scheduling"
+                  },
+                  "value": "go_to_scheduling",
+                  "action_id": "initial_go_to_scheduling"
+               }
+            ]
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Need to change your existing scheduling instead?"
+            },
+            "accessory": {
+               "type": "button",
+               "text": {
+                  "type": "plain_text",
+                  "text": "Go Here"
+               },
+               "value": "schedule_configuration",
+               "action_id": "initial_go_to_schedule_configuration"
+            }
          }
       ]
    },
@@ -141,7 +181,7 @@
             "type": "section",
             "text": {
                "type": "mrkdwn",
-               "text": "Choose what specific days you are and aren't going to be at robotics. The application will not notify you on these days to attend. So you can rest easy! You can always go back can change your scheduling if plans change."
+               "text": "Choose what specific day you aren't going to be at robotics. The application will not notify you on these days to attend. So you can rest easy! You can always go back can change your scheduling if plans change."
             },
             "accessory": {
                "type": "image",
@@ -603,7 +643,7 @@
             "elements": [
                {
                   "type": "plain_text",
-                  "text": "Being gone for this extended amount of time requires a valid reason. Upon submission one of the club leaders will be notified to approve your request."
+                  "text": "Being gone for this extended amount of time requires a valid reason. Upon submission, one of the team leads will be notified to approve your request."
                }
             ]
          }
@@ -770,6 +810,312 @@
                {
                   "type": "mrkdwn",
                   "text": "Please know that any time periods that extend to two weeks or more will need a valid reason along with confirmation from one of the team leaders. This confirmation is automatically sent upon submission."
+               }
+            ]
+         }
+      ]
+   },
+   "config": {
+      "title": {
+         "type": "plain_text",
+         "text": "Scheduling - Config"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "schedule",
+      "private_metadata": "{\"scheduleType\":\"config\"}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Use this menu to configure any existing scheduling you have in place. You cannot create any new schedule entries that overlap ones you have already created. So this is a good chance to look through them!"
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "image",
+            "image_url": "https://i1.wp.com/thetempest.co/wp-content/uploads/2017/08/The-wise-words-of-Michael-Scott-Imgur-2.jpg?w=1024&ssl=1",
+            "alt_text": "inspiration"
+         }
+      ]
+   },
+   "day_config": {
+      "title": {
+         "type": "plain_text",
+         "text": "Scheduling - Config"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "schedule",
+      "private_metadata": "{}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Alter the settings of the day that you scheduled. You can delete the day, change the day or just switch to whether or not you want to recieve an engineering notebook log. Once you are done click save."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "datepicker",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a date"
+               },
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Day"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "checkboxes",
+            "element": {
+               "type": "checkboxes",
+               "options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I am going to be at robotics this day."
+                     },
+                     "value": "attending"
+                  },
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I would like to recieve the engineering notebook log for this day."
+                     },
+                     "value": "recieve_notebook"
+                  }
+               ],
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Attendance"
+            },
+            "optional": true
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Back"
+                  },
+                  "value": "back",
+                  "action_id": "config_back"
+               },
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Delete"
+                  },
+                  "value": "{}",
+                  "action_id": "config_delete_day",
+                  "style": "danger",
+                  "confirm": {
+                     "title": {
+                        "type": "plain_text",
+                        "text": "Are you sure?"
+                     },
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Deleting this means you will not get that day off unless you reschedule."
+                     },
+                     "confirm": {
+                        "type": "plain_text",
+                        "text": "Yes"
+                     },
+                     "deny": {
+                        "type": "plain_text",
+                        "text": "No"
+                     }
+                  }
+               }
+            ]
+         }
+      ]
+   },
+   "custom_config": {
+      "title": {
+         "type": "plain_text",
+         "text": "Scheduling - Config"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "schedule",
+      "private_metadata": "{}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Adjust the settings of the time period that you scheduled. You can alter, delete or choose whether or not you want to recieve an engineering notebook log. Once you are done click save."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "from_date",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a date"
+               },
+               "action_id": "config_from_date_action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "From"
+            },
+            "dispatch_action": true
+         },
+         {
+            "type": "input",
+            "block_id": "to_date",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a date"
+               },
+               "action_id": "config_to_date_action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "To"
+            },
+            "dispatch_action": true
+         },
+         {
+            "type": "input",
+            "block_id": "checkboxes",
+            "element": {
+               "type": "checkboxes",
+               "options": [
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I am going to be at robotics during this period."
+                     },
+                     "value": "attending"
+                  },
+                  {
+                     "text": {
+                        "type": "mrkdwn",
+                        "text": "I would like to recieve the engineering notebook log for each day (sends daily)."
+                     },
+                     "value": "recieve_notebook"
+                  }
+               ],
+               "action_id": "config_checkbox_action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            },
+            "optional": true,
+            "dispatch_action": true
+         },
+         {
+            "type": "context",
+            "elements": [
+               {
+                  "type": "mrkdwn",
+                  "text": "Please know that any time periods that extend to two weeks or more will need a valid reason along with confirmation from one of the team leaders. This confirmation is automatically sent upon submission."
+               }
+            ]
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Back"
+                  },
+                  "value": "back",
+                  "action_id": "config_back"
+               },
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Delete"
+                  },
+                  "value": "{}",
+                  "action_id": "config_delete_period",
+                  "style": "danger",
+                  "confirm": {
+                     "title": {
+                        "type": "plain_text",
+                        "text": "Are you sure?"
+                     },
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Deleting this means you will not get that day off unless you reschedule."
+                     },
+                     "confirm": {
+                        "type": "plain_text",
+                        "text": "Yes"
+                     },
+                     "deny": {
+                        "type": "plain_text",
+                        "text": "No"
+                     }
+                  }
                }
             ]
          }

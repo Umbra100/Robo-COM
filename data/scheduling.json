@@ -1,12 +1,32 @@
 {
    "U04H4NHJC95": {
       "periods": {
-         "absent": [],
-         "recieve_notebook": [],
-         "extended": {}
+         "absent": [
+            "Jun 2nd 2023 - Jun 13th 2023",
+            "Jul 1st 2023 - Jul 31st 2023"
+         ],
+         "recieve_notebook": [
+            "Jul 1st 2023 - Jul 31st 2023",
+            "Jun 2nd 2023 - Jun 13th 2023"
+         ],
+         "extended": {
+            "Jul 1st 2023 - Jul 31st 2023": {
+               "reason": "This is a reason",
+               "approved": false,
+               "notified": false,
+               "changes": {
+                  "hasChanged": false,
+                  "notified": 0,
+                  "log": []
+               }
+            }
+         }
       },
       "days": {
-         "absent": [],
+         "absent": [
+            "Aug 11th 2023",
+            "Aug 4th 2023"
+         ],
          "recieve_notebook": []
       },
       "passed": []
