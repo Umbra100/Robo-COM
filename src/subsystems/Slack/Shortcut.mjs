@@ -21,7 +21,7 @@ class Shortcut {
     * @async
     */
    async activate(client,modalData){
-      this.modal = modalData[this.callback_id];
+      if (typeof modalData !== 'undefined') this.modal = modalData[this.callback_id];
       if (typeof this.#activateFunc !== 'undefined') client.shortcut(this.callback_id,this.#activateFunc);
       if (typeof this.#submit !== 'undefined') client.view(this.callback_id,this.#submit);
       if (typeof this.#close !== 'undefined') client.view({ callback_id: this.callback_id, type: 'view_closed' },this.#close);

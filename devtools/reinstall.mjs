@@ -1,13 +1,16 @@
-import LocalClientClass from "../subsystems/Local/LocalClient.mjs";
-import SlackClientClass from '../subsystems/Slack/SlackClient.mjs';
-import WebClientClass from "../subsystems/Web/WebClient.mjs";
+import LocalClientClass from "../src/subsystems/Local/LocalClient.mjs";
+import SlackClientClass from '../src/subsystems/Slack/SlackClient.mjs';
+import WebClientClass from "../src/subsystems/Web/WebClient.mjs";
 
-import ConfigFile from "../config.mjs";
-import Highway from "../subsystems/Highway.mjs";
-import { terminalFormatter } from "../subsystems/helper.mjs";
+import ConfigFile, { activate as ActivateConfig } from "../src/ConfigFile.mjs";
+import Highway from "../src/Highway.mjs";
+import { terminalFormatter } from "../src/helper.mjs";
 import env from 'dotenv';
 import open from "open";
+
 env.config({ path: './security/.env' });
+await ActivateConfig();
+
 console.log(terminalFormatter.header);
 
 var LocalClient, WebClient, SlackClient;
@@ -42,7 +45,7 @@ SlackClient = await new SlackClientClass({
 
 console.log(terminalFormatter.footer);
 
-WebClient.get(ConfigFile.slack_redirect_path, async (req, res) => {
+WebClient.get(ConfigFile.clients.slack.oauth_redirect_path, async (req, res) => {
    console.log(terminalFormatter.bulletPoint,'Approval Recieved');
    await SlackClient.client.oauth.v2.access({
       client_id: process.env.SLACK_CLIENT_ID,
@@ -116,5 +119,5 @@ WebClient.get(ConfigFile.slack_redirect_path, async (req, res) => {
 });
 console.log(terminalFormatter.bulletPoint,'Endpoint Redirect Defined');
 
-await open('https://slack.com/oauth/v2/authorize?client_id=4621003984640.5353830116610&scope=chat:write,commands,channels:read,channels:history&user_scope=');
+await open('https://slack.com/oauth/v2/authorize?client_id=4621003984640.5353830116610&scope=channels:history,channels:read,chat:write,chat:write.customize,commands,users:read,channels:manage,im:write&user_scope=');
 console.log(terminalFormatter.bulletPoint,'Opening Authorization Page, Awaiting Approval...');

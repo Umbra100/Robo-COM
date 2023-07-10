@@ -105,7 +105,7 @@
                   "text": "Go Here"
                },
                "value": "schedule_configuration",
-               "action_id": "initial_go_to_schedule_configuration"
+               "action_id": "initial_go_to_schedule_config"
             }
          }
       ]

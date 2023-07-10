@@ -1,4 +1,5 @@
 import Shortcut from "../Shortcut.mjs";
+import ModalAssembly from "../ModalAssembly.mjs";
 import ConfigFile from "../../../ConfigFile.mjs";
 import Highway from "../../../Highway.mjs";
 import RegisterAlert from "./RegisterAlert.mjs";
@@ -13,28 +14,23 @@ var scheduleFile, scheduleData, userFile, userData;
 const ScheduleShortcut = new Shortcut('schedule')
    //When shortcut is initialized, get schedule and user data
    .onReady(async () => {
-      //Get user data
+      //Get user file
       userFile = await Highway.makeRequest('Local', 'getFile', ['./data/users.json']);
-      userData = await userFile.read();
-      //Get schedule data
+      //Get schedule file
       scheduleFile = await Highway.makeRequest('Local', 'getFile', ['./data/scheduling.json']);
-      scheduleData = await scheduleFile.read();
    })
    //Opens the initial modal when shortcut is activated
    .onActivation(async ({ shortcut, ack, client }) => {
       await ack();
-
-      //If the user is not registered; send them to registration
+      //If the user is not registered; alert them for registration
       if (!await RegisterAlert.check(shortcut.user.id)) {
          await RegisterAlert.alert({ shortcut, ack, client });
          return;
       }
-
-      //Gets the modal data and sends it
-      const modal = ScheduleShortcut.modal.initial;
+      //Gets and uploads the modal data
       await client.views.open({
          token: process.env.SLACK_BOT_TOKEN,
-         view: modal,
+         view: await Assembly.getModal('initial'),
          trigger_id: shortcut.trigger_id
       });
    })
@@ -43,18 +39,19 @@ const ScheduleShortcut = new Shortcut('schedule')
       var data = null, { body, ack } = pkg;
       //Gets the schedule data from the submitted modal
       const scheduleType = JSON.parse(body.view.private_metadata).scheduleType;
+      //Evaluates and formats date input data (except for configuration; routes to those handlers instead)
       switch (scheduleType) {
          case 'day':
-            data = daySubmitEvaluate(pkg);
+            data = evaluateInput.day({ body });
             break;
          case 'week':
-            data = weekSubmitEvaluate(pkg);
+            data = evaluateInput.week({ body });
             break;
          case 'month':
-            data = monthSubmitEvaluate(pkg);
+            data = evaluateInput.month({ body });
             break;
          case 'custom':
-            data = customSubmitEvaluate(pkg);
+            data = evaluateInput.custom({ body });
             break;
          case 'day_config':
             await configDaySubmitEvent(pkg);
@@ -68,7 +65,8 @@ const ScheduleShortcut = new Shortcut('schedule')
       }
 
       //Processes schedule data and checks for any overlaps
-      var readData = JSON.parse(JSON.stringify(scheduleData[body.user.id]));
+      scheduleData = await scheduleFile.read();
+      var userScheduleData = JSON.parse(JSON.stringify(scheduleData[body.user.id]));
       var checkCompile = { check: false, periods: [], days: [] };
       //Checks for overlap in absent periods
       for (const i of data.periods.absent) {
@@ -77,7 +75,7 @@ const ScheduleShortcut = new Shortcut('schedule')
             checkCompile.check = true;
             for (const ia of scan.periods) if (checkCompile.periods.indexOf(ia) == -1) checkCompile.periods.push(ia);
             for (const ib of scan.days) if (checkCompile.days.indexOf(ib) == -1) checkCompile.days.push(ib);
-         } else readData.periods.absent.push(i);
+         } else userScheduleData.periods.absent.push(i);
       }
       //Checks for overlap in recieving notebook periods
       for (const j of data.periods.recieve_notebook) {
@@ -86,7 +84,7 @@ const ScheduleShortcut = new Shortcut('schedule')
             checkCompile.check = true;
             for (const ja of scan.periods) if (checkCompile.periods.indexOf(ja) == -1) checkCompile.periods.push(ja);
             for (const jb of scan.days) if (checkCompile.days.indexOf(jb) == -1) checkCompile.days.push(jb);
-         } else readData.periods.recieve_notebook.push(j);
+         } else userScheduleData.periods.recieve_notebook.push(j);
       }
       //Checks for overlap in absent days
       for (const k of data.days.absent) {
@@ -95,7 +93,7 @@ const ScheduleShortcut = new Shortcut('schedule')
             checkCompile.check = true;
             for (const ka of scan.periods) if (checkCompile.periods.indexOf(ka) == -1) checkCompile.periods.push(ka);
             for (const kb of scan.days) if (checkCompile.days.indexOf(kb) == -1) checkCompile.days.push(kb);
-         } else readData.days.absent.push(k);
+         } else userScheduleData.days.absent.push(k);
       }
       //Checks for overlap in recieving notebook days
       for (const l of data.days.recieve_notebook) {
@@ -104,10 +102,10 @@ const ScheduleShortcut = new Shortcut('schedule')
             checkCompile.check = true;
             for (const la of scan.periods) if (checkCompile.periods.indexOf(la) == -1) checkCompile.periods.push(la);
             for (const lb of scan.days) if (checkCompile.days.indexOf(lb) == -1) checkCompile.days.push(lb);
-         } else readData.days.recieve_notebook.push(l);
+         } else userScheduleData.days.recieve_notebook.push(l);
       }
       //Overwrites the extended data for the time periods
-      Object.assign(readData.periods.extended, data.periods.extended);
+      Object.assign(userScheduleData.periods.extended, data.periods.extended);
 
       var str = '';
       //If there is overlap; send them an error
@@ -158,59 +156,190 @@ const ScheduleShortcut = new Shortcut('schedule')
 
          //Acknowledges the submission and stores the data in the local file.
          await ack();
-         await scheduleFile.writePath(body.user.id, readData);
-         scheduleData = await scheduleFile.read();
+         await scheduleFile.writePath(body.user.id, userScheduleData);
 
          //Logs the scheduling action
+         userData = await userFile.read();
          str = `User '${userData[body.user.id].slack_name}' (${userData[body.user.id].name}) has made a schedule entry for ${str}`;
          await Highway.makeRequest('Local', 'log', [str]);
          console.log(terminalFormatter.bulletPoint, str);
       }
    })
-   //When someone interacts with the period choice button; routes to correct handler
+   //When someone interacts with the time basis choose dropdown; routes to correct time basis
    .onAction('period_choose', async ({ ack, client, body }) => {
       await ack();
-      //Updates the modal depending on what they chose
+      var modal;
+      //Gets modal based on what basis the user chooses
       switch (body.actions[0].selected_option.value) {
          case 'day':
-            await updateToDay({ client, body });
+            modal = await Assembly.getModal('day');
             break;
          case 'week':
-            await updateToWeek({ client, body });
+            modal = await Assembly.getModal('week');
             break;
          case 'month':
-            await updateToMonth({ client, body });
+            modal = await Assembly.getModal('month');
             break;
          case 'custom':
-            await updateToCustom({ client, body });
+            modal = await Assembly.getModal('custom');
             break;
       }
+      //Uploads modal
+      await client.views.update({
+         token: process.env.SLACK_BOT_TOKEN,
+         view: modal,
+         view_id: body.view.id
+      });
    })
-   //Handles checking the time length to see if they need to provied a reason for their absence
+   //Handles the interaction for when the user selects an option from the time basis dropdown on the initial modal
+   .onAction('initial_period_choose', async ({ ack, body, client }) => {
+      await ack();
+      //Gets and ploads the modal
+      await client.views.update({
+         token: process.env.SLACK_BOT_TOKEN,
+         view: await Assembly.getModal('initial_basis_choose', { body }),
+         view_id: body.view.id
+      });
+   })
+   //Handles when someone presses the button to go their selected time basis
+   .onAction('initial_go_to_scheduling', async ({ ack, body, client }) => {
+      await ack();
+      //Gets the block id of the dropdown
+      var dropdownBlockId = Object.keys(body.view.state.values)[0], modal;
+      //If the user has not filled out the static select menu, get the modal data that contains an error for such
+      if (body.view.state.values[dropdownBlockId].initial_period_choose.selected_option == null) {
+         modal = await Assembly.getModal('initial_required_field_error');
+      //If the user has filled out the static select menu, get the modal data for the designated basis
+      } else switch (body.view.state.values[dropdownBlockId].initial_period_choose.selected_option.value) {
+         case 'day':
+            modal = await Assembly.getModal('day');
+            break;
+         case 'week':
+            modal = await Assembly.getModal('week');
+            break;
+         case 'month':
+            modal = await Assembly.getModal('month');
+            break;
+         case 'custom':
+            modal = await Assembly.getModal('custom');
+            break;
+      }
+
+      //Uploads the modal
+      await client.views.update({
+         token: process.env.SLACK_BOT_TOKEN,
+         view: modal,
+         view_id: body.view.id
+      });
+   })
+   //Handles when user presses the button to go to schedule configuration
+   .onAction('initial_go_to_schedule_config', async (pkg) => updateToConfig(pkg))
+   //Handles when a person click to change/config a schedule entry
+   .onAction('date_config_action', async ({ ack, body, client }) => {
+      await ack();
+      //Get data of the date entry
+      var entryMetadata = JSON.parse(body.actions[0].value), modal;
+      //Get the modal data depending on the schedule entry type
+      switch (entryMetadata.type) {
+         case 'day':
+            modal = await Assembly.getModal('config_day', { body });
+            break;
+         case 'period':
+            modal = await Assembly.getModal('config_period', { body });
+            break;
+      }
+      //Uploads the modal
+      await client.views.update({
+         token: process.env.SLACK_BOT_TOKEN,
+         view: modal,
+         view_id: body.view.id
+      });
+   })
+   //Handles the back button on config menus; routes to config menu
+   .onAction('config_back', async (pkg) => updateToConfig(pkg))
+   //Handles when the user clicks to delete a day schedule entry
+   .onAction('config_delete_day',async ({ ack, body, client }) => {
+      await ack();
+
+      //Gets metadata and if the day is already deleted, return
+      const metadata = JSON.parse(body.view.private_metadata);
+      if (metadata.deleted) return;
+
+      //Modifies schedule data to delete the day entry
+      scheduleData = await scheduleFile.read();
+      var userSchedule = JSON.parse(JSON.stringify(scheduleData[body.user.id].days));
+      if (metadata.date.absent){
+         let index = userSchedule.absent.indexOf(metadata.date.date);
+         userSchedule.absent = [].concat(userSchedule.absent.slice(0,index),userSchedule.absent.slice(index+1,userSchedule.absent.length));
+      }
+      if (metadata.date.recieve_notebook){
+         let index = userSchedule.recieve_notebook.indexOf(metadata.date.date);
+         userSchedule.recieve_notebook = [].concat(userSchedule.recieve_notebook.slice(0,index),userSchedule.recieve_notebook.slice(index+1,userSchedule.recieve_notebook.length));
+      }
+
+      //Saves schedule data to app
+      scheduleData[body.user.id].days.absent = userSchedule.absent;
+      scheduleData[body.user.id].days.recieve_notebook = userSchedule.recieve_notebook;
+      await scheduleFile.writePath(`${body.user.id}.days`,{
+         absent: userSchedule.absent,
+         recieve_notebook: userSchedule.recieve_notebook
+      });
+
+      //Gets and uploads the modal
+      await client.views.update({
+         token: process.env.SLACK_BOT_TOKEN,
+         view: await Assembly.getModal('config_day_delete', { body }),
+         view_id: body.view.id
+      });
+   })
+   //Handles when the user click to delete a period schedule entry
+   .onAction('config_delete_period',async ({ ack, body, client }) => {
+      await ack();
+
+      //Gets metadata and if the period is already deleted, return
+      const metadata = JSON.parse(body.view.private_metadata);
+      if (metadata.deleted) return;
+
+      //Modifies schedule data to delete the period entry
+      scheduleData = await scheduleFile.read();
+      var userSchedule = JSON.parse(JSON.stringify(scheduleData[body.user.id].periods));
+      if (metadata.date.absent){
+         let index = userSchedule.absent.indexOf(metadata.date.date);
+         userSchedule.absent = [].concat(userSchedule.absent.slice(0,index),userSchedule.absent.slice(index+1,userSchedule.absent.length));
+      }
+      if (metadata.date.recieve_notebook){
+         let index = userSchedule.recieve_notebook.indexOf(metadata.date.date);
+         userSchedule.recieve_notebook = [].concat(userSchedule.recieve_notebook.slice(0,index),userSchedule.recieve_notebook.slice(index+1,userSchedule.recieve_notebook.length));
+      }
+      if (typeof userSchedule.extended[metadata.date.date] !== 'undefined'){
+         let extended = {};
+         for (const i in userSchedule.extended){
+            if (i !== metadata.date.date) extended[i] = userSchedule.extended[i];
+         }
+         userSchedule.extended = extended;
+      }
+
+      //Saves schedule data to app
+      scheduleData[body.user.id].periods.absent = userSchedule.absent;
+      scheduleData[body.user.id].periods.recieve_notebook = userSchedule.recieve_notebook;
+      scheduleData[body.user.id].periods.extended = userSchedule.extended;
+      await scheduleFile.writePath(`${body.user.id}.periods`,{
+         absent: userSchedule.absent,
+         recieve_notebook: userSchedule.recieve_notebook,
+         extended: userSchedule.extended
+      });
+
+      //Gets and uploads the modal
+      await client.views.update({
+         token: process.env.SLACK_BOT_TOKEN,
+         view: await Assembly.getModal('config_period_delete', { body }),
+         view_id: body.view.id
+      });
+   })
+   //Handles checking the time length of custom time basis to see if they need to provide a reason for their absence
    .onAction('from_date_action', async (pkg) => customActionDateEvent(pkg))
    .onAction('to_date_action', async (pkg) => customActionDateEvent(pkg))
    .onAction('checkbox_action', async (pkg) => customActionDateEvent(pkg))
-   //Routing for initial modal interactions
-   .onAction('initial_period_choose', async (pkg) => initialBasisEvent(pkg))
-   .onAction('initial_go_to_scheduling', async (pkg) => initialToSchedulingEvent(pkg))
-   .onAction('initial_go_to_schedule_configuration', async (pkg) => updateToConfig(pkg))
-   //Handles when a person click to config a schedule entry
-   .onAction('date_config_action', async (pkg) => {
-      var entryMetadata = JSON.parse(pkg.body.actions[0].value);
-      switch (entryMetadata.type) {
-         case 'day':
-            await updateToDayConfig(pkg);
-            return;
-         case 'period':
-            await updateToPeriodConfig(pkg);
-            return;
-      }
-   })
-   //Handles the back button on config menus
-   .onAction('config_back', async (pkg) => updateToConfig(pkg))
-   //Handles the delete buttons on config menus
-   .onAction('config_delete_day',async (pkg) => dayConfigDeleteEvent(pkg))
-   .onAction('config_delete_period',async (pkg) => periodConfigDeleteEvent(pkg))
    //Handles checking the time length to see if they need to provied a reason for their absence (when configuring a current entry)
    .onAction('config_from_date_action', async (pkg) => configActionDateEvent(pkg))
    .onAction('config_to_date_action', async (pkg) => configActionDateEvent(pkg))
@@ -218,58 +347,31 @@ const ScheduleShortcut = new Shortcut('schedule')
    //Acknowledges any actions that don't have an event tied to them
    .onAction('action', async ({ ack }) => ack());
 
-//* INITIAL MODAL HANDLING
-
-/**Handles the interaction for when the user selects an option from the time basis dropdown */
-const initialBasisEvent = async ({ ack, body, client }) => {
-   await ack();
-
-   //Gets and modifies the modal data to fit the selection
-   var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.initial)), context = '';
-   modal.blocks[4].elements[0].initial_option = body.actions[0].selected_option;
-   modal.blocks[4].elements[1].style = 'primary';
-   switch (body.actions[0].selected_option.value) {
-      case 'day':
-         context = 'This is used to schedule a single day out of the calender.';
-         break;
-      case 'week':
-         context = 'Week scheduling is used to schedule out the days of a specific week.';
-         break;
-      case 'month':
-         context = 'This is used to schedule out a whole month at one time. Please note that confirmation is required with this type of scheduling.';
-         break;
-      case 'custom':
-         context = 'Custom scheduling is used to schedule out a custom time period from one date to another.';
-         break;
-   }
-   modal.blocks = [].concat(modal.blocks.slice(0, 5), [{
-      type: 'context',
-      elements: [
-         {
-            type: 'plain_text',
-            text: context
-         }
-      ]
-   }], modal.blocks.slice(5, modal.blocks.length));
-
-   //Uploads the modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-/**Handles the interaction for when the user click to go to their selected scheduling basis */
-const initialToSchedulingEvent = async ({ ack, body, client }) => {
-   await ack();
-
-   //Gets the modal data
-   var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.initial)), context = 'This field is required.';
-   var dropdownBlockId = Object.keys(body.view.state.values)[0];
-   //If the user has not filled out the static select menu, show an error in the context
-   if (body.view.state.values[dropdownBlockId].initial_period_choose.selected_option == null) {
-      modal.blocks[4].elements[1].style = 'danger';
+/**Handles all modal creation and assembly */
+export const Assembly = new ModalAssembly()
+   //Modal creation for the initial activation modal
+   .addModal('initial',() => JSON.parse(JSON.stringify(ScheduleShortcut.modal.initial)))
+   //Modal creation for showing the tooltip when a user chooses a time basis
+   .addModal('initial_basis_choose', async ({ body }) => {
+      //Gets the original modal data
+      var modal = await Assembly.getModal('initial'), context = '';
+      //Modifies the modal; adds context depending on the selection, changes color of go button
+      modal.blocks[4].elements[0].initial_option = body.actions[0].selected_option;
+      modal.blocks[4].elements[1].style = 'primary';
+      switch (body.actions[0].selected_option.value) {
+         case 'day':
+            context = 'This is used to schedule a single day out of the calender.';
+            break;
+         case 'week':
+            context = 'Week scheduling is used to schedule out the days of a specific week.';
+            break;
+         case 'month':
+            context = 'This is used to schedule out a whole month at one time. Please note that confirmation is required with this type of scheduling.';
+            break;
+         case 'custom':
+            context = 'Custom scheduling is used to schedule out a custom time period from one date to another.';
+            break;
+      }
       modal.blocks = [].concat(modal.blocks.slice(0, 5), [{
          type: 'context',
          elements: [
@@ -279,326 +381,105 @@ const initialToSchedulingEvent = async ({ ack, body, client }) => {
             }
          ]
       }], modal.blocks.slice(5, modal.blocks.length));
-      //If the user has filled out the static select menu, update the modal to the designated basis
-   } else switch (body.view.state.values[dropdownBlockId].initial_period_choose.selected_option.value) {
-      case 'day':
-         await updateToDay({ client, body });
-         return;
-      case 'week':
-         await updateToWeek({ client, body });
-         return;
-      case 'month':
-         await updateToMonth({ client, body });
-         return;
-      case 'custom':
-         await updateToCustom({ client, body });
-         return;
-   }
-
-   //Uploads the modal with the error
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-//* DAY SCHEDULEING
-/**Handles when the user switches to changing specific days */
-const updateToDay = async ({ client, body }) => {
-   const modal = ScheduleShortcut.modal.day;
-
-   //Upload modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-/**Gets the input data from a day schedule submission and formats it */
-const daySubmitEvaluate = ({ body }) => {
-   //Gets input data
-   var data = {
-      periods: { absent: [], recieve_notebook: [], extended: {} },
-      days: { absent: [], recieve_notebook: [] }
-   };
-   var day = clockFormatter.createDate(body.view.state.values.datepicker.action.selected_date, true);
-   var values = JSON.stringify(body.view.state.values.checkboxes.action.selected_options);
-
-   if (values.indexOf('"value":"attending"') == -1) data.days.absent.push(day);
-   if (values.indexOf('"value":"recieve_notebook"') !== -1) data.days.recieve_notebook.push(day);
-
-   return data;
-}
-
-//* WEEK SCHEDULEING
-/**Handles when the user switched to changing specific weeks (changes according to season) */
-const updateToWeek = async ({ client, body }) => {
-   const modal = ScheduleShortcut.modal.week;
-
-   //Generate the week choices that the user can choose (base on season end and start dates)
-   modal.blocks[5].accessory.options = [];
-   var weeksToAdd = 8, addWeekCounter = false;
-   var weeksUntilEnd = (Date.parse(ConfigFile.season_dates.end) - Date.now()) / 1000 / 60 / 60 / 24 / 7;
-   var weeksFromStart = ((Date.now() - Date.parse(ConfigFile.season_dates.start)) / 1000 / 60 / 60 / 24 / 7) + 1;
-   if (ConfigFile.season_dates.end !== null && weeksFromStart > 0 && weeksUntilEnd > 0) {
-      weeksToAdd = weeksUntilEnd;
-      addWeekCounter = true;
-   }
-   var mondayDate = new Date();
-   mondayDate.setDate(mondayDate.getDate() - mondayDate.getDay());
-
-   for (var i = 0; i < weeksToAdd; i++) {
-      let str = '', option = {
-         text: {
-            type: 'plain_text',
-            text: ''
-         },
-         value: ''
-      };
-      str += `${mondayDate.getMonth() + 1}/${mondayDate.getDate() + 1}/${mondayDate.getFullYear()} - `;
-      mondayDate.setDate(mondayDate.getDate() + 6);
-      str += `${mondayDate.getMonth() + 1}/${mondayDate.getDate() + 1}/${mondayDate.getFullYear()}`;
-      mondayDate.setDate(mondayDate.getDate() + 1);
-      option.value = str;
-      if (addWeekCounter) {
-         str = `Week ${Math.ceil(weeksFromStart)}  |  ` + str;
-         weeksFromStart++;
+      return modal;
+   })
+   //Modal creation for showing an error if a time basis has not been chosen
+   .addModal('initial_required_field_error', async () => {
+      //Gets the original modal data
+      var modal = await Assembly.getModal('initial');
+      //Modify modal; add the required field error
+      modal.blocks[4].elements[1].style = 'danger';
+      modal.blocks = [].concat(modal.blocks.slice(0, 5), [{
+         type: 'context',
+         elements: [
+            {
+               type: 'plain_text',
+               text: '⭕️  This field is required  ⭕️'
+            }
+         ]
+      }], modal.blocks.slice(5, modal.blocks.length));
+      return modal;
+   })
+   //Modal creation for the day time basis
+   .addModal('day',() => JSON.parse(JSON.stringify(ScheduleShortcut.modal.day)))
+   //Modal creation for the week time basis
+   .addModal('week',() => {
+      //Get original modal data
+      var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.week));
+      //Modify modal; generate the week choices that the user can choose (base on season end and start dates)
+      modal.blocks[5].accessory.options = [];
+      var weeksToAdd = 8, addWeekCounter = false;
+      var weeksUntilEnd = (Date.parse(ConfigFile.season_dates.end) - Date.now()) / 1000 / 60 / 60 / 24 / 7;
+      var weeksFromStart = ((Date.now() - Date.parse(ConfigFile.season_dates.start)) / 1000 / 60 / 60 / 24 / 7) + 1;
+      if (ConfigFile.season_dates.end !== null && weeksFromStart > 0 && weeksUntilEnd > 0) {
+         weeksToAdd = weeksUntilEnd;
+         addWeekCounter = true;
       }
-      option.text.text = str;
-      modal.blocks[5].accessory.options.push(option);
-   }
-
-   //Uploads modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-/**Gets the input data from a week schedule submission and formats it */
-const weekSubmitEvaluate = ({ body }) => {
-   var data = {
-      periods: { absent: [], recieve_notebook: [], extended: {} },
-      days: { absent: [], recieve_notebook: [] }
-   };
-   var pEnd = null, pStart = null;
-   var index = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-   var attendance = [null, null, null, null, null, null, null];
-   var notebook = [null, null, null, null, null, null, null];
-   var weekStart = new Date(body.view.state.values.chosen_week.action.selected_option.value.split(' - ')[0]);
-
-   //Gets the absent weekdays chosen
-   for (const i of body.view.state.values.chosen_attendence_weekdays.action.selected_options) {
-      let date = new Date(`${weekStart}`);
-      date.setDate(date.getDate() + index.indexOf(i.value));
-      attendance[index.indexOf(i.value)] = date;
-   }
-   //Gets the recieving notebook weekdays chosen
-   for (const j of body.view.state.values.chosen_notebook_weekdays.action.selected_options) {
-      let date = new Date(`${weekStart}`);
-      date.setDate(date.getDate() + index.indexOf(j.value));
-      notebook[index.indexOf(j.value)] = date;
-   }
-
-   //Formats the absent weekdays
-   for (let k = 0; k < attendance.length; k++) {
-      if (attendance[k - 1] == null && attendance[k] !== null) pStart = attendance[k];
-      if (attendance[k + 1] == null && attendance[k] !== null) pEnd = attendance[k];
-
-      if (pStart == pEnd && pStart !== null && pEnd !== null) {
-         data.days.absent.push(clockFormatter.createDate(attendance[k], true));
-         pStart = pEnd = null;
-      } else if (pEnd !== null) {
-         data.periods.absent.push(`${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`);
-         pStart = pEnd = null;
-      }
-   }
-   //Formats the recieving notebook weekdats
-   for (let l = 0; l < notebook.length; l++) {
-      if (notebook[l - 1] == null && notebook[l] !== null) pStart = notebook[l];
-      if (notebook[l + 1] == null && notebook[l] !== null) pEnd = notebook[l];
-
-      if (pStart == pEnd && pStart !== null && pEnd !== null) {
-         data.days.recieve_notebook.push(clockFormatter.createDate(notebook[l], true));
-         pStart = pEnd = null;
-      } else if (pEnd !== null) {
-         data.periods.recieve_notebook.push(`${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`);
-         pStart = pEnd = null;
-      }
-   }
-   return data;
-}
-
-//* MONTH SCHEDULING
-/**Handles when user switches to changing specific months (changes according to the season) */
-const updateToMonth = async ({ client, body }) => {
-   const modal = ScheduleShortcut.modal.month;
-
-   //Generate the month choices that the user can choose (based on season end and start dates)
-   modal.blocks[5].accessory.options = [];
-   var monthsToAdd = 12, addMonthCounter = false;
-   var monthsUntilEnd = (Date.parse(ConfigFile.season_dates.end) - Date.now()) / 1000 / 60 / 60 / 24 / 7 / 4;
-   var monthsFromStart = ((Date.now() - Date.parse(ConfigFile.season_dates.start)) / 1000 / 60 / 60 / 24 / 7 / 4) + 1;
-   if (ConfigFile.season_dates.end !== null && monthsFromStart > 0 && monthsUntilEnd > 0) {
-      monthsToAdd = monthsUntilEnd;
-      addMonthCounter = true;
-   }
-   var currentMonth = (new Date()).getMonth() + 2;
-   var index = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'];
-   for (var i = 0; i < monthsToAdd; i++) {
-      let projectionDate = new Date();
-      projectionDate.setMonth(currentMonth + i);
-      let option = {
-         text: {
-            type: 'plain_text',
-            text: `${index[(currentMonth + i) % 12]} ${projectionDate.getFullYear()}`
-         },
-         value: `${index[(currentMonth + i) % 12]} ${projectionDate.getFullYear()}`.toLowerCase()
-      };
-      if (addMonthCounter) {
-         option.text.text = `Month ${Math.ceil(monthsFromStart)}  |  ` + option.text.text;
-         monthsFromStart++;
-      }
-      modal.blocks[5].accessory.options.push(option);
-   }
-
-   //Uploads modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-/**Gets the input data from a month schedule submission and formats it */
-const monthSubmitEvaluate = ({ body }) => {
-   var data = {
-      periods: { absent: [], recieve_notebook: [], extended: {} },
-      days: { absent: [], recieve_notebook: [] }
-   };
-
-   //Gets input data from modal
-   if (body.view.state.values.checkboxes.action.selected_options.length == 0) {
-      var pStart = new Date(body.view.state.values.month_picker.action.selected_option.value);
-      var pEnd = new Date(body.view.state.values.month_picker.action.selected_option.value);
-      pEnd.setMonth(pEnd.getMonth() + 1);
-      pEnd.setDate(pEnd.getDate() - 1);
-      let period = `${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`
-      data.periods.absent.push(period);
-      data.periods.extended[period] = {
-         reason: body.view.state.values.reason.action.value,
-         approved: false,
-         notified: false,
-         changes: {
-            hasChanged: false,
-            notified: 0,
-            log: [],
-         },
-      };
-   }
-   return data;
-}
-
-//* CUSTOM SCHEDULING
-/**Handles when the user switches to making custom arrangments */
-const updateToCustom = async ({ client, body }) => {
-   const modal = ScheduleShortcut.modal.custom;
-
-   //Uploads modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-/**Gets the input data from a custom schedule submission and format it */
-const customSubmitEvaluate = ({ body }) => {
-   var data = {
-      periods: { absent: [], recieve_notebook: [], extended: {} },
-      days: { absent: [], recieve_notebook: [] }
-   };
-
-   //Gets the start and end dates of the period/day and calculates how long it is
-   var pStart = new Date(body.view.state.values.from_date.from_date_action.selected_date);
-   var pEnd = new Date(body.view.state.values.to_date.to_date_action.selected_date);
-   var dist = (Date.parse(pEnd) - Date.parse(pStart)) / 1000 / 60 / 60 / 24;
-
-   //If the end date is before the start date, swap them so it makes sense
-   if (dist < 0) {
-      pStart = new Date(body.view.state.values.to_date.to_date_action.selected_date);
-      pEnd = new Date(body.view.state.values.from_date.from_date_action.selected_date);
-      dist = Math.abs(dist);
-   }
-
-   //Gets the checkboxes input
-   let jsonStr = JSON.stringify(body.view.state.values.checkboxes.checkbox_action.selected_options);
-   let checkboxes = [true, false];
-   if (jsonStr.indexOf('"value":"attending"') == -1) checkboxes[0] = false;
-   if (jsonStr.indexOf('"value":"recieve_notebook"') !== -1) checkboxes[1] = true;
-
-   //If the user checks that they are not going to be at robotics; format the schedule data and check duration
-   if (!checkboxes[0]) {
-      //If the duration is only a day, add it to the day entries
-      if (dist == 0) data.days.absent.push(clockFormatter.createDate(pStart, true));
-      //If it's longer; format it and check
-      else {
-         //Formats into period form and puts it in period entries for schedule data
-         let str = `${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`;
-         data.periods.absent.push(str);
-         //If the duration of the period is longer than a specified amount. Store the given reason in the extended entries
-         if (dist >= ConfigFile.reason_for_absence_threshold) {
-            data.periods.extended[str] = {
-               reason: body.view.state.values.custom_reason.action.value,
-               approved: false,
-               notified: false,
-               changes: {
-                  hasChanged: false,
-                  notified: 0,
-                  log: [],
-               },
-            };
+      var mondayDate = new Date();
+      mondayDate.setDate(mondayDate.getDate() - mondayDate.getDay());
+      for (var i = 0; i < weeksToAdd; i++) {
+         let str = '', option = {
+            text: {
+               type: 'plain_text',
+               text: ''
+            },
+            value: ''
+         };
+         str += `${mondayDate.getMonth() + 1}/${mondayDate.getDate() + 1}/${mondayDate.getFullYear()} - `;
+         mondayDate.setDate(mondayDate.getDate() + 6);
+         str += `${mondayDate.getMonth() + 1}/${mondayDate.getDate() + 1}/${mondayDate.getFullYear()}`;
+         mondayDate.setDate(mondayDate.getDate() + 1);
+         option.value = str;
+         if (addWeekCounter) {
+            str = `Week ${Math.ceil(weeksFromStart)}  |  ` + str;
+            weeksFromStart++;
          }
+         option.text.text = str;
+         modal.blocks[5].accessory.options.push(option);
       }
-   }
-   //If the user checked the second checkbox, saying they want to be notified of engineering notebook. Format and get the dates for that.
-   if (checkboxes[1]) {
-      if (dist == 0) data.days.recieve_notebook.push(clockFormatter.createDate(pStart, true));
-      else {
-         let str = `${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`;
-         data.periods.recieve_notebook.push(str);
+      return modal;
+   })
+   //Modal creation for the month time basis
+   .addModal('month',() => {
+      //Get original modal data
+      var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.month));
+      //Generate the month choices that the user can choose (based on season end and start dates)
+      modal.blocks[5].accessory.options = [];
+      var monthsToAdd = 12, addMonthCounter = false;
+      var monthsUntilEnd = (Date.parse(ConfigFile.season_dates.end) - Date.now()) / 1000 / 60 / 60 / 24 / 7 / 4;
+      var monthsFromStart = ((Date.now() - Date.parse(ConfigFile.season_dates.start)) / 1000 / 60 / 60 / 24 / 7 / 4) + 1;
+      if (ConfigFile.season_dates.end !== null && monthsFromStart > 0 && monthsUntilEnd > 0) {
+         monthsToAdd = monthsUntilEnd;
+         addMonthCounter = true;
       }
-   }
-   return data;
-}
-
-/**Handles general interaction actions on custom schedule making. Used to see if they need to provide a reason for their absence. */
-const customActionDateEvent = async ({ ack, client, body }) => {
-   await ack();
-   //Gets current input data and calculates period duration
-   var metadata = JSON.parse(body.view.private_metadata);
-   var startDate = new Date(body.view.state.values.from_date.from_date_action.selected_date);
-   var endDate = new Date(body.view.state.values.to_date.to_date_action.selected_date);
-   var dist = (Date.parse(endDate) - Date.parse(startDate)) / 1000 / 60 / 60 / 24;
-   var modal = ScheduleShortcut.modal.custom;
-   var attendanceUnchecked = JSON.stringify(body.view.state.values).indexOf('"value":"attending"') == -1;
-
-   //If the end date is before the start date, swap them so it makes sense
-   if (dist < 0) {
-      startDate = new Date(body.view.state.values.to_date.to_date_action.selected_date);
-      endDate = new Date(body.view.state.values.from_date.from_date_action.selected_date);
-      dist = Math.abs(dist);
-   }
-
-   //If the period duration is longer than a specified amount; add a reason field to the modal.
-   if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reasonAdded) {
-      //If one of the dates is not filled in, meaning the modal is incomplete; return.
-      if (body.view.state.values.to_date.to_date_action.selected_date == null) return;
-      if (body.view.state.values.from_date.from_date_action.selected_date == null) return;
-      //Add the reason field to the modal
+      var currentMonth = (new Date()).getMonth() + 2;
+      var index = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'];
+      for (var i = 0; i < monthsToAdd; i++) {
+         let projectionDate = new Date();
+         projectionDate.setMonth(currentMonth + i);
+         let option = {
+            text: {
+               type: 'plain_text',
+               text: `${index[(currentMonth + i) % 12]} ${projectionDate.getFullYear()}`
+            },
+            value: `${index[(currentMonth + i) % 12]} ${projectionDate.getFullYear()}`.toLowerCase()
+         };
+         if (addMonthCounter) {
+            option.text.text = `Month ${Math.ceil(monthsFromStart)}  |  ` + option.text.text;
+            monthsFromStart++;
+         }
+         modal.blocks[5].accessory.options.push(option);
+      }
+      return modal;
+   })
+   //Modal creation for the custom time basis
+   .addModal('custom',() => JSON.parse(JSON.stringify(ScheduleShortcut.modal.custom)))
+   //Modal creation for when the user chooses a time basis that requires a reason for absence
+   .addModal('custom_reason_input',async () => {
+      //Gets modal data and metadata
+      var modal = await Assembly.getModal('custom');
+      var metadata = JSON.parse(modal.private_metadata);
+      //Modifies modal; adds input field
       modal.blocks.push({
          type: "input",
          block_id: "custom_reason",
@@ -616,260 +497,589 @@ const customActionDateEvent = async ({ ack, client, body }) => {
             text: "Reason",
          },
       });
-      //Change metadata to match modal changes
+      //Modify and save metadata
       metadata.reasonAdded = true;
       modal.private_metadata = JSON.stringify(metadata);
-      //Upload modal
+      return modal;
+   })
+   //Modal creation for when the user chooses to go to the schedule config menu
+   .addModal('config',async ({ body }) => {
+      //Gets original modal data and user schedule data
+      var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.config));
+      scheduleData = await scheduleFile.read();
+      const userScheduleData = scheduleData[body.user.id];
+      //Modifies the modal data; adds existing schedule periods and days
+      //If the user does not have anything scheduled; don't change the modal
+      if (userScheduleData.periods.absent.length + userScheduleData.periods.recieve_notebook.length > 0 || userScheduleData.days.absent.length + userScheduleData.days.recieve_notebook.length > 0) modal.blocks.pop();
+      //If the user has periods scheduled, add them to the modal
+      if (userScheduleData.periods.absent.length + userScheduleData.periods.recieve_notebook.length > 0) {
+         let added = [];
+         //Add the header
+         modal.blocks.push({
+            type: 'section',
+            text: {
+               type: 'mrkdwn',
+               text: '*Periods*'
+            }
+         });
+         /**Creates the block that contains the period */
+         const makePeriod = (period) => {
+            var meta = {
+               date: period,
+               type: 'period',
+               absent: userScheduleData.periods.absent.indexOf(period) !== -1,
+               recieve_notebook: userScheduleData.periods.recieve_notebook.indexOf(period) !== -1
+            };
+            return {
+               type: 'section',
+               text: {
+                  type: 'mrkdwn',
+                  text: `\n>${period.replace(' - ', '  -  ')}`
+               },
+               accessory: {
+                  type: 'button',
+                  text: {
+                     type: 'plain_text',
+                     text: 'Change'
+                  },
+                  action_id: 'date_config_action',
+                  value: JSON.stringify(meta)
+               }
+            }
+         }
+         //Adds absent periods
+         for (const i of userScheduleData.periods.absent) {
+            if (added.indexOf(i) == -1) {
+               modal.blocks.push(makePeriod(i));
+               added.push(i);
+            }
+         }
+         //Adds notebook periods
+         for (const j of userScheduleData.periods.recieve_notebook) {
+            if (added.indexOf(j) == -1) {
+               modal.blocks.push(makePeriod(j));
+               added.push(j);
+            }
+         }
+      }
+      //If the user has days scheduled, add them to the modal
+      if (userScheduleData.days.absent.length + userScheduleData.days.recieve_notebook.length > 0) {
+         let added = [];
+         //Add the header
+         modal.blocks.push({
+            type: 'section',
+            text: {
+               type: 'mrkdwn',
+               text: '*Days*'
+            }
+         });
+         /**Creates the block that contains the day */
+         const makeDay = (day) => {
+            var meta = {
+               date: day,
+               type: 'day',
+               absent: userScheduleData.days.absent.indexOf(day) !== -1,
+               recieve_notebook: userScheduleData.days.recieve_notebook.indexOf(day) !== -1
+            }
+            return {
+               type: 'section',
+               text: {
+                  type: 'mrkdwn',
+                  text: `\n>${day}`
+               },
+               accessory: {
+                  type: 'button',
+                  text: {
+                     type: 'plain_text',
+                     text: 'Change'
+                  },
+                  action_id: 'date_config_action',
+                  value: JSON.stringify(meta)
+               }
+            }
+         }
+         //Adds absent days
+         for (const i of userScheduleData.days.absent) {
+            if (added.indexOf(i) == -1) {
+               modal.blocks.push(makeDay(i, 'absent'));
+               added.push(i);
+            }
+         }
+         //Adds notebook days
+         for (const j of userScheduleData.days.recieve_notebook) {
+            if (added.indexOf(j) == -1) {
+               modal.blocks.push(makeDay(j, 'recieve_notebook'));
+               added.push(j);
+            }
+         }
+      }
+      return modal;
+   })
+   //Modal creation for when the user chooses to change/config a day schedule entry
+   .addModal('config_day',async ({ body }) => {
+      //Gets original modal data and schedule entry data
+      var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.day_config));
+      const entryMetadata = JSON.parse(body.actions[0].value);
+      //Modifies/saves metadata
+      modal.private_metadata = JSON.stringify({
+         scheduleType: 'day_config',
+         date: entryMetadata,
+         deleted: false,
+         checkboxWarningSent: false
+      });
+      //Modifies modal data; adds existing information about schdule entry
+      //Selects checkboxes based on current schedule data
+      if (!entryMetadata.absent || entryMetadata.recieve_notebook) modal.blocks[4].element.initial_options = [];
+      if (!entryMetadata.absent) {
+         modal.blocks[4].element.initial_options.push({
+            text: {
+               type: 'mrkdwn',
+               text: 'I am going to be at robotics this day.',
+            },
+            value: 'attending'
+         });
+      }
+      if (entryMetadata.recieve_notebook) {
+         modal.blocks[4].element.initial_options.push({
+            text: {
+               type: 'mrkdwn',
+               text: 'I would like to recieve the engineering notebook log for this day.',
+            },
+            value: 'recieve_notebook'
+         });
+      }
+      //Selects date based on current schedule data
+      var date = new Date(removeOrdinalIndicator(entryMetadata.date));
+      modal.blocks[3].element.initial_date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      return modal;
+   })
+   //Modal creation for when the user chooses to delete a day schedule entry
+   .addModal('config_day_delete', ({ body }) => {
+      //Get original modal data and existing metadata
+      var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.day_config));
+      var metadata = JSON.parse(body.view.private_metadata);
+      //Modify modal; add context saying the entry has been deleted
+      modal.blocks.push({
+         type: "context",
+         elements: [
+            {
+               type: "mrkdwn",
+               text: "*Schedule entry has now been deleted. You can exit the menu.*",
+            }
+         ]
+      });
+      //Modify and save metadata
+      metadata.deleted = true;
+      modal.private_metadata = JSON.stringify(metadata);
+      return modal;
+   })
+   //Modal creation for when the user chooses to change/config a period schedule entry
+   .addModal('config_period',async ({ body }) => {
+      //Gets original modal data and schedule entry data
+      var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.custom_config));
+      const entryMetadata = JSON.parse(body.actions[0].value);
+
+      //Modifies modal data; adds existing entry information
+      //Selects checkboxes based on current schedule data
+      if (!entryMetadata.absent || entryMetadata.recieve_notebook) modal.blocks[5].element.initial_options = [];
+      if (!entryMetadata.absent) {
+         modal.blocks[5].element.initial_options.push({
+            text: {
+               type: "mrkdwn",
+               text: "I am going to be at robotics during this period.",
+            },
+            value: "attending",
+         });
+      }
+      if (entryMetadata.recieve_notebook) {
+         modal.blocks[5].element.initial_options.push({
+            text: {
+               type: 'mrkdwn',
+               text: 'I would like to recieve the engineering notebook log for each day (sends daily).',
+            },
+            value: 'recieve_notebook'
+         });
+      }
+
+      //Selects dates based on current schedule data
+      const pStart = new Date(removeOrdinalIndicator(entryMetadata.date.split(' - ')[0]));
+      const pEnd = new Date(removeOrdinalIndicator(entryMetadata.date.split(' - ')[1]));
+      const dist = (Date.parse(pEnd) - Date.parse(pStart)) / 1000 / 60 / 60 / 24;
+      modal.blocks[3].element.initial_date = `${pStart.getFullYear()}-${pStart.getMonth() + 1}-${pStart.getDate()}`;
+      modal.blocks[4].element.initial_date = `${pEnd.getFullYear()}-${pEnd.getMonth() + 1}-${pEnd.getDate()}`;
+
+      //If time duration is above specified amount; add and fill in the reason field
+      if (dist >= ConfigFile.reason_for_absence_threshold) {
+         scheduleData = await scheduleFile.read();
+         let popped = modal.blocks.pop();
+         modal.blocks.push({
+            type: "input",
+            block_id: "custom_reason",
+            element: {
+               type: "plain_text_input",
+               multiline: true,
+               action_id: "action",
+               placeholder: {
+                  type: "plain_text",
+                  text: "Please provide the reason for your absence",
+               }
+            },
+            label: {
+               type: "plain_text",
+               text: "Reason",
+            },
+         });
+         if (typeof scheduleData[body.user.id].periods.extended[entryMetadata.date]?.reason !== 'undefined'){
+            modal.blocks[modal.blocks.length-1].element.initial_value = scheduleData[body.user.id].periods.extended[entryMetadata.date]?.reason;
+         }
+         modal.blocks.push(popped);
+      }
+
+      //Modifies/saves metadata
+      modal.private_metadata = JSON.stringify({
+         scheduleType: 'period_config',
+         date: entryMetadata,
+         deleted: false,
+         reasonAdded: dist >= ConfigFile.reason_for_absence_threshold,
+         checkboxWarningSent: false
+      });
+      return modal;
+   })
+   //Modal creation for when the user changes the existing start and end date to a length that requires a reason
+   .addModal('config_period_reason_input', async ({ body }) => {
+      //Gets original modal data and existing metadata
+      var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.custom_config));
+      var metadata = JSON.parse(body.view.private_metadata);
+
+      //Modify modal data; adds the reason input field
+      var popped = modal.blocks.pop();
+      modal.blocks.push({
+         type: "input",
+         block_id: "custom_reason",
+         element: {
+            type: "plain_text_input",
+            multiline: true,
+            action_id: "action",
+            placeholder: {
+               type: "plain_text",
+               text: "Please provide the reason for your absence",
+            },
+         },
+         label: {
+            type: "plain_text",
+            text: "Reason",
+         },
+      });
+      modal.blocks.push(popped);
+      //Modify and save metadata
+      metadata.reasonAdded = true;
+      modal.private_metadata = JSON.stringify(metadata);
+      return modal;
+   })
+   //Modal creation for when the user chooses to delete a period schedule entry
+   .addModal('config_period_delete',({ body }) => {
+      //Get the original modal data and existing metadata
+      var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.custom_config));
+      var metadata = JSON.parse(body.view.private_metadata);
+      //Modify modal data; add context saying that the entry has been deleted, if the user had a reason provided then don't delete the reason  entry
+      if (metadata.reasonAdded){
+         let popped = modal.blocks.pop();
+         modal.blocks.push({
+            type: "input",
+            block_id: "custom_reason",
+            element: {
+               type: "plain_text_input",
+               multiline: true,
+               action_id: "action",
+               placeholder: {
+                  type: "plain_text",
+                  text: "Please provide the reason for your absence",
+               },
+            },
+            label: {
+               type: "plain_text",
+               text: "Reason",
+            },
+         });
+         modal.blocks.push(popped);
+      }
+      modal.blocks.push({
+         type: "context",
+         elements: [
+            {
+               type: "mrkdwn",
+               text: "*Schedule entry has now been deleted. You can exit the menu.*",
+            }
+         ]
+      });
+      //Modify and save metadata
+      metadata.deleted = true;
+      modal.private_metadata = JSON.stringify(metadata);
+      return modal;
+   })
+
+/**Evaluates and formats input data depending on the time basis */
+const evaluateInput = {
+   /**Evaluates and formats input data for the day time basis */
+   day: ({ body }) => {
+      //Gets input data
+      var data = {
+         periods: { absent: [], recieve_notebook: [], extended: {} },
+         days: { absent: [], recieve_notebook: [] }
+      };
+      var day = clockFormatter.createDate(body.view.state.values.datepicker.action.selected_date, true);
+      var values = JSON.stringify(body.view.state.values.checkboxes.action.selected_options);
+      if (values.indexOf('"value":"attending"') == -1) data.days.absent.push(day);
+      if (values.indexOf('"value":"recieve_notebook"') !== -1) data.days.recieve_notebook.push(day);
+      return data;
+   },
+   /**Evaluates and formats input data for the week time basis */
+   week: ({ body }) => {
+      var data = {
+         periods: { absent: [], recieve_notebook: [], extended: {} },
+         days: { absent: [], recieve_notebook: [] }
+      };
+      var pEnd = null, pStart = null;
+      var index = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+      var attendance = [null, null, null, null, null, null, null];
+      var notebook = [null, null, null, null, null, null, null];
+      var weekStart = new Date(body.view.state.values.chosen_week.action.selected_option.value.split(' - ')[0]);
+   
+      //Gets the absent weekdays chosen
+      for (const i of body.view.state.values.chosen_attendence_weekdays.action.selected_options) {
+         let date = new Date(`${weekStart}`);
+         date.setDate(date.getDate() + index.indexOf(i.value));
+         attendance[index.indexOf(i.value)] = date;
+      }
+      //Gets the recieving notebook weekdays chosen
+      for (const j of body.view.state.values.chosen_notebook_weekdays.action.selected_options) {
+         let date = new Date(`${weekStart}`);
+         date.setDate(date.getDate() + index.indexOf(j.value));
+         notebook[index.indexOf(j.value)] = date;
+      }
+   
+      //Formats the absent weekdays
+      for (let k = 0; k < attendance.length; k++) {
+         if (attendance[k - 1] == null && attendance[k] !== null) pStart = attendance[k];
+         if (attendance[k + 1] == null && attendance[k] !== null) pEnd = attendance[k];
+   
+         if (pStart == pEnd && pStart !== null && pEnd !== null) {
+            data.days.absent.push(clockFormatter.createDate(attendance[k], true));
+            pStart = pEnd = null;
+         } else if (pEnd !== null) {
+            data.periods.absent.push(`${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`);
+            pStart = pEnd = null;
+         }
+      }
+      //Formats the recieving notebook weekdats
+      for (let l = 0; l < notebook.length; l++) {
+         if (notebook[l - 1] == null && notebook[l] !== null) pStart = notebook[l];
+         if (notebook[l + 1] == null && notebook[l] !== null) pEnd = notebook[l];
+   
+         if (pStart == pEnd && pStart !== null && pEnd !== null) {
+            data.days.recieve_notebook.push(clockFormatter.createDate(notebook[l], true));
+            pStart = pEnd = null;
+         } else if (pEnd !== null) {
+            data.periods.recieve_notebook.push(`${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`);
+            pStart = pEnd = null;
+         }
+      }
+      return data;
+   },
+   /**Evaluates and formats input data for the month time basis */
+   month: ({ body }) => {
+      var data = {
+         periods: { absent: [], recieve_notebook: [], extended: {} },
+         days: { absent: [], recieve_notebook: [] }
+      };
+   
+      //Gets input data from modal
+      if (body.view.state.values.checkboxes.action.selected_options.length == 0) {
+         var pStart = new Date(body.view.state.values.month_picker.action.selected_option.value);
+         var pEnd = new Date(body.view.state.values.month_picker.action.selected_option.value);
+         pEnd.setMonth(pEnd.getMonth() + 1);
+         pEnd.setDate(pEnd.getDate() - 1);
+         let period = `${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`
+         data.periods.absent.push(period);
+         data.periods.extended[period] = {
+            reason: body.view.state.values.reason.action.value,
+            approved: false,
+            notified: false,
+            changes: {
+               hasChanged: false,
+               notified: 0,
+               log: [],
+            },
+         };
+      }
+      return data;
+   },
+   /**Evaluates and formats input data for the custom time basis */
+   custom: ({ body }) => {
+      var data = {
+         periods: { absent: [], recieve_notebook: [], extended: {} },
+         days: { absent: [], recieve_notebook: [] }
+      };
+   
+      //Gets the start and end dates of the period/day and calculates how long it is
+      var pStart = new Date(body.view.state.values.from_date.from_date_action.selected_date);
+      var pEnd = new Date(body.view.state.values.to_date.to_date_action.selected_date);
+      var dist = (Date.parse(pEnd) - Date.parse(pStart)) / 1000 / 60 / 60 / 24;
+   
+      //If the end date is before the start date, swap them so it makes sense
+      if (dist < 0) {
+         pStart = new Date(body.view.state.values.to_date.to_date_action.selected_date);
+         pEnd = new Date(body.view.state.values.from_date.from_date_action.selected_date);
+         dist = Math.abs(dist);
+      }
+   
+      //Gets the checkboxes input
+      let jsonStr = JSON.stringify(body.view.state.values.checkboxes.checkbox_action.selected_options);
+      let checkboxes = [true, false];
+      if (jsonStr.indexOf('"value":"attending"') == -1) checkboxes[0] = false;
+      if (jsonStr.indexOf('"value":"recieve_notebook"') !== -1) checkboxes[1] = true;
+   
+      //If the user checks that they are not going to be at robotics; format the schedule data and check duration
+      if (!checkboxes[0]) {
+         //If the duration is only a day, add it to the day entries
+         if (dist == 0) data.days.absent.push(clockFormatter.createDate(pStart, true));
+         //If it's longer; format it and check
+         else {
+            //Formats into period form and puts it in period entries for schedule data
+            let str = `${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`;
+            data.periods.absent.push(str);
+            //If the duration of the period is longer than a specified amount. Store the given reason in the extended entries
+            if (dist >= ConfigFile.reason_for_absence_threshold) {
+               data.periods.extended[str] = {
+                  reason: body.view.state.values.custom_reason.action.value,
+                  approved: false,
+                  notified: false,
+                  changes: {
+                     hasChanged: false,
+                     notified: 0,
+                     log: [],
+                  },
+               };
+            }
+         }
+      }
+      //If the user checked the second checkbox, saying they want to be notified of engineering notebook. Format and get the dates for that.
+      if (checkboxes[1]) {
+         if (dist == 0) data.days.recieve_notebook.push(clockFormatter.createDate(pStart, true));
+         else {
+            let str = `${clockFormatter.createDate(pStart, true)} - ${clockFormatter.createDate(pEnd, true)}`;
+            data.periods.recieve_notebook.push(str);
+         }
+      }
+      return data;
+   }
+}
+
+
+/**Handles when the user chooses to go to the schedule configuration menu */
+const updateToConfig = async ({ ack, client, body }) => {
+   await ack();
+   //Gets and uploads modal
+   await client.views.update({
+      token: process.env.SLACK_BOT_TOKEN,
+      view: await Assembly.getModal('config', { body }),
+      view_id: body.view.id
+   });
+}
+
+//Reason Handling
+/**Handles general interaction actions on custom schedule making. Used to see if they need to provide a reason for their absence. */
+const customActionDateEvent = async ({ ack, client, body }) => {
+   await ack();
+   //Gets current input data and calculates period duration
+   var metadata = JSON.parse(body.view.private_metadata);
+   var startDate = new Date(body.view.state.values.from_date.from_date_action.selected_date);
+   var endDate = new Date(body.view.state.values.to_date.to_date_action.selected_date);
+   var dist = (Date.parse(endDate) - Date.parse(startDate)) / 1000 / 60 / 60 / 24;
+   var attendanceUnchecked = JSON.stringify(body.view.state.values).indexOf('"value":"attending"') == -1;
+
+   //If the end date is before the start date, swap them so it makes sense
+   if (dist < 0) {
+      startDate = new Date(body.view.state.values.to_date.to_date_action.selected_date);
+      endDate = new Date(body.view.state.values.from_date.from_date_action.selected_date);
+      dist = Math.abs(dist);
+   }
+
+   //If the period duration is longer than a specified amount; add a reason field to the modal.
+   if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reasonAdded) {
+      //If one of the dates is not filled in, meaning the modal is incomplete; return.
+      if (body.view.state.values.to_date.to_date_action.selected_date == null) return;
+      if (body.view.state.values.from_date.from_date_action.selected_date == null) return;
+      //Gets and uploads modal
       await client.views.update({
          token: process.env.SLACK_BOT_TOKEN,
-         view: modal,
+         view: await Assembly.getModal('custom_reason_input'),
          view_id: body.view.id
       });
    }
    //If the period duration is not over the threshold, or the person is still attending robotics. And a reason has been added to the modal; delete the reason field.
    if ((dist < ConfigFile.reason_for_absence_threshold || !attendanceUnchecked) && metadata.reasonAdded) {
-      //Delets reason field
-      modal.blocks.pop();
-
-      //Changes metadata accordingly
-      metadata.reasonAdded = false;
-      modal.private_metadata = JSON.stringify(metadata);
-
-      //Uploads modal
+      //Gets and uploads modal
       await client.views.update({
          token: process.env.SLACK_BOT_TOKEN,
-         view: modal,
+         view: await Assembly.getModal('custom'),
          view_id: body.view.id
       });
    }
 }
 
-//* INITIAL CONFIG HANDLING
-
-/**Handles when the user chooses to go to the schedule configuration menu */
-const updateToConfig = async ({ ack, client, body }) => {
+/**Handles general interaction actions on config schedule changing. Used to see if they need to provide a reason for their absence. */
+const configActionDateEvent = async ({ ack, client, body }) => {
    await ack();
-
-   //Gets modal and user data
-   var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.config));
-   const userSchedule = scheduleData[body.user.id];
-
-   //If the user does not have anything scheduled; don't change the modal
-   if (userSchedule.periods.absent.length + userSchedule.periods.recieve_notebook.length > 0 && userSchedule.days.absent.length + userSchedule.days.recieve_notebook.length > 0) modal.blocks.pop();
-   //If the user has periods scheduled, add them to the modal
-   if (userSchedule.periods.absent.length + userSchedule.periods.recieve_notebook.length > 0) {
-      let added = [];
-      //Add the header
-      modal.blocks.push({
-         type: 'section',
-         text: {
-            type: 'mrkdwn',
-            text: '*Periods*'
-         }
-      });
-      /**Creates the block that contains the period */
-      const makePeriod = (period) => {
-         var meta = {
-            date: period,
-            type: 'period',
-            absent: userSchedule.periods.absent.indexOf(period) !== -1,
-            recieve_notebook: userSchedule.periods.recieve_notebook.indexOf(period) !== -1
-         };
-         return {
-            type: 'section',
-            text: {
-               type: 'mrkdwn',
-               text: `\n>${period.replace(' - ', '  -  ')}`
-            },
-            accessory: {
-               type: 'button',
-               text: {
-                  type: 'plain_text',
-                  text: 'Change'
-               },
-               action_id: 'date_config_action',
-               value: JSON.stringify(meta)
-            }
-         }
-      }
-      //Adds absent periods
-      for (const i of userSchedule.periods.absent) {
-         if (added.indexOf(i) == -1) {
-            modal.blocks.push(makePeriod(i));
-            added.push(i);
-         }
-      }
-      //Adds notebook periods
-      for (const j of userSchedule.periods.recieve_notebook) {
-         if (added.indexOf(j) == -1) {
-            modal.blocks.push(makePeriod(j));
-            added.push(j);
-         }
-      }
-   }
-   //If the user has days scheduled, add them to the modal
-   if (userSchedule.days.absent.length + userSchedule.days.recieve_notebook.length > 0) {
-      let added = [];
-      //Add the header
-      modal.blocks.push({
-         type: 'section',
-         text: {
-            type: 'mrkdwn',
-            text: '*Days*'
-         }
-      });
-      /**Creates the block that contains the day */
-      const makeDay = (day) => {
-         var meta = {
-            date: day,
-            type: 'day',
-            absent: userSchedule.days.absent.indexOf(day) !== -1,
-            recieve_notebook: userSchedule.days.recieve_notebook.indexOf(day) !== -1
-         }
-         return {
-            type: 'section',
-            text: {
-               type: 'mrkdwn',
-               text: `\n>${day}`
-            },
-            accessory: {
-               type: 'button',
-               text: {
-                  type: 'plain_text',
-                  text: 'Change'
-               },
-               action_id: 'date_config_action',
-               value: JSON.stringify(meta)
-            }
-         }
-      }
-      //Adds absent days
-      for (const i of userSchedule.days.absent) {
-         if (added.indexOf(i) == -1) {
-            modal.blocks.push(makeDay(i, 'absent'));
-            added.push(i);
-         }
-      }
-      //Adds notebook days
-      for (const j of userSchedule.days.recieve_notebook) {
-         if (added.indexOf(j) == -1) {
-            modal.blocks.push(makeDay(j, 'recieve_notebook'));
-            added.push(j);
-         }
-      }
-   }
-
-   //Uploads modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-//* DAY CONFIG SCHEDULING
-
-/**Handles when the user click to change the settings of a scheduled day */
-const updateToDayConfig = async ({ ack, client, body }) => {
-   await ack();
-
-   //Gets and modifies the modal data
-   var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.day_config));
-   const entryMetadata = JSON.parse(body.actions[0].value);
-   modal.private_metadata = JSON.stringify({
-      scheduleType: 'day_config',
-      date: entryMetadata,
-      deleted: false,
-      checkboxWarningSent: false
-   });
-   //Selects checkboxes based on current schedule data
-   if (!entryMetadata.absent || entryMetadata.recieve_notebook) modal.blocks[4].element.initial_options = [];
-   if (!entryMetadata.absent) {
-      modal.blocks[4].element.initial_options.push({
-         text: {
-            type: 'mrkdwn',
-            text: 'I am going to be at robotics this day.',
-         },
-         value: 'attending'
-      });
-   }
-   if (entryMetadata.recieve_notebook) {
-      modal.blocks[4].element.initial_options.push({
-         text: {
-            type: 'mrkdwn',
-            text: 'I would like to recieve the engineering notebook log for this day.',
-         },
-         value: 'recieve_notebook'
-      });
-   }
-   //Selects date based on current schedule data
-   var date = new Date(removeOrdinalIndicator(entryMetadata.date));
-   modal.blocks[3].element.initial_date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-
-   //Uploads modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-/**Handles when the user clicks to delete a day schedule entry */
-const dayConfigDeleteEvent = async ({ ack, client, body }) => {
-   await ack();
-
-   //Gets metadata and if the day is already deleted, return
-   const metadata = JSON.parse(body.view.private_metadata);
+   //Gets current input data and calculates period duration
+   var metadata = JSON.parse(body.view.private_metadata);
    if (metadata.deleted) return;
 
-   //Modifies schedule data to delete the day entry
-   var userSchedule = JSON.parse(JSON.stringify(scheduleData[body.user.id].days));
-   if (metadata.date.absent){
-      let index = userSchedule.absent.indexOf(metadata.date.date);
-      userSchedule.absent = [].concat(userSchedule.absent.slice(0,index),userSchedule.absent.slice(index+1,userSchedule.absent.length));
+   var startDate = new Date(body.view.state.values.from_date.config_from_date_action.selected_date);
+   var endDate = new Date(body.view.state.values.to_date.config_to_date_action.selected_date);
+   var dist = Math.round((Date.parse(endDate) - Date.parse(startDate)) / 1000 / 60 / 60 / 24);
+   var attendanceUnchecked = JSON.stringify(body.view.state.values).indexOf('"value":"attending"') == -1;
+
+   //If the end date is before the start date, swap them so it makes sense
+   if (dist < 0) {
+      startDate = new Date(body.view.state.values.to_date.config_to_date_action.selected_date);
+      endDate = new Date(body.view.state.values.from_date.config_from_date_action.selected_date);
+      dist = Math.abs(dist);
    }
-   if (metadata.date.recieve_notebook){
-      let index = userSchedule.recieve_notebook.indexOf(metadata.date.date);
-      userSchedule.recieve_notebook = [].concat(userSchedule.recieve_notebook.slice(0,index),userSchedule.recieve_notebook.slice(index+1,userSchedule.recieve_notebook.length));
+
+   //If the period duration is longer than a specified amount; add a reason field to the modal.
+   if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reasonAdded) {
+      //If one of the dates is not filled in, meaning the modal is incomplete; return.
+      if (body.view.state.values.to_date.config_to_date_action.selected_date == null) return;
+      if (body.view.state.values.from_date.config_from_date_action.selected_date == null) return;
+      //Gets and uploads modal
+      await client.views.update({
+         token: process.env.SLACK_BOT_TOKEN,
+         view: await Assembly.getModal('config_period_reason_input', { body }),
+         view_id: body.view.id
+      });
    }
-
-   //Modify modal to let user know the entry is deleted
-   var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.day_config));
-   modal.blocks = body.view.blocks;
-   modal.blocks.push({
-      type: "context",
-      elements: [
-         {
-            type: "mrkdwn",
-            text: "*Schedule entry has now been deleted. You can exit the menu.*",
-         }
-      ]
-   });
-   metadata.deleted = true;
-   modal.private_metadata = JSON.stringify(metadata);
-
-   //Saves schedule data to app
-   scheduleData[body.user.id].days.absent = userSchedule.absent;
-   scheduleData[body.user.id].days.recieve_notebook = userSchedule.recieve_notebook;
-   await scheduleFile.writePath(`${body.user.id}.days`,{
-      absent: userSchedule.absent,
-      recieve_notebook: userSchedule.recieve_notebook
-   });
-
-   //Upload modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
+   //If the period duration is not over the threshold, or the person is still attending robotics. And a reason has been added to the modal; delete the reason field.
+   if ((dist < ConfigFile.reason_for_absence_threshold || !attendanceUnchecked) && metadata.reasonAdded) {
+      //Gets and uploads modal
+      await client.views.update({
+         token: process.env.SLACK_BOT_TOKEN,
+         view: JSON.parse(JSON.stringify(ScheduleShortcut.modal.custom_config)),
+         view_id: body.view.id
+      });
+   }
 }
 
+//Config Submission Events
 /**Handles when the user submits a day config modal */
 const configDaySubmitEvent = async ({ ack, client, body }) => {
 
    //Gets the metadata anc checks to see if the schedule entry has already been deleted
    const metadata = JSON.parse(body.view.private_metadata);
-   if (metadata.deleted) return;
+   if (metadata.deleted){
+      await ack();
+      return;
+   }
 
    //Formats metadata date
    var date = metadata.date.date;
@@ -883,6 +1093,7 @@ const configDaySubmitEvent = async ({ ack, client, body }) => {
    inputDate = clockFormatter.createDate(inputDate,true);
 
    var str = '';
+   scheduleData = await scheduleFile.read();
 
    //If the user changed the desired date
    if (dateFormatted !== inputDateFormatted){
@@ -979,225 +1190,11 @@ const configDaySubmitEvent = async ({ ack, client, body }) => {
    await scheduleFile.writePath(`${body.user.id}.days`,scheduleData[body.user.id].days);
 
    //Logs results
+   userData = await userFile.read();
    str = `User '${userData[body.user.id].slack_name}' (${userData[body.user.id].name}) has updated schedule data for '${date}'`;
    if (dateFormatted !== inputDateFormatted) str += ` (now ${inputDate})`;
    await Highway.makeRequest('Local','log',[str]);
    console.log(terminalFormatter.bulletPoint,str);
-}
-
-//* PERIOD CONFIG SCHEDULING
-
-/**Handles when the user click to change the settings of a scheduled period */
-const updateToPeriodConfig = async ({ ack, client, body }) => {
-   await ack();
-
-   //Gets and modifies the modal data
-   var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.custom_config));
-   const entryMetadata = JSON.parse(body.actions[0].value);
-
-   //Selects checkboxes based on current schedule data
-   if (!entryMetadata.absent || entryMetadata.recieve_notebook) modal.blocks[5].element.initial_options = [];
-   if (!entryMetadata.absent) {
-      modal.blocks[5].element.initial_options.push({
-         text: {
-            type: "mrkdwn",
-            text: "I am going to be at robotics during this period.",
-         },
-         value: "attending",
-      });
-   }
-   if (entryMetadata.recieve_notebook) {
-      modal.blocks[5].element.initial_options.push({
-         text: {
-            type: 'mrkdwn',
-            text: 'I would like to recieve the engineering notebook log for each day (sends daily).',
-         },
-         value: 'recieve_notebook'
-      });
-   }
-
-   //Selects dates based on current schedule data
-   const pStart = new Date(removeOrdinalIndicator(entryMetadata.date.split(' - ')[0]));
-   const pEnd = new Date(removeOrdinalIndicator(entryMetadata.date.split(' - ')[1]));
-   const dist = (Date.parse(pEnd) - Date.parse(pStart)) / 1000 / 60 / 60 / 24;
-   modal.blocks[3].element.initial_date = `${pStart.getFullYear()}-${pStart.getMonth() + 1}-${pStart.getDate()}`;
-   modal.blocks[4].element.initial_date = `${pEnd.getFullYear()}-${pEnd.getMonth() + 1}-${pEnd.getDate()}`;
-
-   //If time duration is above specified amount; add and fill in the reason field
-   if (dist >= ConfigFile.reason_for_absence_threshold) {
-      let popped = modal.blocks.pop();
-      modal.blocks.push({
-         type: "input",
-         block_id: "custom_reason",
-         element: {
-            type: "plain_text_input",
-            multiline: true,
-            action_id: "action",
-            placeholder: {
-               type: "plain_text",
-               text: "Please provide the reason for your absence",
-            }
-         },
-         label: {
-            type: "plain_text",
-            text: "Reason",
-         },
-      });
-      if (typeof scheduleData[body.user.id].periods.extended[entryMetadata.date]?.reason !== 'undefined'){
-         modal.blocks[modal.blocks.length-1].element.initial_value = scheduleData[body.user.id].periods.extended[entryMetadata.date]?.reason;
-      }
-      modal.blocks.push(popped);
-   }
-
-   //Saves metadata
-   modal.private_metadata = JSON.stringify({
-      scheduleType: 'period_config',
-      date: entryMetadata,
-      deleted: false,
-      reasonAdded: dist >= ConfigFile.reason_for_absence_threshold,
-      checkboxWarningSent: false
-   });
-
-   //Upload modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
-}
-
-/**Handles general interaction actions on config schedule changing. Used to see if they need to provide a reason for their absence. */
-const configActionDateEvent = async ({ ack, client, body }) => {
-   await ack();
-   //Gets current input data and calculates period duration
-   var metadata = JSON.parse(body.view.private_metadata);
-   if (metadata.deleted) return;
-
-   var startDate = new Date(body.view.state.values.from_date.config_from_date_action.selected_date);
-   var endDate = new Date(body.view.state.values.to_date.config_to_date_action.selected_date);
-   var dist = Math.round((Date.parse(endDate) - Date.parse(startDate)) / 1000 / 60 / 60 / 24);
-   var modal = ScheduleShortcut.modal.custom_config;
-   var attendanceUnchecked = JSON.stringify(body.view.state.values).indexOf('"value":"attending"') == -1;
-
-   //If the end date is before the start date, swap them so it makes sense
-   if (dist < 0) {
-      startDate = new Date(body.view.state.values.to_date.config_to_date_action.selected_date);
-      endDate = new Date(body.view.state.values.from_date.config_from_date_action.selected_date);
-      dist = Math.abs(dist);
-   }
-
-   //If the period duration is longer than a specified amount; add a reason field to the modal.
-   if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reasonAdded) {
-      //If one of the dates is not filled in, meaning the modal is incomplete; return.
-      if (body.view.state.values.to_date.config_to_date_action.selected_date == null) return;
-      if (body.view.state.values.from_date.config_from_date_action.selected_date == null) return;
-      //Add the reason field to the modal
-      let popped = modal.blocks.pop();
-      modal.blocks.push({
-         type: "input",
-         block_id: "custom_reason",
-         element: {
-            type: "plain_text_input",
-            multiline: true,
-            action_id: "action",
-            placeholder: {
-               type: "plain_text",
-               text: "Please provide the reason for your absence",
-            },
-         },
-         label: {
-            type: "plain_text",
-            text: "Reason",
-         },
-      });
-      modal.blocks.push(popped);
-      //Change metadata to match modal changes
-      metadata.reasonAdded = true;
-      modal.private_metadata = JSON.stringify(metadata);
-      //Upload modal
-      await client.views.update({
-         token: process.env.SLACK_BOT_TOKEN,
-         view: modal,
-         view_id: body.view.id
-      });
-   }
-   //If the period duration is not over the threshold, or the person is still attending robotics. And a reason has been added to the modal; delete the reason field.
-   if ((dist < ConfigFile.reason_for_absence_threshold || !attendanceUnchecked) && metadata.reasonAdded) {
-      //Delets reason field
-      let popped = modal.blocks.pop();
-      modal.blocks.pop();
-      modal.blocks.push(popped);
-
-      //Changes metadata accordingly
-      metadata.reasonAdded = false;
-      modal.private_metadata = JSON.stringify(metadata);
-
-      //Uploads modal
-      await client.views.update({
-         token: process.env.SLACK_BOT_TOKEN,
-         view: modal,
-         view_id: body.view.id
-      });
-   }
-}
-
-/**Handles when the user clicks to delete a period schedule entry */
-const periodConfigDeleteEvent = async ({ ack, client, body }) => {
-   await ack();
-
-   //Gets metadata and if the period is already deleted, return
-   const metadata = JSON.parse(body.view.private_metadata);
-   if (metadata.deleted) return;
-
-   //Modifies schedule data to delete the period entry
-   var userSchedule = JSON.parse(JSON.stringify(scheduleData[body.user.id].periods));
-   if (metadata.date.absent){
-      let index = userSchedule.absent.indexOf(metadata.date.date);
-      userSchedule.absent = [].concat(userSchedule.absent.slice(0,index),userSchedule.absent.slice(index+1,userSchedule.absent.length));
-   }
-   if (metadata.date.recieve_notebook){
-      let index = userSchedule.recieve_notebook.indexOf(metadata.date.date);
-      userSchedule.recieve_notebook = [].concat(userSchedule.recieve_notebook.slice(0,index),userSchedule.recieve_notebook.slice(index+1,userSchedule.recieve_notebook.length));
-   }
-   if (typeof userSchedule.extended[metadata.date.date] !== 'undefined'){
-      let extended = {};
-      for (const i in userSchedule.extended){
-         if (i !== metadata.date.date) extended[i] = userSchedule.extended[i];
-      }
-      userSchedule.extended = extended;
-   }
-
-   //Modify modal to let user know the entry is deleted
-   var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.custom_config));
-   modal.blocks = body.view.blocks;
-   modal.blocks.push({
-      type: "context",
-      elements: [
-         {
-            type: "mrkdwn",
-            text: "*Schedule entry has now been deleted. You can exit the menu.*",
-         }
-      ]
-   });
-   metadata.deleted = true;
-   modal.private_metadata = JSON.stringify(metadata);
-
-   //Saves schedule data to app
-   scheduleData[body.user.id].periods.absent = userSchedule.absent;
-   scheduleData[body.user.id].periods.recieve_notebook = userSchedule.recieve_notebook;
-   scheduleData[body.user.id].periods.extended = userSchedule.extended;
-   await scheduleFile.writePath(`${body.user.id}.periods`,{
-      absent: userSchedule.absent,
-      recieve_notebook: userSchedule.recieve_notebook,
-      extended: userSchedule.extended
-   });
-
-   //Uploads modal
-   await client.views.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      view: modal,
-      view_id: body.view.id
-   });
 }
 
 /**Handles when the user submits a period config modal */
@@ -1205,7 +1202,10 @@ const configPeriodSubmitEvent = async ({ack, client, body }) => {
 
    //Gets the metadata anc checks to see if the schedule entry has already been deleted
    const metadata = JSON.parse(body.view.private_metadata);
-   if (metadata.deleted) return;
+   if (metadata.deleted){
+      await ack();
+      return;
+   }
 
    //Formats metadata date
    var pStart = metadata.date.date.split(' - ')[0]
@@ -1226,6 +1226,7 @@ const configPeriodSubmitEvent = async ({ack, client, body }) => {
    iEnd = clockFormatter.createDate(iEnd,true);
 
    var str = '', extendedStore;
+   scheduleData = await scheduleFile.read();
    const index = { 
       absent: scheduleData[body.user.id].periods.absent.indexOf(metadata.date.date),
       recieve_notebook: scheduleData[body.user.id].periods.recieve_notebook.indexOf(metadata.date.date)
@@ -1352,13 +1353,14 @@ const configPeriodSubmitEvent = async ({ack, client, body }) => {
    await scheduleFile.writePath(`${body.user.id}.periods`,scheduleData[body.user.id].periods);
 
    //Logs results
+   userData = await userFile.read();
    str = `User '${userData[body.user.id].slack_name}' (${userData[body.user.id].name}) has updated schedule data for '${pStart} - ${pEnd}'`;
    if (pDatesFormatted[0] !== iDatesFormatted[0] || pDatesFormatted[1] !== iDatesFormatted[1]) str += ` (now ${iStart} - ${iEnd})`;
    await Highway.makeRequest('Local','log',[str]);
    console.log(terminalFormatter.bulletPoint,str);
 }
 
-//* MISC
+//Miscelleneous
 /**
  * Check the schedule data of a user with a provided date to see if there is any overlap.
  * @param {Object} options Options for the check
@@ -1451,5 +1453,3 @@ const checkDateOverlap = ({ date, type, location, userId }) => {
 }
 
 export default ScheduleShortcut;
-
-//todo - Change initial modal to match new schedule changing command

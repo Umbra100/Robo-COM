@@ -9,6 +9,7 @@ import TwilioClientClass from "./src/subsystems/Twilio/TwilioClient.mjs";
 import Highway from "./src/Highway.mjs";
 import { terminalFormatter } from "./src/helper.mjs";
 import env from 'dotenv';
+import email from 'email-validator';
 env.config({ path: './security/.env' });
 console.log(terminalFormatter.header);
 
@@ -46,7 +47,6 @@ console.log(terminalFormatter.footer);
 //todo - Create message recieving functionality for Twilio client (local doesn't work, external endpoint connection needed)
 //todo - Make scheduling watch for days that we don't have robotics (set by normal times and club leaders)
 
-//todo - Handle schedule submissions
 //todo - Make notification system (accomodate for scheduling as well)
 
 //* Note: Date classes cannot process dates that have day suffixes such as 'rd' or 'st'

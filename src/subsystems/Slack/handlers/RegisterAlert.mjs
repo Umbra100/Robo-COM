@@ -1,11 +1,12 @@
 import Shortcut from "../Shortcut.mjs";
+import ModalAssembly from "../ModalAssembly.mjs";
 import Highway from "../../../Highway.mjs";
-import { activationEvent as RegisterActivate } from "./RegisterShortcut.mjs";
+import { Assembly as RegisterAssembly } from "./RegisterShortcut.mjs";
 import env from 'dotenv';
 
 env.config({ path: './security/.env' });
 
-var registerModal, userFile;
+var userFile;
 
 const RegisterAlert = new (class extends Shortcut {
    constructor(){
@@ -20,10 +21,10 @@ const RegisterAlert = new (class extends Shortcut {
     * @returns {Object} Slack view open response
     */
    async alert({ shortcut, client }){
-      const modal = RegisterAlert.modal.initial;
+      //Get and upload modal
       return await client.views.open({
          token: process.env.SLACK_BOT_TOKEN,
-         view: modal,
+         view: await Assembly.getModal('initial'),
          trigger_id: shortcut.trigger_id
       });
    }
@@ -34,23 +35,45 @@ const RegisterAlert = new (class extends Shortcut {
     * @returns {Boolean} Whether the user registration data is complete. true = complete
     */
    async check(userId){
+      //Get user data and return whether the registration is complete
       const data = (await userFile.read())[userId];
-      return (typeof data !== 'undefined') && data?.registration_stage == 'Part 2 Complete';
+      return data?.registration_stage == 'Part 2 Complete';
    }
 })()
    //When the shortcut is intialized; get user and modal data
    .onReady(async () => {
-      var file = await Highway.makeRequest('Local','getFile',['./src/subsystems/Slack/modals/register.json']);
       userFile = await Highway.makeRequest('Local','getFile',['./data/users.json']);
-      registerModal = (await file.read()).initial;
    })
    //When the modal is submitted (they click the 'go to registration' button) sends them to registration system
    .onSubmit(async (pkg) => {
-      Object.assign(pkg,{
-         shortcut: pkg.body
+      const { body, ack } = pkg;
+
+      //Get user data
+      var modal;
+      const data = (await userFile.read())[body.user.id];
+
+      //Get modal data according to registration stage
+      switch (data.registration_stage){
+         case 'Not Complete':
+            modal = await RegisterAssembly.getModal('part1',{ ...pkg, userData: data });
+            break;
+         case 'Part 1 Complete':
+            modal = await RegisterAssembly.getModal('part2',{ ...pkg, userData: data });
+            break;
+            default: throw new Error(`Invalid registration stage, expected 'Part 1 Complete', 'Part 2 Complete' or 'Not Complete', recieved '${data.registration_stage}'`);
+      }
+
+      //Upload modal
+      await ack({
+         response_action: 'update',
+         view: modal
       });
-      await RegisterActivate(pkg);
    });
+
+/**Handles all modal creation and assembly */
+export const Assembly = new ModalAssembly()
+   //Modal creation for the initial modal 
+   .addModal('initial',() => JSON.parse(JSON.stringify(RegisterAlert.modal.initial)));
 
 export default RegisterAlert;
 

@@ -19,3 +19,46 @@ Things to do when setting up:
    - Port forward host computer ip address for the express app
    - Change the configured webhook url for message recieving to point to the ip address of host computer
 
+
+
+  "attachments": [
+      {
+         Text shown on notification on phone
+          "fallback": "Plain-text summary of the attachment."
+
+         Color (can be for mrkdwn block quote color)
+          "color": "#2eb886",
+         
+          "pretext": "Optional text that appears above the attachment block",
+
+          Author of attachment?
+          "author_name": "Bobby Tables",
+          "author_link": "http://flickr.com/bobby/",
+          "author_icon": "http://flickr.com/icons/bobby.jpg",
+
+          Title of attachment
+          "title": "Slack API Documentation",
+          "title_link": "https://api.slack.com/",
+
+          "text": "Optional text that appears within the attachment",
+
+          Fields that appear under the title
+          "fields": [
+              {
+                  "title": "Priority",
+                  "value": "High",
+                  "short": false
+              }
+          ],
+
+          Large image show at end of attachment, size of image does matter
+          "image_url": "http://my-website.com/path/to/image.jpg",
+
+          No idea
+          "thumb_url": "http://example.com/path/to/thumb.png",
+
+          Footer of the attachment
+          "footer": "Slack API",
+          "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
+      }
+  ]

@@ -6,7 +6,7 @@
          "text": "Registration - Part 1"
       },
       "callback_id": "register",
-      "private_metadata": "{\"part\": 1}",
+      "private_metadata": "{\"part\": 1,\"stageOverride\":false}",
       "blocks": [
          {
             "type": "divider"
@@ -249,7 +249,118 @@
                      "value": "reminders-active"
                   }
                ],
-               "action_id": "reminder_action"
+               "action_id": "action"
+            }
+         }
+      ]
+   },
+   "part3": {
+      "title": {
+         "type": "plain_text",
+         "text": "Registration"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Change Info"
+      },
+      "close": {
+         "type": "plain_text",
+         "text": "Cancel"
+      },
+      "type": "modal",
+      "callback_id": "register",
+      "private_metadata": "{\"part\": 3,\"warningAdded\":false,\"infoChosen\":null,\"userData\":null}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "You have already completed the registration process. Here's the info you have registered so far. If you would like to go back and change your information, please click the *Change Info* button."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*What do you want to modify?*"
+            },
+            "block_id": "info_select",
+            "accessory": {
+               "type": "static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select an item"
+               },
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Part 1 Info"
+                     },
+                     "value": "p1"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Part 2 Info"
+                     },
+                     "value": "p2"
+                  }
+               ],
+               "action_id": "info_select_action"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "header",
+            "text": {
+               "type": "plain_text",
+               "text": "My Info"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "\n>         *Name:*   $1\n>         *Phone Number:*   $2\n>         *School Email:*   $3$4"
+            }
+         },
+         {
+            "type": "header",
+            "text": {
+               "type": "plain_text",
+               "text": "Guardian Info"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "\n>         *Name:*  $5\n>         *Phone Number:*   $6\n>         *Email:*   $7"
+            }
+         },
+         {
+            "type": "header",
+            "text": {
+               "type": "plain_text",
+               "text": "Other Info"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "\n>         *Interested in Outreach:*   $8\n>         *Team Interest:* $9"
             }
          }
       ]
