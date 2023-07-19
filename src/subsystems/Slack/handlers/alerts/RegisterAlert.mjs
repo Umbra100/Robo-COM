@@ -1,7 +1,7 @@
-import Shortcut from "../Shortcut.mjs";
-import ModalAssembly from "../ModalAssembly.mjs";
-import Highway from "../../../Highway.mjs";
-import { Assembly as RegisterAssembly } from "./RegisterShortcut.mjs";
+import Shortcut from "../../Shortcut.mjs";
+import ModalAssembly from "../../ModalAssembly.mjs";
+import Highway from "../../../../Highway.mjs";
+import { Assembly as RegisterAssembly } from "../shortcuts/RegisterShortcut.mjs";
 import env from 'dotenv';
 
 env.config({ path: './security/.env' });

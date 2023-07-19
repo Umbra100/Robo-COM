@@ -169,7 +169,7 @@
                      "text": "Add Personal Email"
                   },
                   "value": "add_personal_email",
-                  "action_id": "personal_email_button"
+                  "action_id": "register_personal_email_button"
                }
             ]
          },
@@ -315,7 +315,7 @@
                      "value": "p2"
                   }
                ],
-               "action_id": "info_select_action"
+               "action_id": "register_info_select_action"
             }
          },
          {

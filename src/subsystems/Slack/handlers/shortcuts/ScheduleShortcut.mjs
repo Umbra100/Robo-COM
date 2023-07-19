@@ -1,10 +1,10 @@
-import Shortcut from "../Shortcut.mjs";
-import ModalAssembly from "../ModalAssembly.mjs";
-import ConfigFile from "../../../ConfigFile.mjs";
-import Highway from "../../../Highway.mjs";
-import RegisterAlert from "./RegisterAlert.mjs";
+import Shortcut from "../../Shortcut.mjs";
+import ModalAssembly from "../../ModalAssembly.mjs";
+import ConfigFile from "../../../../ConfigFile.mjs";
+import Highway from "../../../../Highway.mjs";
+import RegisterAlert from "../alerts/RegisterAlert.mjs";
 import env from 'dotenv';
-import { clockFormatter, removeOrdinalIndicator, mergeArrays, terminalFormatter } from "../../../helper.mjs";
+import { clockFormatter, removeOrdinalIndicator, mergeArrays, terminalFormatter } from "../../../../helper.mjs";
 
 env.config({ path: './security/.env' });
 
@@ -166,7 +166,7 @@ const ScheduleShortcut = new Shortcut('schedule')
       }
    })
    //When someone interacts with the time basis choose dropdown; routes to correct time basis
-   .onAction('period_choose', async ({ ack, client, body }) => {
+   .onAction('schedule_period_choose', async ({ ack, client, body }) => {
       await ack();
       var modal;
       //Gets modal based on what basis the user chooses
@@ -192,7 +192,7 @@ const ScheduleShortcut = new Shortcut('schedule')
       });
    })
    //Handles the interaction for when the user selects an option from the time basis dropdown on the initial modal
-   .onAction('initial_period_choose', async ({ ack, body, client }) => {
+   .onAction('schedule_initial_period_choose', async ({ ack, body, client }) => {
       await ack();
       //Gets and ploads the modal
       await client.views.update({
@@ -202,15 +202,15 @@ const ScheduleShortcut = new Shortcut('schedule')
       });
    })
    //Handles when someone presses the button to go their selected time basis
-   .onAction('initial_go_to_scheduling', async ({ ack, body, client }) => {
+   .onAction('schedule_initial_go_to_scheduling', async ({ ack, body, client }) => {
       await ack();
       //Gets the block id of the dropdown
       var dropdownBlockId = Object.keys(body.view.state.values)[0], modal;
       //If the user has not filled out the static select menu, get the modal data that contains an error for such
-      if (body.view.state.values[dropdownBlockId].initial_period_choose.selected_option == null) {
+      if (body.view.state.values[dropdownBlockId].schedule_initial_period_choose.selected_option == null) {
          modal = await Assembly.getModal('initial_required_field_error');
       //If the user has filled out the static select menu, get the modal data for the designated basis
-      } else switch (body.view.state.values[dropdownBlockId].initial_period_choose.selected_option.value) {
+      } else switch (body.view.state.values[dropdownBlockId].schedule_initial_period_choose.selected_option.value) {
          case 'day':
             modal = await Assembly.getModal('day');
             break;
@@ -233,7 +233,7 @@ const ScheduleShortcut = new Shortcut('schedule')
       });
    })
    //Handles when user presses the button to go to schedule configuration
-   .onAction('initial_go_to_schedule_config', async (pkg) => updateToConfig(pkg))
+   .onAction('schedule_initial_go_to_schedule_config', async (pkg) => updateToConfig(pkg))
    //Handles when a person click to change/config a schedule entry
    .onAction('date_config_action', async ({ ack, body, client }) => {
       await ack();
@@ -256,9 +256,9 @@ const ScheduleShortcut = new Shortcut('schedule')
       });
    })
    //Handles the back button on config menus; routes to config menu
-   .onAction('config_back', async (pkg) => updateToConfig(pkg))
+   .onAction('schedule_config_back', async (pkg) => updateToConfig(pkg))
    //Handles when the user clicks to delete a day schedule entry
-   .onAction('config_delete_day',async ({ ack, body, client }) => {
+   .onAction('schedule_config_delete_day',async ({ ack, body, client }) => {
       await ack();
 
       //Gets metadata and if the day is already deleted, return
@@ -293,7 +293,7 @@ const ScheduleShortcut = new Shortcut('schedule')
       });
    })
    //Handles when the user click to delete a period schedule entry
-   .onAction('config_delete_period',async ({ ack, body, client }) => {
+   .onAction('schedule_config_delete_period',async ({ ack, body, client }) => {
       await ack();
 
       //Gets metadata and if the period is already deleted, return
@@ -337,13 +337,13 @@ const ScheduleShortcut = new Shortcut('schedule')
       });
    })
    //Handles checking the time length of custom time basis to see if they need to provide a reason for their absence
-   .onAction('from_date_action', async (pkg) => customActionDateEvent(pkg))
-   .onAction('to_date_action', async (pkg) => customActionDateEvent(pkg))
-   .onAction('checkbox_action', async (pkg) => customActionDateEvent(pkg))
+   .onAction('schedule_from_date_action', async (pkg) => customActionDateEvent(pkg))
+   .onAction('schedule_to_date_action', async (pkg) => customActionDateEvent(pkg))
+   .onAction('schedule_checkbox_action', async (pkg) => customActionDateEvent(pkg))
    //Handles checking the time length to see if they need to provied a reason for their absence (when configuring a current entry)
-   .onAction('config_from_date_action', async (pkg) => configActionDateEvent(pkg))
-   .onAction('config_to_date_action', async (pkg) => configActionDateEvent(pkg))
-   .onAction('config_checkbox_action', async (pkg) => configActionDateEvent(pkg))
+   .onAction('schedule_config_from_date_action', async (pkg) => configActionDateEvent(pkg))
+   .onAction('schedule_config_to_date_action', async (pkg) => configActionDateEvent(pkg))
+   .onAction('schedule_config_checkbox_action', async (pkg) => configActionDateEvent(pkg))
    //Acknowledges any actions that don't have an event tied to them
    .onAction('action', async ({ ack }) => ack());
 
@@ -922,19 +922,19 @@ const evaluateInput = {
       };
    
       //Gets the start and end dates of the period/day and calculates how long it is
-      var pStart = new Date(body.view.state.values.from_date.from_date_action.selected_date);
-      var pEnd = new Date(body.view.state.values.to_date.to_date_action.selected_date);
+      var pStart = new Date(body.view.state.values.from_date.schedule_from_date_action.selected_date);
+      var pEnd = new Date(body.view.state.values.to_date.schedule_to_date_action.selected_date);
       var dist = (Date.parse(pEnd) - Date.parse(pStart)) / 1000 / 60 / 60 / 24;
    
       //If the end date is before the start date, swap them so it makes sense
       if (dist < 0) {
-         pStart = new Date(body.view.state.values.to_date.to_date_action.selected_date);
-         pEnd = new Date(body.view.state.values.from_date.from_date_action.selected_date);
+         pStart = new Date(body.view.state.values.to_date.schedule_to_date_action.selected_date);
+         pEnd = new Date(body.view.state.values.from_date.schedule_from_date_action.selected_date);
          dist = Math.abs(dist);
       }
    
       //Gets the checkboxes input
-      let jsonStr = JSON.stringify(body.view.state.values.checkboxes.checkbox_action.selected_options);
+      let jsonStr = JSON.stringify(body.view.state.values.checkboxes.schedule_checkbox_action.selected_options);
       let checkboxes = [true, false];
       if (jsonStr.indexOf('"value":"attending"') == -1) checkboxes[0] = false;
       if (jsonStr.indexOf('"value":"recieve_notebook"') !== -1) checkboxes[1] = true;
@@ -993,23 +993,23 @@ const customActionDateEvent = async ({ ack, client, body }) => {
    await ack();
    //Gets current input data and calculates period duration
    var metadata = JSON.parse(body.view.private_metadata);
-   var startDate = new Date(body.view.state.values.from_date.from_date_action.selected_date);
-   var endDate = new Date(body.view.state.values.to_date.to_date_action.selected_date);
+   var startDate = new Date(body.view.state.values.from_date.schedule_from_date_action.selected_date);
+   var endDate = new Date(body.view.state.values.to_date.schedule_to_date_action.selected_date);
    var dist = (Date.parse(endDate) - Date.parse(startDate)) / 1000 / 60 / 60 / 24;
    var attendanceUnchecked = JSON.stringify(body.view.state.values).indexOf('"value":"attending"') == -1;
 
    //If the end date is before the start date, swap them so it makes sense
    if (dist < 0) {
-      startDate = new Date(body.view.state.values.to_date.to_date_action.selected_date);
-      endDate = new Date(body.view.state.values.from_date.from_date_action.selected_date);
+      startDate = new Date(body.view.state.values.to_date.schedule_to_date_action.selected_date);
+      endDate = new Date(body.view.state.values.from_date.schedule_from_date_action.selected_date);
       dist = Math.abs(dist);
    }
 
    //If the period duration is longer than a specified amount; add a reason field to the modal.
    if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reasonAdded) {
       //If one of the dates is not filled in, meaning the modal is incomplete; return.
-      if (body.view.state.values.to_date.to_date_action.selected_date == null) return;
-      if (body.view.state.values.from_date.from_date_action.selected_date == null) return;
+      if (body.view.state.values.to_date.schedule_to_date_action.selected_date == null) return;
+      if (body.view.state.values.from_date.schedule_from_date_action.selected_date == null) return;
       //Gets and uploads modal
       await client.views.update({
          token: process.env.SLACK_BOT_TOKEN,
@@ -1035,23 +1035,23 @@ const configActionDateEvent = async ({ ack, client, body }) => {
    var metadata = JSON.parse(body.view.private_metadata);
    if (metadata.deleted) return;
 
-   var startDate = new Date(body.view.state.values.from_date.config_from_date_action.selected_date);
-   var endDate = new Date(body.view.state.values.to_date.config_to_date_action.selected_date);
+   var startDate = new Date(body.view.state.values.from_date.schedule_config_from_date_action.selected_date);
+   var endDate = new Date(body.view.state.values.to_date.schedule_config_to_date_action.selected_date);
    var dist = Math.round((Date.parse(endDate) - Date.parse(startDate)) / 1000 / 60 / 60 / 24);
    var attendanceUnchecked = JSON.stringify(body.view.state.values).indexOf('"value":"attending"') == -1;
 
    //If the end date is before the start date, swap them so it makes sense
    if (dist < 0) {
-      startDate = new Date(body.view.state.values.to_date.config_to_date_action.selected_date);
-      endDate = new Date(body.view.state.values.from_date.config_from_date_action.selected_date);
+      startDate = new Date(body.view.state.values.to_date.schedule_config_to_date_action.selected_date);
+      endDate = new Date(body.view.state.values.from_date.schedule_config_from_date_action.selected_date);
       dist = Math.abs(dist);
    }
 
    //If the period duration is longer than a specified amount; add a reason field to the modal.
    if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reasonAdded) {
       //If one of the dates is not filled in, meaning the modal is incomplete; return.
-      if (body.view.state.values.to_date.config_to_date_action.selected_date == null) return;
-      if (body.view.state.values.from_date.config_from_date_action.selected_date == null) return;
+      if (body.view.state.values.to_date.schedule_config_to_date_action.selected_date == null) return;
+      if (body.view.state.values.from_date.schedule_config_from_date_action.selected_date == null) return;
       //Gets and uploads modal
       await client.views.update({
          token: process.env.SLACK_BOT_TOKEN,
@@ -1217,8 +1217,8 @@ const configPeriodSubmitEvent = async ({ack, client, body }) => {
    ];
 
    //Formats input date
-   var iStart = body.view.state.values.from_date.config_from_date_action.selected_date;
-   var iEnd = body.view.state.values.to_date.config_to_date_action.selected_date;
+   var iStart = body.view.state.values.from_date.schedule_config_from_date_action.selected_date;
+   var iEnd = body.view.state.values.to_date.schedule_config_to_date_action.selected_date;
    var iDatesFormatted = [iStart.split('-').map(i => parseInt(i)),iEnd.split('-').map(i => parseInt(i))];
    iDatesFormatted[0] = `${iDatesFormatted[0][0]}-${iDatesFormatted[0][1]}-${iDatesFormatted[0][2]}`;
    iDatesFormatted[1] = `${iDatesFormatted[1][0]}-${iDatesFormatted[1][1]}-${iDatesFormatted[1][2]}`;
@@ -1286,7 +1286,7 @@ const configPeriodSubmitEvent = async ({ack, client, body }) => {
    }
 
    //Gets the checkbox input data
-   var values = JSON.stringify(body.view.state.values.checkboxes.config_checkbox_action.selected_options);
+   var values = JSON.stringify(body.view.state.values.checkboxes.schedule_config_checkbox_action.selected_options);
    //If the user set the checkboxes to their default value and a warning hasn't alread been sent
    if (values.indexOf('"value":"attending"') !== -1 && values.indexOf('"value":"recieve_notebook"') == -1 && !metadata.checkboxWarningSent){
       //Sends an error saying that there input will not have an effect

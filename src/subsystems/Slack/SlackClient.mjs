@@ -6,10 +6,12 @@ import ConfigFile from '../../ConfigFile.mjs';
 import env from 'dotenv';
 import { terminalFormatter } from '../../helper.mjs';
 
-import RegisterShortcut from './handlers/RegisterShortcut.mjs';
-import RegisterAlert from './handlers/RegisterAlert.mjs';
-import ScheduleShortcut from './handlers/ScheduleShortcut.mjs';
-import AdminShortcut from './handlers/AdminShortcut.mjs';
+import RegisterShortcut from './handlers/shortcuts/RegisterShortcut.mjs';
+import ScheduleShortcut from './handlers/shortcuts/ScheduleShortcut.mjs';
+import AdminShortcut from './handlers/shortcuts/AdminShortcut.mjs';
+
+import RegisterAlert from './handlers/alerts/RegisterAlert.mjs';
+import AdminAlert from './handlers/alerts/AdminAlert.mjs';
 
 env.config({path: './security'});
 
@@ -59,9 +61,12 @@ class SlackClient extends Bolt {
 
             //Shortcut activations
             await RegisterShortcut.activate(cls,modals);
-            await RegisterAlert.activate(cls,modals);
             await ScheduleShortcut.activate(cls,modals);
             await AdminShortcut.activate(cls,modals);
+
+            //Alert activations
+            await RegisterAlert.activate(cls,modals);
+            await AdminAlert.activate(cls,modals);
 
             //Miscellenious
             cls.event('team_join', async (pkg) => teamJoinEvent(pkg));
@@ -193,12 +198,12 @@ const userWelcomeButtonEvent = async ({ ack, client, body }) => {
 }
 
 /**Creates a new user entry */
-const createNewUser = async (id) => {
+export const createNewUser = async (id) => {
    //Gets the user and schedule data files
    const userFile = await Highway.makeRequest('Local','getFile',['./data/users.json']);
    const scheduleFile = await Highway.makeRequest('Local','getFile',['./data/scheduling.json']);
    //Write a new entry for the user data file
-   await userFile.writePath(id,{
+   const ret = await userFile.writePath(id,{
       name: null,
       slack_username: null,
       slack_name: null,
@@ -231,6 +236,7 @@ const createNewUser = async (id) => {
       },
       passed: []
    });
+   return ret;
 }
 
 export default SlackClient

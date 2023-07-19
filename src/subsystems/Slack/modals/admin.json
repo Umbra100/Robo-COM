@@ -46,10 +46,10 @@
                   "type": "button",
                   "text": {
                      "type": "plain_text",
-                     "text": "View Registered Users"
+                     "text": "View User Catalog"
                   },
-                  "value": "view_registered_users",
-                  "action_id": "admin_view_registered_users"
+                  "value": "view_user_catalog",
+                  "action_id": "admin_view_user_catalog"
                }
             ]
          },
@@ -98,7 +98,7 @@
             "type": "section",
             "text": {
                "type": "mrkdwn",
-               "text": "This is where you can change the season start and end dates. This is used to calibrate the scheduling of the application. Please make sure you use the dates for when *_robotics itself_* starts and ends."
+               "text": "This is where you can change the season start and end dates. This is used to calibrate the scheduling of the application. Please make sure you use the dates for when *_robotics itself_* starts and ends. This is usually set near to the start and end of the school year."
             }
          },
          {
@@ -132,6 +132,64 @@
                "type": "plain_text",
                "text": "Label"
             }
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Back"
+                  },
+                  "value": "back",
+                  "action_id": "admin_initial_back_to"
+               }
+            ]
+         }
+      ]
+   },
+   "user_catalog": {
+      "title": {
+         "type": "plain_text",
+         "text": "User Catalog"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "View"
+      },
+      "type": "modal",
+      "callback_id": "admin",
+      "private_metadata": "{\"submitType\":\"user_catalog\",\"errorAdded\":false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "This is where you can view who all the users in the slack server; both registered and unregistered. You can also view any information any they have given through the registration process by clicking the *View* button after you have chosen the user in the dropdown"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*Which user would you like to view?*"
+            },
+            "block_id": "user_choose",
+            "accessory": {
+               "type": "users_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a user"
+               },
+               "action_id": "admin_view_user_choose"
+            }
+         },
+         {
+            "type": "divider"
          }
       ]
    }

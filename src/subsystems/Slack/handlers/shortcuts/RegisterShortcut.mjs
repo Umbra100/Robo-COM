@@ -1,10 +1,11 @@
-import Shortcut from "../Shortcut.mjs";
-import ModalAssembly from "../ModalAssembly.mjs";
-import Highway from "../../../Highway.mjs";
-import ConfigFile from "../../../ConfigFile.mjs";
+import Shortcut from "../../Shortcut.mjs";
+import ModalAssembly from "../../ModalAssembly.mjs";
+import Highway from "../../../../Highway.mjs";
+import ConfigFile from "../../../../ConfigFile.mjs";
+import { createNewUser } from "../../SlackClient.mjs";
 import EmailValidator from 'email-validator';
 import env from 'dotenv';
-import { terminalFormatter } from "../../../helper.mjs";
+import { terminalFormatter } from "../../../../helper.mjs";
 
 env.config({path: './security/.env'});
 var userFile;
@@ -22,7 +23,7 @@ const RegisterShortcut = new Shortcut('register')
       
       //Defines modal variable and gets user data for modals to use
       var modal;
-      const data = (await userFile.read())[shortcut.user.id];
+      var data = (await userFile.read())[shortcut.user.id] || {};
 
       //Gets modal data accoridng to registration stage
       switch (data.registration_stage){
@@ -35,7 +36,11 @@ const RegisterShortcut = new Shortcut('register')
          case 'Part 2 Complete':
             modal = await Assembly.getModal('part3',{ ...pkg, userData: data });
             break;
-         default: throw new Error(`Invalid registration stage, expected 'Part 1 Complete', 'Part 2 Complete' or 'Not Complete', recieved '${data.registration_stage}'`);
+         default:
+            console.log(terminalFormatter.bulletPoint,'Uncached user found; creating new user entry...');
+            data = await createNewUser(shortcut.user.id);
+            modal = await Assembly.getModal('part1',{ ...pkg, userData: data });
+            break;
       }
 
       //Uploads modal
@@ -60,7 +65,7 @@ const RegisterShortcut = new Shortcut('register')
       }
    })
    //Handles when the user clicks on the 'Add Personal Contact" button in part two 
-   .onAction('personal_email_button',async ({ ack, body, client }) => {
+   .onAction('register_personal_email_button',async ({ ack, body, client }) => {
       await ack();
       //Gets the modal data and if the personal emal hasn't been added:
       var metadata = JSON.parse(body.view.private_metadata);
@@ -74,7 +79,7 @@ const RegisterShortcut = new Shortcut('register')
       }
    })
    //Handles when the user clicks on the 'Add Personal Contact" button in the config mode of part two
-   .onAction('personal_email_button_config',async({ ack, body, client }) => {
+   .onAction('register_personal_email_button_config',async({ ack, body, client }) => {
       await ack();
       //Gets the modal data and if the personal emal hasn't been added:
       var metadata = JSON.parse(body.view.private_metadata);
@@ -88,7 +93,7 @@ const RegisterShortcut = new Shortcut('register')
       }
    })
    //Handles when the user chooses what registration info they want to change
-   .onAction('info_select_action', async ({ ack, body, client }) => {
+   .onAction('register_info_select_action', async ({ ack, body, client }) => {
       await ack();
       //Gets and uploads modal data
       await client.views.update({
@@ -98,7 +103,7 @@ const RegisterShortcut = new Shortcut('register')
       });
    })
    //Acknowledges any miscellenous actions that don't have an event 
-   .onAction('action',async ({ ack }) => {await ack();});
+   .onAction('action',async ({ ack }) => {await ack()});
 
 /**Handles all modal creation and assembly */
 export const Assembly = new ModalAssembly()
@@ -200,7 +205,7 @@ export const Assembly = new ModalAssembly()
       var modal, metadata;
       if (userData.personal_contact.personal_email == null){
          modal = await Assembly.getModal('part2');
-         modal.blocks[5].elements[0].action_id = 'personal_email_button_config';
+         modal.blocks[5].elements[0].action_id = 'register_personal_email_button_config';
          metadata = JSON.parse(modal.private_metadata);
       } else {
          modal = await Assembly.getModal('part2_personal_email', { body });
@@ -307,7 +312,7 @@ export const Assembly = new ModalAssembly()
       var modal = await Assembly.getModal('part3', { userData: metadata.userData });
 
       //If the user chose to change part 1 data, mark those list items
-      if (body.view.state.values.info_select.info_select_action.selected_option.value == 'p1'){
+      if (body.view.state.values.info_select.register_info_select_action.selected_option.value == 'p1'){
          modal.blocks[5].text.text = modal.blocks[5].text.text.replace('         *Name:*','💠  *Name:*');
          modal.blocks[9].text.text = modal.blocks[9].text.text.replace('         *Interested in Outreach:*','💠  *Interested in Outreach:*');
          modal.blocks[9].text.text = modal.blocks[9].text.text.replace('         *Team Interest:*','💠  *Team Interest:*');
@@ -413,7 +418,7 @@ const P3submitEvent = async ({ ack, body, client }) => {
    //Gets metadata
    var metadata = JSON.parse(body.view.private_metadata);
    //If a user hasn't selected info to modify, send an error
-   if (body.view.state.values.info_select.info_select_action.selected_option == null){
+   if (body.view.state.values.info_select.register_info_select_action.selected_option == null){
       await ack({
          response_action: 'update',
          view: await Assembly.getModal('part3_required_field_error', { body })
@@ -421,7 +426,7 @@ const P3submitEvent = async ({ ack, body, client }) => {
       return;
    }
    //If the user has chosen to modify registration data from part one; send part one modal in config mode
-   if (body.view.state.values.info_select.info_select_action.selected_option.value == 'p1'){
+   if (body.view.state.values.info_select.register_info_select_action.selected_option.value == 'p1'){
       await ack({
          response_action: 'update',
          view: await Assembly.getModal('part1_config',{ userData: metadata.userData })

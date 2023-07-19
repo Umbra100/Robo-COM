@@ -1,0 +1,31 @@
+{
+   "initial": {
+      "title": {
+         "type": "plain_text",
+         "text": "Alert - Access Denied"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "OK"
+      },
+      "type": "modal",
+      "callback_id": "admin-alert",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "You are not allowed to use the admin panel without granted permissions. If you think this is a problem or a bug and you were given the go ahead, please contact one of the admins that have access to the app system."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         }
+      ]
+   }
+}

@@ -76,7 +76,7 @@
                         "value": "custom"
                      }
                   ],
-                  "action_id": "initial_period_choose"
+                  "action_id": "schedule_initial_period_choose"
                },
                {
                   "type": "button",
@@ -85,7 +85,7 @@
                      "text": "Go to Scheduling"
                   },
                   "value": "go_to_scheduling",
-                  "action_id": "initial_go_to_scheduling"
+                  "action_id": "schedule_initial_go_to_scheduling"
                }
             ]
          },
@@ -105,7 +105,7 @@
                   "text": "Go Here"
                },
                "value": "schedule_configuration",
-               "action_id": "initial_go_to_schedule_config"
+               "action_id": "schedule_initial_go_to_schedule_config"
             }
          }
       ]
@@ -171,7 +171,7 @@
                   },
                   "value": "day"
                },
-               "action_id": "period_choose"
+               "action_id": "schedule_period_choose"
             }
          },
          {
@@ -309,7 +309,7 @@
                   },
                   "value": "week"
                },
-               "action_id": "period_choose"
+               "action_id": "schedule_period_choose"
             }
          },
          {
@@ -553,7 +553,7 @@
                   },
                   "value": "month"
                },
-               "action_id": "period_choose"
+               "action_id": "schedule_period_choose"
             }
          },
          {
@@ -710,7 +710,7 @@
                   },
                   "value": "custom"
                },
-               "action_id": "period_choose"
+               "action_id": "schedule_period_choose"
             }
          },
          {
@@ -740,7 +740,7 @@
                   "type": "plain_text",
                   "text": "Select a date"
                },
-               "action_id": "from_date_action"
+               "action_id": "schedule_from_date_action"
             },
             "label": {
                "type": "plain_text",
@@ -757,7 +757,7 @@
                   "type": "plain_text",
                   "text": "Select a date"
                },
-               "action_id": "to_date_action"
+               "action_id": "schedule_to_date_action"
             },
             "label": {
                "type": "plain_text",
@@ -795,7 +795,7 @@
                      "value": "attending"
                   }
                ],
-               "action_id": "checkbox_action"
+               "action_id": "schedule_checkbox_action"
             },
             "label": {
                "type": "plain_text",
@@ -939,7 +939,7 @@
                      "text": "Back"
                   },
                   "value": "back",
-                  "action_id": "config_back"
+                  "action_id": "schedule_config_back"
                },
                {
                   "type": "button",
@@ -948,7 +948,7 @@
                      "text": "Delete"
                   },
                   "value": "{}",
-                  "action_id": "config_delete_day",
+                  "action_id": "schedule_config_delete_day",
                   "style": "danger",
                   "confirm": {
                      "title": {
@@ -1013,7 +1013,7 @@
                   "type": "plain_text",
                   "text": "Select a date"
                },
-               "action_id": "config_from_date_action"
+               "action_id": "schedule_config_from_date_action"
             },
             "label": {
                "type": "plain_text",
@@ -1030,7 +1030,7 @@
                   "type": "plain_text",
                   "text": "Select a date"
                },
-               "action_id": "config_to_date_action"
+               "action_id": "schedule_config_to_date_action"
             },
             "label": {
                "type": "plain_text",
@@ -1059,7 +1059,7 @@
                      "value": "recieve_notebook"
                   }
                ],
-               "action_id": "config_checkbox_action"
+               "action_id": "schedule_config_checkbox_action"
             },
             "label": {
                "type": "plain_text",
@@ -1087,7 +1087,7 @@
                      "text": "Back"
                   },
                   "value": "back",
-                  "action_id": "config_back"
+                  "action_id": "schedule_config_back"
                },
                {
                   "type": "button",
@@ -1096,7 +1096,7 @@
                      "text": "Delete"
                   },
                   "value": "{}",
-                  "action_id": "config_delete_period",
+                  "action_id": "schedule_config_delete_period",
                   "style": "danger",
                   "confirm": {
                      "title": {
