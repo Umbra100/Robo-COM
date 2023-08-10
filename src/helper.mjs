@@ -133,3 +133,29 @@ export const mergeArrays = (arr1,arr2) => {
    for (const j of arr2) if (retArr.indexOf(j) == -1) retArr.push(j);
    return retArr;
 }
+
+/**
+ * Capitalizes the first letter of all words in a string that are seperated by spaces
+ * @param {String} str String to capitalize
+ * @returns {String} A strin with the provided words capitalized
+ */
+export const capitalizeWords = (str) => {
+   var returnStr = '';
+   for (const i of str.split(' ')) returnStr += `${i[0].toUpperCase() + i.slice(1,i.length)} `;
+   if (returnStr[returnStr.length - 1] == ' ') returnStr = returnStr.slice(0,returnStr.length - 1);
+   return returnStr;
+}
+
+/**
+ * Sorts an array of strings alphabetically (ignores capitals)
+ * @param {String[]} arr Array of strings to order
+ * @returns {String[]} Array of sorted strings
+ */
+export const alphabeticalSort = (arr) => {
+   const compare = (a, b) => {
+      if (a.toLowerCase() < b.toLowerCase()) return -1;
+      if (b.toLowerCase() < a.toLowerCase()) return 1;
+      return 0;
+   };
+   return arr.sort(compare);
+}

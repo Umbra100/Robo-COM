@@ -1,5 +1,3 @@
-import fs from 'node:fs/promises';
-import fs2 from 'node:fs'
 import { JSONFile } from './subsystems/Local/file-classes.mjs';
 import { terminalFormatter } from './helper.mjs';
 
@@ -7,33 +5,49 @@ import { terminalFormatter } from './helper.mjs';
 var ConfigFile = new (class {})(), watcher, waiters = [];
 
 /**JSON File wrapper of the config file */
-export const ConfigJSON = new JSONFile('./config.json');
-
-/**Gets the data from the json config file and saves it statically to the ConfigFile class @async*/
-export const activate = async () => {
-   //Gets and save the config data
-   const data = JSON.parse(await fs.readFile('./config.json',{ encoding: 'utf8' }));
-   for (const i in data){
-      ConfigFile[i] = data[i];
+export const ConfigJSON = new (class extends JSONFile {
+   #fileClass
+   constructor(filepath){
+      super(filepath);
+      this.#fileClass = new JSONFile(filepath);
    }
+   /**
+       * Overwrite a specific path in the JSON json file.
+       * @async
+       * @param {String} path JS syntax path in a string to target JSON object node of JSON file to write
+       * @param {Object} data Value to set location of JSON path to
+       * @param {Object} [options] Writing options for node
+       *    @param {String} options.action Action specify how to the data is stored ('set' | 'append' | 'prepend' | 'delete')
+       *    @param {Boolean} [options.parse] Whether or not to parse JSON data into Javascript object data type
+       * @returns {any} Overwritten data at node
+       */
+   async writePath(path,data,options = {action: 'set', parse: true}){
+      await this.#fileClass.writePath(path,data,options);
+      var upd = await updateConfig();
+      console.log(terminalFormatter.bulletPoint,'Config File Updated');
+      return upd;
+   }
+   /**
+    * Overwrites JSON file to a provided object.
+    * @async
+    * @param {Object} data Data to completely overwrite JSON file. File JSON object will be set to the data; no appendation is done.
+    * @param {Boolean} [parse] Whether or not to parse the JSON data it writes/returns
+    * @returns {Object} Overwritten data
+    */
+   async write(data,parse = true){
+      await this.#fileClass.write(data,parse);
+      var upd = await updateConfig();
+      console.log(terminalFormatter.bulletPoint,'Config File Updated');
+      return upd;
+   }
+})('./config.json');
 
-   //Creates a watcher event that's called when the config json file changes
-   watcher = fs2.watchFile('./config.json',async () => {
-      const data = JSON.parse(await fs.readFile('./config.json',{ encoding: 'utf8' }));
-      for (const i in data){
-         ConfigFile[i] = data[i];
-      }
-      for (const func of waiters) func();
-      waiters = [];
-      console.log(terminalFormatter.bulletPoint, 'Config File Updated');
-   });
+export const updateConfig = async () => {
+   const read = await ConfigJSON.read();
+   for (const i in read){
+      ConfigFile[i] = read[i];
+   }
+   return read;
 }
-
-/**Waits for the config file to update @async */
-export const waitForChange = async () => new Promise((resolve,reject) => {
-   waiters.push(() => {
-      resolve();
-   })
-});
 
 export default ConfigFile;

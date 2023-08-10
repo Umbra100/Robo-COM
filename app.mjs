@@ -1,5 +1,5 @@
-import { activate as ActivateConfig, waitForChange } from "./src/ConfigFile.mjs";
-await ActivateConfig();
+import { updateConfig } from "./src/ConfigFile.mjs";
+await updateConfig();
 
 import LocalClientClass from "./src/subsystems/Local/LocalClient.mjs";
 import SlackClientClass from './src/subsystems/Slack/SlackClient.mjs';

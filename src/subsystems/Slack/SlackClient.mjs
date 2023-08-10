@@ -107,14 +107,14 @@ const logger = new (class {
    info (log){
       if (log.indexOf('Now connected to Slack') !== -1) logger.#callbackEvent();
       else if (log.indexOf('Going to establish a new connection to Slack') == -1) {
-         console.log(terminalFormatter.bulletPoint,'SlackBolt sent info message: ',log);
+         console.log(terminalFormatter.bulletPoint,'SlackClient: ',log);
       }
    }
    error (log){
-      console.log(terminalFormatter.errorPoint, 'SlackBolt sent error message: ',log);
+      console.log(terminalFormatter.errorPoint, 'SlackBolt encountered an error: ',log);
    }
    warn (log){
-      console.log(terminalFormatter.errorPoint, 'SlackBolt sent warning message: ',log);
+      console.log(terminalFormatter.errorPoint, 'SlackBolt sent a warning message: ',log);
    }
    getLevel (){}
    setLevel (){}
