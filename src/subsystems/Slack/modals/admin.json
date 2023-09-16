@@ -10,7 +10,7 @@
       },
       "type": "modal",
       "callback_id": "admin",
-      "private_metadata": "{\"submitType\":\"initial\"}",
+      "private_metadata": "{\"submit_type\":\"initial\"}",
       "blocks": [
          {
             "type": "divider"
@@ -89,7 +89,7 @@
       },
       "type": "modal",
       "callback_id": "admin",
-      "private_metadata": "{\"submitType\":\"season_dates\"}",
+      "private_metadata": "{\"submit_type\":\"season_dates\"}",
       "blocks": [
          {
             "type": "divider"
@@ -130,7 +130,7 @@
             },
             "label": {
                "type": "plain_text",
-               "text": "Label"
+               "text": "End"
             }
          },
          {
@@ -160,7 +160,7 @@
       },
       "type": "modal",
       "callback_id": "admin",
-      "private_metadata": "{\"submitType\":\"user_catalog\",\"errorAdded\":false}",
+      "private_metadata": "{\"submit_type\":\"user_catalog\",\"error_added\":false}",
       "blocks": [
          {
             "type": "divider"
@@ -204,7 +204,7 @@
       },
       "type": "modal",
       "callback_id": "admin",
-      "private_metadata": "{\"submitType\":\"team_options\",\"options\":{}}",
+      "private_metadata": "{\"submit_type\":\"team_options\",\"options\":{}}",
       "blocks": [
          {
             "type": "divider"
@@ -248,7 +248,7 @@
       },
       "type": "modal",
       "callback_id": "admin",
-      "private_metadata": "{\"submitType\":\"team_options_edit\",\"options\":{},\"team_prefix\":\"\",\"team\":\"\",\"subteamEditingAdded\":false,\"newSubteamEditingAdded\":false}",
+      "private_metadata": "{\"submit_type\":\"team_options_edit\",\"options\":{},\"team_prefix\":\"\",\"team\":\"\",\"subteam_editing_added\":false,\"new_subteam_editing_added\":false}",
       "blocks": [
          {
             "type": "divider"

@@ -6,7 +6,7 @@
          "text": "Registration - Part 1"
       },
       "callback_id": "register",
-      "private_metadata": "{\"part\": 1,\"stageOverride\":false}",
+      "private_metadata": "{\"part\": 1,\"stage_override\":false}",
       "blocks": [
          {
             "type": "divider"
@@ -269,7 +269,7 @@
       },
       "type": "modal",
       "callback_id": "register",
-      "private_metadata": "{\"part\": 3,\"warningAdded\":false,\"infoChosen\":null,\"userData\":null}",
+      "private_metadata": "{\"part\": 3,\"warning_added\":false,\"user_data\":null}",
       "blocks": [
          {
             "type": "divider"

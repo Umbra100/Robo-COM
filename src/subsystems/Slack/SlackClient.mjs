@@ -9,6 +9,7 @@ import { terminalFormatter } from '../../helper.mjs';
 import RegisterShortcut from './handlers/shortcuts/RegisterShortcut.mjs';
 import ScheduleShortcut from './handlers/shortcuts/ScheduleShortcut.mjs';
 import AdminShortcut from './handlers/shortcuts/AdminShortcut.mjs';
+import NotebookShortcut from './handlers/shortcuts/NotebookShortcut.mjs';
 
 import RegisterAlert from './handlers/alerts/RegisterAlert.mjs';
 import AdminAlert from './handlers/alerts/AdminAlert.mjs';
@@ -63,6 +64,7 @@ class SlackClient extends Bolt {
             await RegisterShortcut.activate(cls,modals);
             await ScheduleShortcut.activate(cls,modals);
             await AdminShortcut.activate(cls,modals);
+            await NotebookShortcut.activate(cls,modals);
 
             //Alert activations
             await RegisterAlert.activate(cls,modals);

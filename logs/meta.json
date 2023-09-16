@@ -1,1 +1,19 @@
-{"files":{"May 26th 2023.txt":{"initializedOn":"Fri May 26 2023 12:39:21 GMT-0600 (Mountain Daylight Time)","initialized":true,"terminatedOn":null,"terminated":false,"size":"58 B"},"Aug 7th 2023.txt":{"initializedOn":"Mon Aug 07 2023 17:31:54 GMT-0600 (Mountain Daylight Time)","initialized":true,"terminatedOn":null,"terminated":false,"size":"56 B"}},"currentFile":"Aug 7th 2023.txt"}
+{
+   "files": {
+      "May 26th 2023.txt": {
+         "initializedOn": "Fri May 26 2023 12:39:21 GMT-0600 (Mountain Daylight Time)",
+         "initialized": true,
+         "terminatedOn": null,
+         "terminated": false,
+         "size": "58 B"
+      },
+      "Aug 7th 2023.txt": {
+         "initializedOn": "Mon Aug 07 2023 17:31:54 GMT-0600 (Mountain Daylight Time)",
+         "initialized": true,
+         "terminatedOn": null,
+         "terminated": false,
+         "size": "56 B"
+      }
+   },
+   "currentFile": "Aug 7th 2023.txt"
+}

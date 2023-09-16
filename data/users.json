@@ -1,1 +1,85 @@
-{"U04H4NHJC95":{"name":"Carson Angell","slack_username":"carsonjesseangell","slack_name":"carsonjesseangell","personal_contact":{"phone_number":"3854259100","school_email":"cang2135@csddocs.org","personal_email":"carsonjesseangell@gmail.com"},"guardian_contact":{"name":"Cindy Angell","phone_number":"8012093633","email":"cma@westernagcredit.com"},"teams":["robot.programming","robot.build","robot.design","business.other"],"unsure_about_teams":false,"interested_in_outreach":true,"settings":{"recieve_push_notifications":true,"recieve_daily_reminders":true},"registration_stage":"Part 2 Complete"},"U05FTNUC0JH":{"name":"Carson2 Angell2","slack_username":"carsonjesseangell.lea","slack_name":"carsonjesseangell.lea","personal_contact":{"phone_number":"999-999-9999","school_email":"cang2135@csddocs.org","personal_email":"carsonjesseangell.learn@gmail.com"},"guardian_contact":{"name":"Legit Person","phone_number":"8012093633","email":"cma@westernagcredit.com"},"teams":["business.media","business.finance","business.outreach","robot.drive"],"unsure_about_teams":false,"interested_in_outreach":false,"settings":{"recieve_push_notifications":true,"recieve_daily_reminders":true},"registration_stage":"Part 2 Complete"}}
+{
+   "U05FTNUC0JH": {
+      "name": "Carson2 Angell2",
+      "slack_username": "carsonjesseangell.lea",
+      "slack_name": "carsonjesseangell.lea",
+      "personal_contact": {
+         "phone_number": "999-999-9999",
+         "school_email": "cang2135@csddocs.org",
+         "personal_email": "carsonjesseangell.learn@gmail.com"
+      },
+      "guardian_contact": {
+         "name": "Legit Person",
+         "phone_number": "8012093633",
+         "email": "cma@westernagcredit.com"
+      },
+      "teams": [
+         "business.media",
+         "business.finance",
+         "business.outreach",
+         "robot.drive"
+      ],
+      "unsure_about_teams": false,
+      "interested_in_outreach": false,
+      "settings": {
+         "recieve_push_notifications": true,
+         "recieve_daily_reminders": true
+      },
+      "registration_stage": "Part 2 Complete"
+   },
+   "U05FTNUC0JW": {
+      "name": "Carson3 Angell3",
+      "slack_username": "carsonjesseangell.lea",
+      "slack_name": "carsonjesseangell.lea",
+      "personal_contact": {
+         "phone_number": "999-999-9999",
+         "school_email": "cang2135@csddocs.org",
+         "personal_email": "carsonjesseangell.learn@gmail.com"
+      },
+      "guardian_contact": {
+         "name": "Legit Person",
+         "phone_number": "8012093633",
+         "email": "cma@westernagcredit.com"
+      },
+      "teams": [
+         "business.media",
+         "business.finance",
+         "business.outreach",
+         "robot.drive"
+      ],
+      "unsure_about_teams": false,
+      "interested_in_outreach": false,
+      "settings": {
+         "recieve_push_notifications": true,
+         "recieve_daily_reminders": true
+      },
+      "registration_stage": "Part 2 Complete"
+   },
+   "U04H4NHJC95": {
+      "name": "Carson Angell",
+      "slack_username": "carsonjesseangell",
+      "slack_name": "carsonjesseangell",
+      "personal_contact": {
+         "phone_number": "385-425-9100",
+         "school_email": "cang2135@csddocs.org",
+         "personal_email": "carsonjesseangell@gmail.com"
+      },
+      "guardian_contact": {
+         "name": "Cindy Angell",
+         "phone_number": "8012093633",
+         "email": "cma@westernagcredit.com"
+      },
+      "teams": [
+         "robot.programming",
+         "robot.build",
+         "robot.drive"
+      ],
+      "unsure_about_teams": false,
+      "interested_in_outreach": true,
+      "settings": {
+         "recieve_push_notifications": true,
+         "recieve_daily_reminders": true
+      },
+      "registration_stage": "Part 2 Complete"
+   }
+}

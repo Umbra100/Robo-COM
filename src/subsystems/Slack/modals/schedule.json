@@ -10,7 +10,7 @@
       },
       "type": "modal",
       "callback_id": "schedule",
-      "private_metadata": "{\"scheduleType\":\"initial\"}",
+      "private_metadata": "{\"schedule_type\":\"initial\"}",
       "blocks": [
          {
             "type": "divider"
@@ -121,7 +121,7 @@
       },
       "type": "modal",
       "callback_id": "schedule",
-      "private_metadata": "{\"scheduleType\":\"day\"}",
+      "private_metadata": "{\"schedule_type\":\"day\"}",
       "blocks": [
          {
             "type": "divider"
@@ -259,7 +259,7 @@
       },
       "type": "modal",
       "callback_id": "schedule",
-      "private_metadata": "{\"scheduleType\":\"week\"}",
+      "private_metadata": "{\"schedule_type\":\"week\"}",
       "blocks": [
          {
             "type": "divider"
@@ -503,7 +503,7 @@
       },
       "type": "modal",
       "callback_id": "schedule",
-      "private_metadata": "{\"scheduleType\":\"month\"}",
+      "private_metadata": "{\"schedule_type\":\"month\"}",
       "blocks": [
          {
             "type": "divider"
@@ -660,7 +660,7 @@
       },
       "type": "modal",
       "callback_id": "schedule",
-      "private_metadata": "{\"scheduleType\":\"custom\",\"reasonAdded\":false}",
+      "private_metadata": "{\"schedule_type\":\"custom\",\"reason_added\":false}",
       "blocks": [
          {
             "type": "divider"
@@ -826,7 +826,7 @@
       },
       "type": "modal",
       "callback_id": "schedule",
-      "private_metadata": "{\"scheduleType\":\"config\"}",
+      "private_metadata": "{\"schedule_type\":\"config\"}",
       "blocks": [
          {
             "type": "divider"

@@ -1,5 +1,7 @@
 import { updateConfig } from "./src/ConfigFile.mjs";
 await updateConfig();
+import EngineeringNotebook from "./src/EngineeringNotebook.mjs";
+await EngineeringNotebook.updateIndex();
 
 import LocalClientClass from "./src/subsystems/Local/LocalClient.mjs";
 import SlackClientClass from './src/subsystems/Slack/SlackClient.mjs';
@@ -43,7 +45,6 @@ TwilioClient = await new TwilioClientClass();
 await LocalClient.logs.currentFile.log('Application Online');
 console.log(terminalFormatter.footer);
 
-//todo - Finish register shortcut functionality (conjunction with other features)
 //todo - Create message recieving functionality for Twilio client (local doesn't work, external endpoint connection needed)
 //todo - Make scheduling watch for days that we don't have robotics (set by normal times and club leaders)
 

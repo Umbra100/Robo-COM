@@ -24,8 +24,7 @@ const ScheduleShortcut = new Shortcut('schedule')
       await ack();
       //If the user is not registered; alert them for registration
       if (!await RegisterAlert.check(shortcut.user.id)) {
-         await RegisterAlert.alert({ shortcut, ack, client });
-         return;
+         return await RegisterAlert.alert({ shortcut, ack, client });
       }
       //Gets and uploads the modal data
       await client.views.open({
@@ -38,9 +37,9 @@ const ScheduleShortcut = new Shortcut('schedule')
    .onSubmit(async (pkg) => {
       var data = null, { body, ack } = pkg;
       //Gets the schedule data from the submitted modal
-      const scheduleType = JSON.parse(body.view.private_metadata).scheduleType;
+      const schedule_type = JSON.parse(body.view.private_metadata).schedule_type;
       //Evaluates and formats date input data (except for configuration; routes to those handlers instead)
-      switch (scheduleType) {
+      switch (schedule_type) {
          case 'day':
             data = evaluateInput.day({ body });
             break;
@@ -122,7 +121,7 @@ const ScheduleShortcut = new Shortcut('schedule')
          str += 'already scheduled. If you want to change your scheduling, execute the scheduling shortcut again.';
 
          //Depending on the submitted schedule type, send the error to specific input blocks
-         switch (scheduleType) {
+         switch (schedule_type) {
             case 'day':
                errors['datepicker'] = str;
                break;
@@ -498,7 +497,7 @@ export const Assembly = new ModalAssembly()
          },
       });
       //Modify and save metadata
-      metadata.reasonAdded = true;
+      metadata.reason_added = true;
       modal.private_metadata = JSON.stringify(metadata);
       return modal;
    })
@@ -622,7 +621,7 @@ export const Assembly = new ModalAssembly()
       const entryMetadata = JSON.parse(body.actions[0].value);
       //Modifies/saves metadata
       modal.private_metadata = JSON.stringify({
-         scheduleType: 'day_config',
+         schedule_type: 'day_config',
          date: entryMetadata,
          deleted: false,
          checkboxWarningSent: false
@@ -737,10 +736,10 @@ export const Assembly = new ModalAssembly()
 
       //Modifies/saves metadata
       modal.private_metadata = JSON.stringify({
-         scheduleType: 'period_config',
+         schedule_type: 'period_config',
          date: entryMetadata,
          deleted: false,
-         reasonAdded: dist >= ConfigFile.reason_for_absence_threshold,
+         reason_added: dist >= ConfigFile.reason_for_absence_threshold,
          checkboxWarningSent: false
       });
       return modal;
@@ -772,7 +771,7 @@ export const Assembly = new ModalAssembly()
       });
       modal.blocks.push(popped);
       //Modify and save metadata
-      metadata.reasonAdded = true;
+      metadata.reason_added = true;
       modal.private_metadata = JSON.stringify(metadata);
       return modal;
    })
@@ -782,7 +781,7 @@ export const Assembly = new ModalAssembly()
       var modal = JSON.parse(JSON.stringify(ScheduleShortcut.modal.custom_config));
       var metadata = JSON.parse(body.view.private_metadata);
       //Modify modal data; add context saying that the entry has been deleted, if the user had a reason provided then don't delete the reason  entry
-      if (metadata.reasonAdded){
+      if (metadata.reason_added){
          let popped = modal.blocks.pop();
          modal.blocks.push({
             type: "input",
@@ -1006,7 +1005,7 @@ const customActionDateEvent = async ({ ack, client, body }) => {
    }
 
    //If the period duration is longer than a specified amount; add a reason field to the modal.
-   if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reasonAdded) {
+   if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reason_added) {
       //If one of the dates is not filled in, meaning the modal is incomplete; return.
       if (body.view.state.values.to_date.schedule_to_date_action.selected_date == null) return;
       if (body.view.state.values.from_date.schedule_from_date_action.selected_date == null) return;
@@ -1018,7 +1017,7 @@ const customActionDateEvent = async ({ ack, client, body }) => {
       });
    }
    //If the period duration is not over the threshold, or the person is still attending robotics. And a reason has been added to the modal; delete the reason field.
-   if ((dist < ConfigFile.reason_for_absence_threshold || !attendanceUnchecked) && metadata.reasonAdded) {
+   if ((dist < ConfigFile.reason_for_absence_threshold || !attendanceUnchecked) && metadata.reason_added) {
       //Gets and uploads modal
       await client.views.update({
          token: process.env.SLACK_BOT_TOKEN,
@@ -1048,7 +1047,7 @@ const configActionDateEvent = async ({ ack, client, body }) => {
    }
 
    //If the period duration is longer than a specified amount; add a reason field to the modal.
-   if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reasonAdded) {
+   if (dist >= ConfigFile.reason_for_absence_threshold && attendanceUnchecked && !metadata.reason_added) {
       //If one of the dates is not filled in, meaning the modal is incomplete; return.
       if (body.view.state.values.to_date.schedule_config_to_date_action.selected_date == null) return;
       if (body.view.state.values.from_date.schedule_config_from_date_action.selected_date == null) return;
@@ -1060,7 +1059,7 @@ const configActionDateEvent = async ({ ack, client, body }) => {
       });
    }
    //If the period duration is not over the threshold, or the person is still attending robotics. And a reason has been added to the modal; delete the reason field.
-   if ((dist < ConfigFile.reason_for_absence_threshold || !attendanceUnchecked) && metadata.reasonAdded) {
+   if ((dist < ConfigFile.reason_for_absence_threshold || !attendanceUnchecked) && metadata.reason_added) {
       //Gets and uploads modal
       await client.views.update({
          token: process.env.SLACK_BOT_TOKEN,
@@ -1331,7 +1330,7 @@ const configPeriodSubmitEvent = async ({ack, client, body }) => {
       );
    }
    //If a reason was added, store the reason in extended and log the changes to the entry as well
-   if (metadata.reasonAdded){
+   if (metadata.reason_added){
       extendedStore.changes.hasChanged = true;
       if (extendedStore.changes.log.length == 0) extendedStore.changes.log.push({
          date: `${pStart} - ${pEnd}`,
@@ -1451,5 +1450,8 @@ const checkDateOverlap = ({ date, type, location, userId }) => {
    }
    return ret;
 }
+
+//todo - Create system to notify admins of an extended period being created (and prompt it with an approval
+//todo - Program to notify the creator of an event of someone makes a schedule that interferes with it
 
 export default ScheduleShortcut;

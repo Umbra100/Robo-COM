@@ -1,0 +1,53 @@
+{
+   "May 26th 2023": {
+      "team": {
+         "attendance": [
+            { "name": "Carson Angell", "id": "15712683"},
+            { "name": "Carson2 Angell2", "id": "15712683"}
+         ],
+         "description": "Did this, that, and all of the things.",
+         "notificationSent": false
+      },
+      "individual": [
+         {
+            "name": "Carson Angell",
+            "id": "15712683",
+            "description": "I did this, that, and a bunch of stuff.",
+            "collaboration": [
+               { "name": "Carson2 Angell2", "id": "15712683"}
+            ],
+            "nts": null,
+            "notificationSent": false
+         },
+         {
+            "name": "Carson2 Angell2",
+            "id": "15712683",
+            "description": "I did this, that, and a bunch of stuff.",
+            "collaboration": null,
+            "nts": [
+               "So remember that this is a thing!"
+            ],
+            "notificationSent": true
+         }
+      ]
+   },
+   "May 27th 2023": {
+      "team": null,
+      "individual": [
+         {
+            "name": "Carson Angell",
+            "id": "15712683",
+            "description": "I did this, that, and a bunch of stuff.",
+            "collaboration": [
+               { "name": "Carson2 Angell2", "id": "15712683"}
+            ],
+            "nts": null,
+            "notificationSent": "N/A"
+         }
+      ]
+   },
+   "notifications": [
+      { "type": "team", "date": "May 26th 2023" },
+      { "type": "individual", "date": "May 26th 2023", "target": "15712683"}
+   ]
+}

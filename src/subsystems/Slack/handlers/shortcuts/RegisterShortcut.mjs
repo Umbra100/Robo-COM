@@ -159,7 +159,7 @@ export const Assembly = new ModalAssembly()
       modal.blocks.pop();
       modal.blocks.pop();
       //Modify can save metadata
-      metadata.stageOverride = true;
+      metadata.stage_override = true;
       modal.private_metadata = JSON.stringify(metadata);
       return modal;
    })
@@ -256,7 +256,7 @@ export const Assembly = new ModalAssembly()
 
       //Stores userdata in modal metadata
       var metadata = JSON.parse(modal.private_metadata);
-      metadata.userData = userData;
+      metadata.user_data = userData;
       modal.private_metadata = JSON.stringify(metadata);
 
       //Modifies modal data; fills out user data from completed registration
@@ -289,7 +289,7 @@ export const Assembly = new ModalAssembly()
       var metadata = JSON.parse(body.view.private_metadata);
       //Changes modal data; adds the requires field error if it hasn't already been added
       modal.blocks = body.view.blocks;
-      if (!metadata.warningAdded){
+      if (!metadata.warning_added){
          modal.blocks = [].concat(modal.blocks.slice(0, 3), [{
             type: "context",
             elements: [
@@ -301,7 +301,7 @@ export const Assembly = new ModalAssembly()
          }], modal.blocks.slice(3, modal.blocks.length));
       }
       //Modifies and stores metadata
-      metadata.warningAdded = true;
+      metadata.warning_added = true;
       modal.private_metadata = JSON.stringify(metadata);
       return modal;
    })
@@ -309,7 +309,7 @@ export const Assembly = new ModalAssembly()
    .addModal('part3_info_chosen', async ({ body }) => {
       //Gets the original modal data
       var metadata = JSON.parse(body.view.private_metadata);
-      var modal = await Assembly.getModal('part3', { userData: metadata.userData });
+      var modal = await Assembly.getModal('part3', { userData: metadata.user_data });
 
       //If the user chose to change part 1 data, mark those list items
       if (body.view.state.values.info_select.register_info_select_action.selected_option.value == 'p1'){
@@ -342,7 +342,7 @@ const P1submitEvent = async ({ ack, body, client }) => {
       unsure_about_teams: false,
       teams: [],
       interested_in_outreach: body.view.state.values.outreach_field.action.selected_options[0]?.value == 'yes',
-      registration_stage: metadata.stageOverride ? 'Part 2 Complete' : 'Part 1 Complete'
+      registration_stage: metadata.stage_override ? 'Part 2 Complete' : 'Part 1 Complete'
    };
    for (const i of body.view.state.values.team_select_field.action.selected_options){
       if (i.value == `other.I Don't Know`) dataForm.unsure_about_teams = true;
@@ -355,7 +355,7 @@ const P1submitEvent = async ({ ack, body, client }) => {
    await userFile.writePath(body.user.id,data);
 
    //Sends them to part two of registration unless the submission is in config mode (just to change existing data)
-   if (!metadata.stageOverride){
+   if (!metadata.stage_override){
       await ack({
          response_action: 'update',
          view: await Assembly.getModal('part2')
@@ -363,7 +363,6 @@ const P1submitEvent = async ({ ack, body, client }) => {
    } else await ack();
 }
 
-//todo - DM user a welcome message with necessary info
 /**Handles the submission event for part two of registration */
 const P2submitEvent = async ({ ack, body, view }) => {
    //Gets metadata
@@ -429,15 +428,20 @@ const P3submitEvent = async ({ ack, body, client }) => {
    if (body.view.state.values.info_select.register_info_select_action.selected_option.value == 'p1'){
       await ack({
          response_action: 'update',
-         view: await Assembly.getModal('part1_config',{ userData: metadata.userData })
+         view: await Assembly.getModal('part1_config',{ userData: metadata.user_data })
       });
    //If the user has chosen to modify registration data from part two; send part two modal in config mode
    } else {
       await ack({
          response_action: 'update',
-         view: await Assembly.getModal('part2_config',{ userData: metadata.userData })
+         view: await Assembly.getModal('part2_config',{ userData: metadata.user_data })
       });
    }
 }
+
+//todo - Program for messaging
+   //Have the system DM a newly registered user with a welcome message that contains info about the club
+   //It can also have info about what to learn and how to go about learning it
+//todo - Program for email verification
 
 export default RegisterShortcut;

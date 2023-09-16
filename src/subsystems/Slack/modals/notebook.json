@@ -1,0 +1,376 @@
+{
+   "individual": {
+      "title": {
+         "type": "plain_text",
+         "text": "Notebook - Individual"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "notebook",
+      "private_metadata": "{\"submit_type\":\"individual\",\"this_user\":{},\"nts_amount\": 0,\"nts_error_added\":false,\"nts_max_index\":0,\"editing_mode\":false,\"original_date\":null}",
+      "notify_on_close": true,
+      "blocks": [
+         {
+            "type": "section",
+            "block_id": "note_type",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*What type of engineering note are you making?*"
+            },
+            "accessory": {
+               "type": "static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select an item"
+               },
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Individual Note"
+                     },
+                     "value": "individual"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Team Note"
+                     },
+                     "value": "team"
+                  }
+               ],
+               "initial_option": {
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Individual Note"
+                  },
+                  "value": "individual"
+               },
+               "action_id": "notebook_choose_note_type"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "This is the main body of the note. Fill out the questions accordingly. Anything you enter here can be seen by anyone."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "date",
+            "dispatch_action": true,
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "When were you at robotics?"
+               },
+               "action_id": "notebook_choose_note_date"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "description",
+            "element": {
+               "type": "plain_text_input",
+               "multiline": true,
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "What did you get done?"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         },
+         {
+            "type": "section",
+            "block_id": "collaboration",
+            "text": {
+               "type": "mrkdwn",
+               "text": " "
+            },
+            "accessory": {
+               "type": "multi_static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Who did you work with?"
+               },
+               "options": [],
+               "action_id": "action"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Would you like to add any notes to yourself?"
+            },
+            "accessory": {
+               "type": "button",
+               "text": {
+                  "type": "plain_text",
+                  "text": "Add NTS"
+               },
+               "value": "add_nts",
+               "action_id": "notebook_add_nts"
+            }
+         }
+      ]
+   },
+   "team": {
+      "title": {
+         "type": "plain_text",
+         "text": "Notebook - Team"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "notebook",
+      "private_metadata": "{\"submit_type\":\"team\",\"individual_note_amount\":0,\"individual_add_error_added\":false,\"editing_mode\":false,\"team_view_id\":null,\"original_date\":null}",
+      "notify_on_close": true,
+      "blocks": [
+         {
+            "type": "section",
+            "block_id": "note_type",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*What type of engineering log are you making?*"
+            },
+            "accessory": {
+               "type": "static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select an item"
+               },
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Individual Note"
+                     },
+                     "value": "individual"
+                  },
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Team Note"
+                     },
+                     "value": "team"
+                  }
+               ],
+               "initial_option": {
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Team Note"
+                  },
+                  "value": "team"
+               },
+               "action_id": "notebook_choose_note_type"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "This is the main body of the note. Fill out the questions accordingly. Anything you entered can be accessed and referenced by anyone."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "date",
+            "dispatch_action": true,
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "What day are you making a note for?"
+               },
+               "action_id": "notebook_choose_note_date"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "attendance",
+            "element": {
+               "type": "multi_static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Who all attended robotics?"
+               },
+               "options": [],
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "description",
+            "element": {
+               "type": "plain_text_input",
+               "multiline": true,
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Write a general description of what all got done."
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": " "
+            }
+         },
+         {
+            "type": "section",
+            "block_id": "notify_team",
+            "text": {
+               "type": "mrkdwn",
+               "text": " "
+            },
+            "accessory": {
+               "type": "checkboxes",
+               "options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Notify the team that this notebook entry was created."
+                     },
+                     "value": "notify_team"
+                  }
+               ],
+               "initial_options": [
+                  {
+                     "text": {
+                        "type": "plain_text",
+                        "text": "Notify the team that this notebook entry was created."
+                     },
+                     "value": "notify_team"
+                  }
+               ],
+               "action_id": "action"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Would you like to add an individual note?"
+            },
+            "accessory": {
+               "type": "button",
+               "text": {
+                  "type": "plain_text",
+                  "text": "Add Note"
+               },
+               "value": "add_individual_note",
+               "action_id": "notebook_add_individual_note"
+            }
+         }
+      ]
+   },
+   "alert_edit": {
+      "title": {
+         "type": "plain_text",
+         "text": "Notebook - Alert"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Edit"
+      },
+      "close": {
+         "type": "plain_text",
+         "text": "Continue"
+      },
+      "type": "modal",
+      "callback_id": "notebook",
+      "private_metadata": "{\"submit_type\":\"alert_edit\",\"date_target\":\"\",\"note_type\":\"\",\"view_id\":\"\"}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "It looks like a notebook entry already exists on this date! Would you like to edit it? Or would you rather overwrite it completely with what you have now?"
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         }
+      ]
+   },
+   "alert_delete": {
+      "title": {
+         "type": "plain_text",
+         "text": "Notebook - Alert"
+      },
+      "close": {
+         "type": "plain_text",
+         "text": "Close"
+      },
+      "type": "modal",
+      "callback_id": "notebook",
+      "private_metadata": "{\"submit_type\":\"alert_back\",\"note_type\":\"\",\"view_id\":\"\"}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Deletion successful! Remember that the deleting a note only deletes the note you were editing. This means if you delete a team note, the individual notes will not be deleted (except for the ones you added)."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         }
+      ]
+   }
+}

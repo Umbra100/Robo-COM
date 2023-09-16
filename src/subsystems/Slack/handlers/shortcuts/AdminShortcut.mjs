@@ -41,7 +41,7 @@ const AdminShortcut = new Shortcut('admin')
    .onSubmit(async ({ ack, body, client }) => {
       const metadata = JSON.parse(body.view.private_metadata);
       var modal
-      switch (metadata.submitType){
+      switch (metadata.submit_type){
          case 'season_dates':
             await seasonDatesSubmitEvent({ ack, body });
             return;
@@ -101,7 +101,7 @@ const AdminShortcut = new Shortcut('admin')
       //Iterates through slack user data; if the chosen user is a bot update modal with the error
       for (const i of slackUserData){
          if (i.id == body.view.state.values.user_choose.admin_view_user_choose.selected_user && (i.is_bot || i.id == 'USLACKBOT')){
-            if (!metadata.errorAdded){
+            if (!metadata.error_added){
                await client.views.update({
                   token: process.env.SLACK_BOT_TOKEN,
                   view: await Assembly.getModal('user_catalog_user_choice_error', { body }),
@@ -112,7 +112,7 @@ const AdminShortcut = new Shortcut('admin')
          }
       }
       //If the error has been added and the chosen user is a valid user; remove the error message
-      if (metadata.errorAdded){
+      if (metadata.error_added){
          await client.views.update({
             token: process.env.SLACK_BOT_TOKEN,
             view: await Assembly.getModal('user_catalog_user_choice_error_remove', { body }),
@@ -181,7 +181,7 @@ const AdminShortcut = new Shortcut('admin')
       //Gets input and metadata. Also creates an empty variable for modal
       var metadata = JSON.parse(body.view.private_metadata);
       var modal;
-      if (!metadata.newSubteamEditingAdded) modal = await Assembly.getModal('subteam_add_new', { body });
+      if (!metadata.new_subteam_editing_added) modal = await Assembly.getModal('subteam_add_new', { body });
       else {
          let subteamName = body.view.state.values[body.view.blocks[8].block_id].action.value;
          if (typeof metadata.team == 'undefined' || typeof metadata.team_prefix == 'undefined'){
@@ -393,7 +393,7 @@ export const Assembly = new ModalAssembly()
       },...modal.blocks];
       modal.blocks = shifted.concat(modal.blocks);
       //Modifies and saves metadata
-      metadata.errorAdded = true;
+      metadata.error_added = true;
       modal.private_metadata = JSON.stringify(metadata);
       return modal;
    })
@@ -417,7 +417,7 @@ export const Assembly = new ModalAssembly()
       modal.callback_id = 'admin';
       modal.submit.text = 'OK';
       modal.close.text = 'Close';
-      modal.private_metadata = '{"submitType":"back_to_user_catalog"}'
+      modal.private_metadata = '{"submit_type":"back_to_user_catalog"}'
       for (let j = 0; j < 4; j++) modal.blocks.shift();
 
       modal.blocks[0].text.text = 'User Info';
@@ -490,7 +490,25 @@ export const Assembly = new ModalAssembly()
                         text: "Delete Team"
                      },
                      value: i,
-                     action_id: "admin_delete_team"
+                     action_id: "admin_delete_team",
+                     confirm: {
+                        title: {
+                           type: 'plain_text',
+                           text: 'Are you sure?'
+                        },
+                        text: {
+                           type: 'plain_text',
+                           text: 'You can\'t undo this action. Which means if you decide that you do want this team you\'ll have to remake the whole thing!'
+                        },
+                        confirm: {
+                           type: 'plain_text',
+                           text: 'Yes'
+                        },
+                        deny: {
+                           type: 'plain_text',
+                           text: 'No'
+                        }
+                     }
                   }
                ]
             }
@@ -507,10 +525,10 @@ export const Assembly = new ModalAssembly()
       var modal = JSON.parse(JSON.stringify(AdminShortcut.modal.team_options_edit));
       var metadata = JSON.parse(body.view.private_metadata);
       //Modifies metadata
-      metadata.submitType = 'team_options_edit';
+      metadata.submit_type = 'team_options_edit';
       if (typeof metadata.team_prefix == 'undefined') metadata.team = action?.value;
       if (typeof metadata.team_prefix == 'undefined') metadata.team_prefix = ConfigFile.team_options[metadata.team]?.prefix;
-      metadata.subteamEditingAdded = false;
+      metadata.subteam_editing_added = false;
       //Modifies modal data
       if (metadata.team) modal.blocks[3].element.initial_value = capitalizeWords(metadata.team);
       if (metadata.team_prefix) modal.blocks[4].element.initial_value = metadata.team_prefix;
@@ -551,8 +569,8 @@ export const Assembly = new ModalAssembly()
       //Gets input data from select subteam dropdown
       var selectedSubteam = capitalizeWords(action.selected_option.value);
       //Modifies metadata
-      metadata.subteamEditingAdded = true;
-      metadata.newSubteamEditingAdded = false;
+      metadata.subteam_editing_added = true;
+      metadata.new_subteam_editing_added = false;
       //Modifies modal; adds new input blocks, resets input data for the subteam dropdown
       modal.blocks[6].block_id = (body.view.blocks[6].block_id == 'subteam_select0') ? 'subteam_select1' : 'subteam_select0';
       modal.blocks[6].text.text = modal.blocks[6].text.text.replace(`         ${selectedSubteam}`,`  💠 ${selectedSubteam}`);
@@ -625,8 +643,8 @@ export const Assembly = new ModalAssembly()
          action: { value: metadata.team }
       });
       //Modifies metadata
-      metadata.newSubteamEditingAdded = true;
-      metadata.subteamEditingAdded = false;
+      metadata.new_subteam_editing_added = true;
+      metadata.subteam_editing_added = false;
       //Modifies modal data
       var popped = modal.blocks.pop();
       popped.elements[0].style = 'primary';
@@ -670,7 +688,7 @@ export const Assembly = new ModalAssembly()
          ]
       };
       //Gets the modal data based on conditions
-      if (metadata.subteamEditingAdded){ //If the user is in a subteam editing menu; modify modal to display error accordingly
+      if (metadata.subteam_editing_added){ //If the user is in a subteam editing menu; modify modal to display error accordingly
          modal = await Assembly.getModal('subteam_select', {
             body,
             action: { selected_option: body.view.state.values[body.view.blocks[6].block_id].admin_subteam_select.selected_option} 
@@ -757,5 +775,10 @@ const teamOptionsEditSubmitEvent = async ({ ack, body }) => {
       view: await Assembly.getModal('team_options')
    });
 }
+
+//todo - Program to only accept executions from admins (and the criteria for such)
+//todo - Add a panel to view system logs
+//todo - Add a panel to view engineering notebook entries
+//todo - Add a panel to view everyone's scheduling
 
 export default AdminShortcut;
