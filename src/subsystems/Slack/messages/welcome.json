@@ -1,0 +1,102 @@
+{
+   "initial": {
+      "text": "A new member has arrived!",
+      "blocks": [
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Welcome our new teamate to the JHS robotics team!"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": null
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": null,
+               "alt_text": "Profile Picture"
+            }
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Click to Welcome"
+                  },
+                  "value": "welcome_new_user",
+                  "action_id": "user_welcome_response_action"
+               }
+            ]
+         }
+      ]
+   },
+   "response": {
+      "attachments": [
+         {
+            "fallback": "Sent a welcome message.",
+            "color": "#327aed",
+            "image_url": null
+         }
+      ]
+   },
+   "intro": {
+      "text": "Introduction Message",
+      "blocks": [
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "\n>Hey there! Welcome to the JHS Robotics Team #$1! We are proud to have you on our team and we look forward to working with you. If you have any questions, you can contact us at $2. Or if you really need to, talk to one of our team members."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "In order for you to become a full member of the team, please register by typing the following command:```/register```"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Or if you feel like this isn't the club/team for you. You can leave by talking to *$3* in room *$4* or by executing the command: ```/leave```"
+            }
+         },
+         {
+            "type": "context",
+            "elements": [
+               {
+                  "type": "mrkdwn",
+                  "text": "*PS:*  $5 is also a great source for answering any questions you have!"
+               }
+            ]
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Now that's out of the way. Please watch this introductory video so you can learn the ropes of what this robotics team is all about:\n$6"
+            }
+         }
+      ]
+   }
+}

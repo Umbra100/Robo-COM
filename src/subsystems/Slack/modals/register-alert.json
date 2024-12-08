@@ -1,0 +1,47 @@
+{
+   "initial": {
+      "title": {
+         "type": "plain_text",
+         "text": "Alert - Not Registered"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Go to Registration"
+      },
+      "type": "modal",
+      "callback_id": "register-alert",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "To use the scheduling system you need to be registered with the app. This means filling out information such as name, team  and contact info. The app will use this to coordinate with different systems you use!"
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "context",
+            "elements": [
+               {
+                  "type": "plain_text",
+                  "text": " "
+               }
+            ]
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*In order to register, type '/register'. Or simply click the button below and it will send you to it.*"
+            }
+         }
+      ]
+   }
+}

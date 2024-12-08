@@ -1,0 +1,345 @@
+{
+   "initial": {
+      "title": {
+         "type": "plain_text",
+         "text": "Admin Panel"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Submit"
+      },
+      "type": "modal",
+      "callback_id": "admin",
+      "private_metadata": "{\"submit_type\":\"initial\"}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Use this panel to customize and view different things according to the application. These changes affect the overall functionality of the app and how the users can use it."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Change Season Dates"
+                  },
+                  "value": "change_season_dates",
+                  "action_id": "admin_change_season_dates"
+               },
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "View User Catalog"
+                  },
+                  "value": "view_user_catalog",
+                  "action_id": "admin_view_user_catalog"
+               }
+            ]
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Change Team Choices"
+                  },
+                  "value": "change_team_choices",
+                  "action_id": "admin_change_team_options"
+               },
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Change User Permissions"
+                  },
+                  "value": "change_user_persimissions",
+                  "action_id": "admin_change_user_persimissions"
+               }
+            ]
+         }
+      ]
+   },
+   "season_dates": {
+      "title": {
+         "type": "plain_text",
+         "text": "Season Dates"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save"
+      },
+      "type": "modal",
+      "callback_id": "admin",
+      "private_metadata": "{\"submit_type\":\"season_dates\"}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "This is where you can change the season start and end dates. This is used to calibrate the scheduling of the application. Please make sure you use the dates for when *_robotics itself_* starts and ends. This is usually set near to the start and end of the school year."
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "startDate",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a start date"
+               },
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Start"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "endDate",
+            "element": {
+               "type": "datepicker",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select an end date"
+               },
+               "action_id": "action"
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "End"
+            }
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Back"
+                  },
+                  "value": "back",
+                  "action_id": "admin_initial_back_to"
+               }
+            ]
+         }
+      ]
+   },
+   "user_catalog": {
+      "title": {
+         "type": "plain_text",
+         "text": "User Catalog"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "View"
+      },
+      "type": "modal",
+      "callback_id": "admin",
+      "private_metadata": "{\"submit_type\":\"user_catalog\",\"error_added\":false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "This is where you can view who all the users in the slack server; both registered and unregistered. You can also view any information any they have given through the registration process by clicking the *View* button after you have chosen the user in the dropdown"
+            }
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*Which user would you like to view?*"
+            },
+            "block_id": "user_choose",
+            "accessory": {
+               "type": "users_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select a user"
+               },
+               "action_id": "admin_view_user_choose"
+            }
+         },
+         {
+            "type": "divider"
+         }
+      ]
+   },
+   "team_options": {
+      "title": {
+         "type": "plain_text",
+         "text": "Team Options"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Done"
+      },
+      "type": "modal",
+      "callback_id": "admin",
+      "private_metadata": "{\"submit_type\":\"team_options\",\"options\":{}}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "Use this to change what users can choose in terms of what teams they want to be on. You can also change a small bit of the style of how the teams will look when the user goes to choose them."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Add New Team"
+                  },
+                  "value": "add_new_team",
+                  "action_id": "admin_add_new_team"
+               }
+            ]
+         }
+      ]
+   },
+   "team_options_edit": {
+      "title": {
+         "type": "plain_text",
+         "text": "Team Editing"
+      },
+      "submit": {
+         "type": "plain_text",
+         "text": "Save Changes"
+      },
+      "type": "modal",
+      "callback_id": "admin",
+      "private_metadata": "{\"submit_type\":\"team_options_edit\",\"options\":{},\"team_prefix\":\"\",\"team\":\"\",\"subteam_editing_added\":false,\"new_subteam_editing_added\":false}",
+      "blocks": [
+         {
+            "type": "divider"
+         },
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "This is where you can edit all the details of a team and its subteams. Please make sure to apply changes before saving them. And remember, these teams will be displayed when the user is registering."
+            },
+            "accessory": {
+               "type": "image",
+               "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+               "alt_text": "cute cat"
+            }
+         },
+         {
+            "type": "divider"
+         },
+         {
+            "type": "input",
+            "block_id": "team_name",
+            "element": {
+               "type": "plain_text_input",
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Enter team name"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Team Name"
+            }
+         },
+         {
+            "type": "input",
+            "block_id": "team_prefix",
+            "element": {
+               "type": "plain_text_input",
+               "action_id": "action",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Enter emoji prefix"
+               }
+            },
+            "label": {
+               "type": "plain_text",
+               "text": "Prefix"
+            }
+         },
+         {
+            "type": "context",
+            "elements": [
+               {
+                  "type": "plain_text",
+                  "text": "This will be added before each option in the dropdown menus of choosing the teams. It makes it better to organize and style out each category of teams."
+               }
+            ]
+         },
+         {
+            "type": "section",
+            "block_id": "subteam_select0",
+            "text": {
+               "type": "mrkdwn",
+               "text": null
+            },
+            "accessory": {
+               "type": "static_select",
+               "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select an item"
+               },
+               "options": [],
+               "action_id": "admin_subteam_select"
+            }
+         },
+         {
+            "type": "actions",
+            "elements": [
+               {
+                  "type": "button",
+                  "text": {
+                     "type": "plain_text",
+                     "text": "Add New Subteam"
+                  },
+                  "value": "add_new_subteam",
+                  "action_id": "admin_add_new_subteam"
+               }
+            ]
+         }
+      ]
+   }
+}

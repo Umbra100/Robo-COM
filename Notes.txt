@@ -1,23 +1,64 @@
-APIs needed for communication app (NodeJS)
-==========================================
+Things to do at end of development:
 
--> Slack Bolt API	https://slack.dev/bolt-js/concepts	
-    - Features:
-	+ Has command capability
-	+ Has chat compability
-    - Node Module:  "@slack/bolt"
--> SMS API Twilio	https://www.twilio.com/docs/sms/quickstart/node
-    - Features:
-	+ Has secure SMS capability
-    - Node Module:  "twilio"
+- Change log directory config value to absolute value (per server computer)
+- Change Registration P1 image source to something better (maybe); you can use google drive images with inspecting them
+- Change Registration P1 to have a link to more info about outreach
+- Change Registration P2 image source to something better; you can use google drive images with inspecting them
+
+Things to do when setting up:
+ 
+ -> General
+   - Use OpenSSL to create a new SSL certificate in JHS robotics name (use email as well)
+ -> Slack
+   - Go to slack application dashboard
+   - Customize app appearance
+   - Create App Level token names 'socket-mode'
+   - Put app level token in .env labeled 'SLACK_APP_LEVEL_TOKEN'
+   - Enable Socket Mode
+-> Twilio
+   - Port forward host computer ip address for the express app
+   - Change the configured webhook url for message recieving to point to the ip address of host computer
 
 
-Potential Dependencies
-----------------------
 
-- "dotenv"
-- "@slack/bolt"
-- "twilio"
+  "attachments": [
+      {
+         Text shown on notification on phone
+          "fallback": "Plain-text summary of the attachment."
 
+         Color (can be for mrkdwn block quote color)
+          "color": "#2eb886",
+         
+          "pretext": "Optional text that appears above the attachment block",
 
-07Z2KbcaqU9P8-vGXIAow75NAAfRJ4EK6IpLb7dy
+          Author of attachment?
+          "author_name": "Bobby Tables",
+          "author_link": "http://flickr.com/bobby/",
+          "author_icon": "http://flickr.com/icons/bobby.jpg",
+
+          Title of attachment
+          "title": "Slack API Documentation",
+          "title_link": "https://api.slack.com/",
+
+          "text": "Optional text that appears within the attachment",
+
+          Fields that appear under the title
+          "fields": [
+              {
+                  "title": "Priority",
+                  "value": "High",
+                  "short": false
+              }
+          ],
+
+          Large image show at end of attachment, size of image does matter
+          "image_url": "http://my-website.com/path/to/image.jpg",
+
+          No idea
+          "thumb_url": "http://example.com/path/to/thumb.png",
+
+          Footer of the attachment
+          "footer": "Slack API",
+          "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
+      }
+  ]

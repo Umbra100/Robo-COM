@@ -1,0 +1,63 @@
+{
+   "Sep 10th 2023": {
+      "team": {
+         "attendance": [
+            {
+               "name": "Carson2 Angell2",
+               "id": "U05FTNUC0JH"
+            }
+         ],
+         "description": "wgdiuqwhod",
+         "notificationSent": false
+      },
+      "individual": [
+         {
+            "name": "Carson Angell",
+            "id": "U04H4NHJC95",
+            "description": "ucdrydfigu",
+            "collaboration": [
+               {
+                  "name": "Carson2 Angell2",
+                  "id": "U05FTNUC0JH"
+               },
+               {
+                  "name": "Carson3 Angell3",
+                  "id": "U05FTNUC0JW"
+               }
+            ],
+            "nts": [],
+            "notificationSent": false
+         },
+         {
+            "name": "Carson2 Angell2",
+            "id": "U05FTNUC0JH",
+            "description": "Fuck!",
+            "collaboration": [
+               {
+                  "name": "Carson Angell",
+                  "id": "U04H4NHJC95"
+               },
+               {
+                  "name": "Carson3 Angell3",
+                  "id": "U05FTNUC0JW"
+               }
+            ],
+            "nts": [],
+            "notificationSent": false
+         },
+         {
+            "name": "Carson3 Angell3",
+            "id": "U05FTNUC0JW",
+            "description": "Shit!",
+            "collaboration": [
+               {
+                  "name": "Carson Angell",
+                  "id": "U04H4NHJC95"
+               }
+            ],
+            "nts": [],
+            "notificationSent": "N/A"
+         }
+      ]
+   }
+}
